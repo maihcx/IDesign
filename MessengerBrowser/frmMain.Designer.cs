@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pnPIP = new System.Windows.Forms.Panel();
+            this.pnDF = new System.Windows.Forms.Panel();
+            this.PanelMain = new System.Windows.Forms.Panel();
+            this.lblhostkey = new System.Windows.Forms.Label();
+            this.pnMaximize = new System.Windows.Forms.Panel();
+            this.pnClose = new System.Windows.Forms.Panel();
             this.pnAutoPIP = new System.Windows.Forms.Panel();
             this.pnEndprocess = new System.Windows.Forms.Panel();
             this.pnFA = new System.Windows.Forms.Panel();
             this.pnMess = new System.Windows.Forms.Panel();
-            this.pnDF = new System.Windows.Forms.Panel();
-            this.PanelMain = new System.Windows.Forms.Panel();
-            this.pnClose = new System.Windows.Forms.Panel();
-            this.pnMaximize = new System.Windows.Forms.Panel();
-            this.lblhostkey = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // pnPIP
@@ -50,6 +50,60 @@
             this.pnPIP.Size = new System.Drawing.Size(25, 18);
             this.pnPIP.TabIndex = 0;
             this.pnPIP.Click += new System.EventHandler(this.pnPIP_Click);
+            // 
+            // pnDF
+            // 
+            this.pnDF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnDF.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.pnDF.Location = new System.Drawing.Point(1, 23);
+            this.pnDF.Name = "pnDF";
+            this.pnDF.Size = new System.Drawing.Size(674, 9);
+            this.pnDF.TabIndex = 10;
+            // 
+            // PanelMain
+            // 
+            this.PanelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PanelMain.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelMain.Location = new System.Drawing.Point(1, 29);
+            this.PanelMain.Name = "PanelMain";
+            this.PanelMain.Size = new System.Drawing.Size(672, 493);
+            this.PanelMain.TabIndex = 16;
+            this.PanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelMain_Paint);
+            // 
+            // lblhostkey
+            // 
+            this.lblhostkey.AutoSize = true;
+            this.lblhostkey.Location = new System.Drawing.Point(134, 8);
+            this.lblhostkey.Name = "lblhostkey";
+            this.lblhostkey.Size = new System.Drawing.Size(0, 13);
+            this.lblhostkey.TabIndex = 19;
+            // 
+            // pnMaximize
+            // 
+            this.pnMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.pnMaximize.BackgroundImage = global::MessengerBrowser.Properties.Resources.icon_mac_maximize2;
+            this.pnMaximize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMaximize.Location = new System.Drawing.Point(27, 4);
+            this.pnMaximize.Name = "pnMaximize";
+            this.pnMaximize.Size = new System.Drawing.Size(19, 19);
+            this.pnMaximize.TabIndex = 18;
+            this.pnMaximize.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnMaximize_MouseClick);
+            // 
+            // pnClose
+            // 
+            this.pnClose.BackColor = System.Drawing.Color.Transparent;
+            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close2;
+            this.pnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnClose.Location = new System.Drawing.Point(3, 4);
+            this.pnClose.Name = "pnClose";
+            this.pnClose.Size = new System.Drawing.Size(19, 19);
+            this.pnClose.TabIndex = 17;
+            this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
             // 
             // pnAutoPIP
             // 
@@ -79,13 +133,13 @@
             // 
             this.pnFA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnFA.BackColor = System.Drawing.Color.Transparent;
-            this.pnFA.BackgroundImage = global::MessengerBrowser.Properties.Resources.facebook_new1;
+            this.pnFA.BackgroundImage = global::MessengerBrowser.Properties.Resources.Sicons_Basic_Round_Social_Facebook;
             this.pnFA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnFA.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnFA.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnFA.Location = new System.Drawing.Point(635, 4);
+            this.pnFA.Location = new System.Drawing.Point(635, 5);
             this.pnFA.Name = "pnFA";
-            this.pnFA.Size = new System.Drawing.Size(24, 20);
+            this.pnFA.Size = new System.Drawing.Size(18, 18);
             this.pnFA.TabIndex = 0;
             this.pnFA.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnFA_MouseClick);
             // 
@@ -101,59 +155,6 @@
             this.pnMess.Size = new System.Drawing.Size(20, 20);
             this.pnMess.TabIndex = 0;
             this.pnMess.Click += new System.EventHandler(this.pnMess_Click);
-            // 
-            // pnDF
-            // 
-            this.pnDF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnDF.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.pnDF.Location = new System.Drawing.Point(1, 23);
-            this.pnDF.Name = "pnDF";
-            this.pnDF.Size = new System.Drawing.Size(674, 9);
-            this.pnDF.TabIndex = 10;
-            // 
-            // PanelMain
-            // 
-            this.PanelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PanelMain.BackColor = System.Drawing.SystemColors.Control;
-            this.PanelMain.Location = new System.Drawing.Point(1, 29);
-            this.PanelMain.Name = "PanelMain";
-            this.PanelMain.Size = new System.Drawing.Size(672, 493);
-            this.PanelMain.TabIndex = 16;
-            // 
-            // pnClose
-            // 
-            this.pnClose.BackColor = System.Drawing.Color.Transparent;
-            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close2;
-            this.pnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnClose.Location = new System.Drawing.Point(3, 4);
-            this.pnClose.Name = "pnClose";
-            this.pnClose.Size = new System.Drawing.Size(19, 19);
-            this.pnClose.TabIndex = 17;
-            this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
-            // 
-            // pnMaximize
-            // 
-            this.pnMaximize.BackColor = System.Drawing.Color.Transparent;
-            this.pnMaximize.BackgroundImage = global::MessengerBrowser.Properties.Resources.icon_mac_maximize2;
-            this.pnMaximize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnMaximize.Location = new System.Drawing.Point(27, 4);
-            this.pnMaximize.Name = "pnMaximize";
-            this.pnMaximize.Size = new System.Drawing.Size(19, 19);
-            this.pnMaximize.TabIndex = 18;
-            this.pnMaximize.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnMaximize_MouseClick);
-            // 
-            // lblhostkey
-            // 
-            this.lblhostkey.AutoSize = true;
-            this.lblhostkey.Location = new System.Drawing.Point(134, 8);
-            this.lblhostkey.Name = "lblhostkey";
-            this.lblhostkey.Size = new System.Drawing.Size(0, 13);
-            this.lblhostkey.TabIndex = 19;
             // 
             // frmMain
             // 

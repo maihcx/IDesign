@@ -19,7 +19,7 @@ namespace MessengerBrowser
         {
             InitializeComponent();
         }
-
+        bool PIPNameFirstStart = true;
         private void frmSetting_Load(object sender, EventArgs e)
         {
             //string[] arrStrColor = { "Default", "Black", "White", "Silver", "Blue", "Green", "Lime", "Teal", "Orange", "Brown", "Pink", "Magenta", "Purple", "Red", "Yellow" };
@@ -39,6 +39,14 @@ namespace MessengerBrowser
             cbFA.Checked = Properties.Settings.Default.FEnableFA;
             trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
             trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
+            if (Properties.Settings.Default.FPIPIsShowName)
+            {
+                rdbShowName.Checked = true;
+            }
+            else
+            {
+                rdbHideName.Checked = true;
+            }
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -111,6 +119,15 @@ namespace MessengerBrowser
                     is_restartThread = true;
                 }
 
+                if (rdbHideName.Checked)
+                {
+                    Properties.Settings.Default.FPIPIsShowName = false;
+                }
+                else
+                {
+                    Properties.Settings.Default.FPIPIsShowName = true;
+                }
+
                 Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
 
                 Properties.Settings.Default.Save();
@@ -148,6 +165,24 @@ namespace MessengerBrowser
         private void trackPIPPanelWidth_Scroll(object sender, ScrollEventArgs e)
         {
             Library.previewPIPPanelSize(trackPIPPanelWidth.Value, trackPIPPanelHeight.Value);
+        }
+
+        private void rdbHideName_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbHideName.Checked)
+            {
+                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, (PIPNameFirstStart) ? 0 : -60);
+                PIPNameFirstStart = false;
+            }
+        }
+
+        private void rdbShowName_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbShowName.Checked)
+            {
+                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, (PIPNameFirstStart) ? 0 : 60);
+                PIPNameFirstStart = false;
+            }
         }
     }
 }
