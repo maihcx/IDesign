@@ -169,20 +169,20 @@ namespace MessengerBrowser
 
         private void rdbHideName_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbHideName.Checked)
+            if (rdbHideName.Checked && !PIPNameFirstStart)
             {
-                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, (PIPNameFirstStart) ? 0 : -60);
-                PIPNameFirstStart = false;
+                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, -60);
             }
+            PIPNameFirstStart = false;
         }
 
         private void rdbShowName_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbShowName.Checked)
+            if (rdbShowName.Checked && !PIPNameFirstStart)
             {
-                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, (PIPNameFirstStart) ? 0 : 60);
-                PIPNameFirstStart = false;
+                Library.previewPIPPanelSize(trackPIPPanelWidth.Value, 60);
             }
+            PIPNameFirstStart = false;
         }
     }
 }
