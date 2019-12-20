@@ -36,6 +36,8 @@ namespace MessengerBrowser
             cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
             trackWidth.Value = Properties.Settings.Default.FPIPWidth;
             trackHeight.Value = Properties.Settings.Default.FPIPHeight;
+            cbFA.Checked = Properties.Settings.Default.FEnableFA;
+
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -83,13 +85,14 @@ namespace MessengerBrowser
 
         private void OKBTN()
         {
+            bool is_restartThread = false;
             if (MetroMessageBox.Show(this, "Bạn có chắc muốn thực hiện hành động này ?, Có thể bạn sẽ phải đóng ứng dụng để áp dụng thiết lập này!", "Warning !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 Properties.Settings.Default.FPIPWidth = trackWidth.Value;
                 Properties.Settings.Default.FPIPHeight = trackHeight.Value;
                 Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
                 Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
-                Properties.Settings.Default.Save();
+                Properties.Settings.Default.FEnableFA = cbFA.Checked;
                 Library.PIPWidth = trackWidth.Value;
                 Library.PIPHeight = trackHeight.Value;
                 this.Close();
@@ -99,17 +102,38 @@ namespace MessengerBrowser
                     Cef.GetGlobalCookieManager().DeleteCookies("", "");
                     Library.RestartMessenger();
                 }
+
                 if (Properties.Settings.Default.FStopGPU != cbDisableGPU.Checked)
                 {
                     Properties.Settings.Default.FStopGPU = cbDisableGPU.Checked;
+                    is_restartThread = true;
                 }
 
                 Properties.Settings.Default.Save();
 
-                Application.ExitThread();
-                Application.Restart();
+                if (is_restartThread)
+                {
+                    Application.ExitThread();
+                    Application.Restart();
+                }
+
                 this.Close();
             }
+        }
+
+        private void trackWidth_Scroll(object sender, ScrollEventArgs e)
+        {
+            Library.previewPIPSize(trackWidth.Value, trackHeight.Value);
+        }
+
+        private void trackHeight_Scroll(object sender, ScrollEventArgs e)
+        {
+            Library.previewPIPSize(trackWidth.Value, trackHeight.Value);
+        }
+
+        private void btnOKMulti_Click(object sender, EventArgs e)
+        {
+            OKBTN();
         }
     }
 }

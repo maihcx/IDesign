@@ -291,7 +291,7 @@ namespace MessengerBrowser
                 case 0:
                     Library.EndFace = false;
                     hidebrowser(frmface);
-                    Library.str_url = "http://www.facebook.com";
+                    Library.str_url = string.Empty;
                     frmmes.TopLevel = false;
                     frmmes.Dock = DockStyle.Fill;
                     this.Invoke((MethodInvoker)delegate
@@ -303,42 +303,57 @@ namespace MessengerBrowser
                     break;
                 case 1:
                     hidebrowser(frmmes);
+
                     Library.str_url = str_url;
                     frmface.TopLevel = false;
                     frmface.Dock = DockStyle.Fill;
-                    if (!Library.is_FaceOpened)
+                    //if (Library.is_FaceOpened)
+                    //{
+                    if (this.InvokeRequired)
                     {
-                        if (this.InvokeRequired)
+                        this.Invoke((MethodInvoker)delegate
                         {
-                            this.Invoke((MethodInvoker)delegate
+                            try
                             {
                                 PanelMain.Controls.Add(frmface);
-                            });
-                        }
-                        else
-                        {
-                            PanelMain.Controls.Add(frmface);
-                        }
+                                frmface.Show();
+                                if (!string.IsNullOrEmpty(str_url))
+                                {
+                                    Library.ChangeUrlFace(str_url);
+                                }
+                            }
+                            catch
+                            {
+                                frmface.Close();
+                                frmface = new frmBrowserFacebook();
+                                frmface.TopLevel = false;
+                                frmface.Dock = DockStyle.Fill;
+                                PanelMain.Controls.Add(frmface);
+                                frmface.Show();
+                            }
+                        });
                     }
                     else
                     {
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                PanelMain.Controls.Add(frmface);
-                                Library.ChangeUrlFace(str_url);
-                            });
-                        }
-                        else
+                        try
                         {
                             PanelMain.Controls.Add(frmface);
-                            Library.ChangeUrlFace(str_url);
+                            frmface.Show();
+                            if (!string.IsNullOrEmpty(str_url))
+                            {
+                                Library.ChangeUrlFace(str_url);
+                            }
                         }
-
+                        catch
+                        {
+                            frmface.Close();
+                            frmface = new frmBrowserFacebook();
+                            frmface.TopLevel = false;
+                            frmface.Dock = DockStyle.Fill;
+                            PanelMain.Controls.Add(frmface);
+                            frmface.Show();
+                        }
                     }
-
-                    frmface.Show();
                     break;
 
                 default:
@@ -349,15 +364,18 @@ namespace MessengerBrowser
         private void hidebrowser(Form form_input)
         {
             PanelMain.Controls.Remove(form_input);
-            Library.FacebookCefShutdow();
-            frmface = new frmBrowserFacebook();
+            if (!Properties.Settings.Default.FEnableFA)
+            {
+                frmface = new frmBrowserFacebook();
+                Library.FacebookCefShutdow();
+            }
         }
 
         private void pnFA_MouseClick(object sender, MouseEventArgs e)
         {
             Library.int_windows = 1;
             painPanels(1, Color.DarkGray);
-            changeControlIcon(1, "http://www.facebook.com");
+            changeControlIcon(1, string.Empty);
         }
 
         private void pnPIP_Click(object sender, EventArgs e)
@@ -395,7 +413,7 @@ namespace MessengerBrowser
             //BlueformFrameworkUse.Hide(this, 10);
             BlueformFrameworkUse.Hide(this, 10);
             //PanelMain.Visible = false;
-            
+
             Library.setZoomLever(-1.3);
             this.Hide();
             this.Width = Library.PIPWidth;
