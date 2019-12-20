@@ -29,6 +29,7 @@ namespace MessengerBrowser
         internal static int PIPHeight = Properties.Settings.Default.FPIPHeight;
         internal static int PIPPanelWidth = Properties.Settings.Default.FPIPPanelWidth;
         internal static int PIPPanelHeight = Properties.Settings.Default.FPIPPanelHeight;
+        internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
         internal static void NotificationShow()
         {
             if (!(str_inputTitle.Contains("(") || str_inputTitle.Contains("Messenger") || str_inputTitle.Contains("Đăng nhập")))
@@ -345,6 +346,17 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     ((frmMain)frm).previewPIPSize(width, height);
+                    break;
+                }
+            }
+        }
+        public static void previewPIPPanelSize(int width, int height)
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).previewPIPPanelSize(width, height);
                     break;
                 }
             }

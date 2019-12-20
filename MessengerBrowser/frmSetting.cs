@@ -37,7 +37,8 @@ namespace MessengerBrowser
             trackWidth.Value = Properties.Settings.Default.FPIPWidth;
             trackHeight.Value = Properties.Settings.Default.FPIPHeight;
             cbFA.Checked = Properties.Settings.Default.FEnableFA;
-
+            trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
+            trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -92,6 +93,7 @@ namespace MessengerBrowser
                 Properties.Settings.Default.FPIPHeight = trackHeight.Value;
                 Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
                 Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
+                Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
                 Properties.Settings.Default.FEnableFA = cbFA.Checked;
                 Library.PIPWidth = trackWidth.Value;
                 Library.PIPHeight = trackHeight.Value;
@@ -108,6 +110,8 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FStopGPU = cbDisableGPU.Checked;
                     is_restartThread = true;
                 }
+
+                Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
 
                 Properties.Settings.Default.Save();
 
@@ -134,6 +138,16 @@ namespace MessengerBrowser
         private void btnOKMulti_Click(object sender, EventArgs e)
         {
             OKBTN();
+        }
+
+        private void trackPIPPanelHeight_Scroll(object sender, ScrollEventArgs e)
+        {
+            Library.previewPIPPanelSize(trackPIPPanelWidth.Value, trackPIPPanelHeight.Value);
+        }
+
+        private void trackPIPPanelWidth_Scroll(object sender, ScrollEventArgs e)
+        {
+            Library.previewPIPPanelSize(trackPIPPanelWidth.Value, trackPIPPanelHeight.Value);
         }
     }
 }

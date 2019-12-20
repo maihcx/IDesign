@@ -42,15 +42,19 @@
             this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
             this.metroRadioButton1 = new MetroFramework.Controls.MetroRadioButton();
             this.pipSetting = new MetroFramework.Controls.MetroTabPage();
+            this.trackHeight = new MetroFramework.Controls.MetroTrackBar();
+            this.trackWidth = new MetroFramework.Controls.MetroTrackBar();
             this.btnOKPIP = new MetroFramework.Controls.MetroButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnClose = new System.Windows.Forms.Panel();
-            this.trackWidth = new MetroFramework.Controls.MetroTrackBar();
-            this.trackHeight = new MetroFramework.Controls.MetroTrackBar();
             this.multiThread = new MetroFramework.Controls.MetroTabPage();
-            this.cbFA = new MetroFramework.Controls.MetroCheckBox();
             this.btnOKMulti = new MetroFramework.Controls.MetroButton();
+            this.cbFA = new MetroFramework.Controls.MetroCheckBox();
+            this.pnClose = new System.Windows.Forms.Panel();
+            this.trackPIPPanelHeight = new MetroFramework.Controls.MetroTrackBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.trackPIPPanelWidth = new MetroFramework.Controls.MetroTrackBar();
+            this.label4 = new System.Windows.Forms.Label();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
             this.theme.SuspendLayout();
@@ -64,12 +68,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelControls.Controls.Add(this.system);
+            this.PanelControls.Controls.Add(this.multiThread);
             this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.pipSetting);
-            this.PanelControls.Controls.Add(this.multiThread);
             this.PanelControls.Location = new System.Drawing.Point(11, 63);
             this.PanelControls.Name = "PanelControls";
-            this.PanelControls.SelectedIndex = 3;
+            this.PanelControls.SelectedIndex = 2;
             this.PanelControls.Size = new System.Drawing.Size(403, 297);
             this.PanelControls.TabIndex = 0;
             this.PanelControls.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -233,6 +237,10 @@
             // 
             // pipSetting
             // 
+            this.pipSetting.Controls.Add(this.trackPIPPanelWidth);
+            this.pipSetting.Controls.Add(this.label4);
+            this.pipSetting.Controls.Add(this.trackPIPPanelHeight);
+            this.pipSetting.Controls.Add(this.label3);
             this.pipSetting.Controls.Add(this.trackHeight);
             this.pipSetting.Controls.Add(this.trackWidth);
             this.pipSetting.Controls.Add(this.btnOKPIP);
@@ -251,6 +259,34 @@
             this.pipSetting.VerticalScrollbarHighlightOnWheel = false;
             this.pipSetting.VerticalScrollbarSize = 10;
             // 
+            // trackHeight
+            // 
+            this.trackHeight.BackColor = System.Drawing.Color.Transparent;
+            this.trackHeight.Location = new System.Drawing.Point(101, 66);
+            this.trackHeight.Maximum = 500;
+            this.trackHeight.Minimum = 320;
+            this.trackHeight.Name = "trackHeight";
+            this.trackHeight.Size = new System.Drawing.Size(269, 23);
+            this.trackHeight.TabIndex = 9;
+            this.trackHeight.Text = "Width";
+            this.trackHeight.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackHeight.Value = 320;
+            this.trackHeight.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackHeight_Scroll);
+            // 
+            // trackWidth
+            // 
+            this.trackWidth.BackColor = System.Drawing.Color.Transparent;
+            this.trackWidth.Location = new System.Drawing.Point(101, 37);
+            this.trackWidth.Maximum = 550;
+            this.trackWidth.Minimum = 325;
+            this.trackWidth.Name = "trackWidth";
+            this.trackWidth.Size = new System.Drawing.Size(269, 23);
+            this.trackWidth.TabIndex = 8;
+            this.trackWidth.Text = "Width";
+            this.trackWidth.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackWidth.Value = 325;
+            this.trackWidth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackWidth_Scroll);
+            // 
             // btnOKPIP
             // 
             this.btnOKPIP.Location = new System.Drawing.Point(151, 185);
@@ -267,7 +303,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(23, 129);
+            this.label2.Location = new System.Drawing.Point(23, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 5;
@@ -278,53 +314,11 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(23, 72);
+            this.label1.Location = new System.Drawing.Point(23, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Chiều dài:";
-            // 
-            // pnClose
-            // 
-            this.pnClose.BackColor = System.Drawing.Color.Transparent;
-            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close1;
-            this.pnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnClose.Location = new System.Drawing.Point(1, 6);
-            this.pnClose.Name = "pnClose";
-            this.pnClose.Size = new System.Drawing.Size(20, 20);
-            this.pnClose.TabIndex = 2;
-            this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
-            this.pnClose.MouseLeave += new System.EventHandler(this.pnClose_MouseLeave);
-            this.pnClose.MouseHover += new System.EventHandler(this.pnClose_MouseHover);
-            // 
-            // trackWidth
-            // 
-            this.trackWidth.BackColor = System.Drawing.Color.Transparent;
-            this.trackWidth.Location = new System.Drawing.Point(101, 68);
-            this.trackWidth.Maximum = 550;
-            this.trackWidth.Minimum = 325;
-            this.trackWidth.Name = "trackWidth";
-            this.trackWidth.Size = new System.Drawing.Size(269, 23);
-            this.trackWidth.TabIndex = 8;
-            this.trackWidth.Text = "Width";
-            this.trackWidth.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.trackWidth.Value = 325;
-            this.trackWidth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackWidth_Scroll);
-            // 
-            // trackHeight
-            // 
-            this.trackHeight.BackColor = System.Drawing.Color.Transparent;
-            this.trackHeight.Location = new System.Drawing.Point(101, 125);
-            this.trackHeight.Maximum = 500;
-            this.trackHeight.Minimum = 320;
-            this.trackHeight.Name = "trackHeight";
-            this.trackHeight.Size = new System.Drawing.Size(269, 23);
-            this.trackHeight.TabIndex = 9;
-            this.trackHeight.Text = "Width";
-            this.trackHeight.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.trackHeight.Value = 320;
-            this.trackHeight.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackHeight_Scroll);
             // 
             // multiThread
             // 
@@ -343,6 +337,17 @@
             this.multiThread.VerticalScrollbarHighlightOnWheel = false;
             this.multiThread.VerticalScrollbarSize = 10;
             // 
+            // btnOKMulti
+            // 
+            this.btnOKMulti.Location = new System.Drawing.Point(151, 185);
+            this.btnOKMulti.Name = "btnOKMulti";
+            this.btnOKMulti.Size = new System.Drawing.Size(101, 42);
+            this.btnOKMulti.TabIndex = 8;
+            this.btnOKMulti.Text = "Xác nhận";
+            this.btnOKMulti.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnOKMulti.UseSelectable = true;
+            this.btnOKMulti.Click += new System.EventHandler(this.btnOKMulti_Click);
+            // 
             // cbFA
             // 
             this.cbFA.AutoSize = true;
@@ -354,16 +359,69 @@
             this.cbFA.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbFA.UseSelectable = true;
             // 
-            // btnOKMulti
+            // pnClose
             // 
-            this.btnOKMulti.Location = new System.Drawing.Point(151, 185);
-            this.btnOKMulti.Name = "btnOKMulti";
-            this.btnOKMulti.Size = new System.Drawing.Size(101, 42);
-            this.btnOKMulti.TabIndex = 8;
-            this.btnOKMulti.Text = "Xác nhận";
-            this.btnOKMulti.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.btnOKMulti.UseSelectable = true;
-            this.btnOKMulti.Click += new System.EventHandler(this.btnOKMulti_Click);
+            this.pnClose.BackColor = System.Drawing.Color.Transparent;
+            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close1;
+            this.pnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnClose.Location = new System.Drawing.Point(1, 6);
+            this.pnClose.Name = "pnClose";
+            this.pnClose.Size = new System.Drawing.Size(20, 20);
+            this.pnClose.TabIndex = 2;
+            this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
+            this.pnClose.MouseLeave += new System.EventHandler(this.pnClose_MouseLeave);
+            this.pnClose.MouseHover += new System.EventHandler(this.pnClose_MouseHover);
+            // 
+            // trackPIPPanelHeight
+            // 
+            this.trackPIPPanelHeight.BackColor = System.Drawing.Color.Transparent;
+            this.trackPIPPanelHeight.Location = new System.Drawing.Point(130, 109);
+            this.trackPIPPanelHeight.Maximum = 600;
+            this.trackPIPPanelHeight.Minimum = 200;
+            this.trackPIPPanelHeight.Name = "trackPIPPanelHeight";
+            this.trackPIPPanelHeight.Size = new System.Drawing.Size(240, 23);
+            this.trackPIPPanelHeight.TabIndex = 11;
+            this.trackPIPPanelHeight.Text = "Height";
+            this.trackPIPPanelHeight.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackPIPPanelHeight.Value = 200;
+            this.trackPIPPanelHeight.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackPIPPanelHeight_Scroll);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(23, 142);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Chiều dài PIP:";
+            // 
+            // trackPIPPanelWidth
+            // 
+            this.trackPIPPanelWidth.BackColor = System.Drawing.Color.Transparent;
+            this.trackPIPPanelWidth.Location = new System.Drawing.Point(130, 138);
+            this.trackPIPPanelWidth.Maximum = 600;
+            this.trackPIPPanelWidth.Minimum = 400;
+            this.trackPIPPanelWidth.Name = "trackPIPPanelWidth";
+            this.trackPIPPanelWidth.Size = new System.Drawing.Size(240, 23);
+            this.trackPIPPanelWidth.TabIndex = 13;
+            this.trackPIPPanelWidth.Text = "Width";
+            this.trackPIPPanelWidth.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackPIPPanelWidth.Value = 400;
+            this.trackPIPPanelWidth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackPIPPanelWidth_Scroll);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(23, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Chiều rộng PIP:";
             // 
             // frmSetting
             // 
@@ -420,5 +478,9 @@
         private MetroFramework.Controls.MetroTabPage multiThread;
         private MetroFramework.Controls.MetroCheckBox cbFA;
         private MetroFramework.Controls.MetroButton btnOKMulti;
+        private MetroFramework.Controls.MetroTrackBar trackPIPPanelHeight;
+        private System.Windows.Forms.Label label3;
+        private MetroFramework.Controls.MetroTrackBar trackPIPPanelWidth;
+        private System.Windows.Forms.Label label4;
     }
 }
