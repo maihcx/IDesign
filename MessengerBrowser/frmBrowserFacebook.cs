@@ -34,7 +34,7 @@ namespace MessengerBrowser
         {
             Library.int_windows = 1;
             Library.painPanels(1, Color.DarkGray);
-            Library.is_FaceOpened = true;
+            //Library.is_FaceOpened = true;
             //new Thread(() =>
             //{
             //    if (this.InvokeRequired)
@@ -70,7 +70,7 @@ namespace MessengerBrowser
         private void loadchild()
         {
             DisplayHandler displayer = new DisplayHandler();
-            browser = new ChromiumWebBrowser(Library.str_url);
+            browser = new ChromiumWebBrowser((string.IsNullOrEmpty(Library.str_url)) ? "http://www.facebook.com" : Library.str_url);
             browser.DownloadHandler = new DownloadHandler();
             Controls.Add(browser);
             browser.Dock = DockStyle.Fill;
@@ -101,7 +101,8 @@ namespace MessengerBrowser
 
         public void ChangeUrl(string str_url)
         {
-            browser.Load(str_url);
+            if (!string.IsNullOrEmpty(str_url))
+                browser.Load(str_url);
         }
 
         public void FacebookShutdow()

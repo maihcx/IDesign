@@ -123,6 +123,7 @@ namespace MessengerBrowser
                 // Open Google in Default browser 
                 Library.EndFace = true;
                 Library.changeBrowser(1, request.Url.ToString());
+                Library.painPanels(1, Color.DarkGray);
                 browser.CloseBrowser(true);
                 Library.stopPIP();
                 return true;

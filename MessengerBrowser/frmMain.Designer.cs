@@ -69,7 +69,7 @@
             this.pnEndprocess.BackgroundImage = global::MessengerBrowser.Properties.Resources.close_red;
             this.pnEndprocess.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnEndprocess.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnEndprocess.Location = new System.Drawing.Point(51, 2);
+            this.pnEndprocess.Location = new System.Drawing.Point(51, 3);
             this.pnEndprocess.Name = "pnEndprocess";
             this.pnEndprocess.Size = new System.Drawing.Size(22, 22);
             this.pnEndprocess.TabIndex = 3;
@@ -150,7 +150,7 @@
             // lblhostkey
             // 
             this.lblhostkey.AutoSize = true;
-            this.lblhostkey.Location = new System.Drawing.Point(148, 8);
+            this.lblhostkey.Location = new System.Drawing.Point(134, 8);
             this.lblhostkey.Name = "lblhostkey";
             this.lblhostkey.Size = new System.Drawing.Size(0, 13);
             this.lblhostkey.TabIndex = 19;

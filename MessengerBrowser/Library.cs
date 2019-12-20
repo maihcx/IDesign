@@ -10,7 +10,7 @@ namespace MessengerBrowser
         internal static int int_ChangeIconUrl = 0;
         internal static string str_url = "http://www.messenger.com";
         internal static bool EndFace = false;
-        internal static bool is_FaceOpened = false;
+        //internal static bool is_FaceOpened = false;
         internal static int int_keyClick = 0;
         internal static bool is_PIP = false;
         internal static frmPictureInPicture frm = new frmPictureInPicture();

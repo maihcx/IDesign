@@ -30,6 +30,7 @@
         {
             this.PanelControls = new MetroFramework.Controls.MetroTabControl();
             this.system = new MetroFramework.Controls.MetroTabPage();
+            this.cbDisableGPU = new MetroFramework.Controls.MetroCheckBox();
             this.cbClear = new MetroFramework.Controls.MetroCheckBox();
             this.btnOKSystem = new MetroFramework.Controls.MetroButton();
             this.cbHead = new MetroFramework.Controls.MetroCheckBox();
@@ -43,17 +44,18 @@
             this.pipSetting = new MetroFramework.Controls.MetroTabPage();
             this.btnOKPIP = new MetroFramework.Controls.MetroButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.trackHeight = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.trackWidth = new System.Windows.Forms.TrackBar();
             this.pnClose = new System.Windows.Forms.Panel();
-            this.cbDisableGPU = new MetroFramework.Controls.MetroCheckBox();
+            this.trackWidth = new MetroFramework.Controls.MetroTrackBar();
+            this.trackHeight = new MetroFramework.Controls.MetroTrackBar();
+            this.multiThread = new MetroFramework.Controls.MetroTabPage();
+            this.cbFA = new MetroFramework.Controls.MetroCheckBox();
+            this.btnOKMulti = new MetroFramework.Controls.MetroButton();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
             this.theme.SuspendLayout();
             this.pipSetting.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackWidth)).BeginInit();
+            this.multiThread.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelControls
@@ -64,9 +66,10 @@
             this.PanelControls.Controls.Add(this.system);
             this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.pipSetting);
+            this.PanelControls.Controls.Add(this.multiThread);
             this.PanelControls.Location = new System.Drawing.Point(11, 63);
             this.PanelControls.Name = "PanelControls";
-            this.PanelControls.SelectedIndex = 0;
+            this.PanelControls.SelectedIndex = 3;
             this.PanelControls.Size = new System.Drawing.Size(403, 297);
             this.PanelControls.TabIndex = 0;
             this.PanelControls.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -93,6 +96,17 @@
             this.system.VerticalScrollbarBarColor = true;
             this.system.VerticalScrollbarHighlightOnWheel = false;
             this.system.VerticalScrollbarSize = 10;
+            // 
+            // cbDisableGPU
+            // 
+            this.cbDisableGPU.AutoSize = true;
+            this.cbDisableGPU.Location = new System.Drawing.Point(85, 123);
+            this.cbDisableGPU.Name = "cbDisableGPU";
+            this.cbDisableGPU.Size = new System.Drawing.Size(251, 15);
+            this.cbDisableGPU.TabIndex = 7;
+            this.cbDisableGPU.Text = "Vô hiệu hóa tiến trình GPU để tiết kiệm ram";
+            this.cbDisableGPU.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbDisableGPU.UseSelectable = true;
             // 
             // cbClear
             // 
@@ -219,11 +233,11 @@
             // 
             // pipSetting
             // 
+            this.pipSetting.Controls.Add(this.trackHeight);
+            this.pipSetting.Controls.Add(this.trackWidth);
             this.pipSetting.Controls.Add(this.btnOKPIP);
             this.pipSetting.Controls.Add(this.label2);
-            this.pipSetting.Controls.Add(this.trackHeight);
             this.pipSetting.Controls.Add(this.label1);
-            this.pipSetting.Controls.Add(this.trackWidth);
             this.pipSetting.HorizontalScrollbarBarColor = true;
             this.pipSetting.HorizontalScrollbarHighlightOnWheel = false;
             this.pipSetting.HorizontalScrollbarSize = 10;
@@ -259,18 +273,6 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Chiều rộng:";
             // 
-            // trackHeight
-            // 
-            this.trackHeight.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.trackHeight.Location = new System.Drawing.Point(101, 113);
-            this.trackHeight.Maximum = 500;
-            this.trackHeight.Minimum = 320;
-            this.trackHeight.Name = "trackHeight";
-            this.trackHeight.Size = new System.Drawing.Size(269, 45);
-            this.trackHeight.TabIndex = 4;
-            this.trackHeight.Value = 320;
-            this.trackHeight.Scroll += new System.EventHandler(this.trackHeight_Scroll);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -281,18 +283,6 @@
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Chiều dài:";
-            // 
-            // trackWidth
-            // 
-            this.trackWidth.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.trackWidth.Location = new System.Drawing.Point(101, 56);
-            this.trackWidth.Maximum = 500;
-            this.trackWidth.Minimum = 325;
-            this.trackWidth.Name = "trackWidth";
-            this.trackWidth.Size = new System.Drawing.Size(269, 45);
-            this.trackWidth.TabIndex = 2;
-            this.trackWidth.Value = 325;
-            this.trackWidth.Scroll += new System.EventHandler(this.trackWidth_Scroll);
             // 
             // pnClose
             // 
@@ -308,16 +298,72 @@
             this.pnClose.MouseLeave += new System.EventHandler(this.pnClose_MouseLeave);
             this.pnClose.MouseHover += new System.EventHandler(this.pnClose_MouseHover);
             // 
-            // cbDisableGPU
+            // trackWidth
             // 
-            this.cbDisableGPU.AutoSize = true;
-            this.cbDisableGPU.Location = new System.Drawing.Point(85, 123);
-            this.cbDisableGPU.Name = "cbDisableGPU";
-            this.cbDisableGPU.Size = new System.Drawing.Size(251, 15);
-            this.cbDisableGPU.TabIndex = 7;
-            this.cbDisableGPU.Text = "Vô hiệu hóa tiến trình GPU để tiết kiệm ram";
-            this.cbDisableGPU.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cbDisableGPU.UseSelectable = true;
+            this.trackWidth.BackColor = System.Drawing.Color.Transparent;
+            this.trackWidth.Location = new System.Drawing.Point(101, 68);
+            this.trackWidth.Maximum = 550;
+            this.trackWidth.Minimum = 325;
+            this.trackWidth.Name = "trackWidth";
+            this.trackWidth.Size = new System.Drawing.Size(269, 23);
+            this.trackWidth.TabIndex = 8;
+            this.trackWidth.Text = "Width";
+            this.trackWidth.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackWidth.Value = 325;
+            this.trackWidth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackWidth_Scroll);
+            // 
+            // trackHeight
+            // 
+            this.trackHeight.BackColor = System.Drawing.Color.Transparent;
+            this.trackHeight.Location = new System.Drawing.Point(101, 125);
+            this.trackHeight.Maximum = 500;
+            this.trackHeight.Minimum = 320;
+            this.trackHeight.Name = "trackHeight";
+            this.trackHeight.Size = new System.Drawing.Size(269, 23);
+            this.trackHeight.TabIndex = 9;
+            this.trackHeight.Text = "Width";
+            this.trackHeight.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.trackHeight.Value = 320;
+            this.trackHeight.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackHeight_Scroll);
+            // 
+            // multiThread
+            // 
+            this.multiThread.Controls.Add(this.btnOKMulti);
+            this.multiThread.Controls.Add(this.cbFA);
+            this.multiThread.HorizontalScrollbarBarColor = true;
+            this.multiThread.HorizontalScrollbarHighlightOnWheel = false;
+            this.multiThread.HorizontalScrollbarSize = 10;
+            this.multiThread.Location = new System.Drawing.Point(4, 38);
+            this.multiThread.Name = "multiThread";
+            this.multiThread.Size = new System.Drawing.Size(395, 255);
+            this.multiThread.TabIndex = 3;
+            this.multiThread.Text = "Đa nhiệm trang";
+            this.multiThread.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.multiThread.VerticalScrollbarBarColor = true;
+            this.multiThread.VerticalScrollbarHighlightOnWheel = false;
+            this.multiThread.VerticalScrollbarSize = 10;
+            // 
+            // cbFA
+            // 
+            this.cbFA.AutoSize = true;
+            this.cbFA.Location = new System.Drawing.Point(36, 27);
+            this.cbFA.Name = "cbFA";
+            this.cbFA.Size = new System.Drawing.Size(74, 15);
+            this.cbFA.TabIndex = 2;
+            this.cbFA.Text = "Facebook";
+            this.cbFA.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbFA.UseSelectable = true;
+            // 
+            // btnOKMulti
+            // 
+            this.btnOKMulti.Location = new System.Drawing.Point(151, 185);
+            this.btnOKMulti.Name = "btnOKMulti";
+            this.btnOKMulti.Size = new System.Drawing.Size(101, 42);
+            this.btnOKMulti.TabIndex = 8;
+            this.btnOKMulti.Text = "Xác nhận";
+            this.btnOKMulti.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnOKMulti.UseSelectable = true;
+            this.btnOKMulti.Click += new System.EventHandler(this.btnOKMulti_Click);
             // 
             // frmSetting
             // 
@@ -343,8 +389,8 @@
             this.theme.PerformLayout();
             this.pipSetting.ResumeLayout(false);
             this.pipSetting.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackWidth)).EndInit();
+            this.multiThread.ResumeLayout(false);
+            this.multiThread.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -364,12 +410,15 @@
         private MetroFramework.Controls.MetroRadioButton metroRadioButton1;
         private MetroFramework.Controls.MetroCheckBox cbClear;
         private MetroFramework.Controls.MetroTabPage pipSetting;
-        private System.Windows.Forms.TrackBar trackWidth;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackHeight;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroButton btnOKPIP;
         private System.Windows.Forms.Panel pnClose;
         private MetroFramework.Controls.MetroCheckBox cbDisableGPU;
+        private MetroFramework.Controls.MetroTrackBar trackWidth;
+        private MetroFramework.Controls.MetroTrackBar trackHeight;
+        private MetroFramework.Controls.MetroTabPage multiThread;
+        private MetroFramework.Controls.MetroCheckBox cbFA;
+        private MetroFramework.Controls.MetroButton btnOKMulti;
     }
 }
