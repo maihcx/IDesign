@@ -43,6 +43,7 @@ namespace MessengerBrowser
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //Properties.Settings.Default.Reset();
             SaveSettingForm.IntializeForm(this);
 
             //pnAutoPIP.BackgroundImage = (Properties.Settings.Default.FAutoPIP) ? Properties.Resources.done_red : Properties.Resources.done;
@@ -85,6 +86,8 @@ namespace MessengerBrowser
                 }
             })
             { IsBackground = true }.Start();
+
+
         }
 
         private void load()
@@ -421,7 +424,7 @@ namespace MessengerBrowser
             showPanels(false);
             //PanelMain.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             PanelMain.Width = Library.PIPPanelWidth; PanelMain.Height = Library.PIPPanelHeight;
-            PanelMain.Location = new System.Drawing.Point(-70, -45);
+            PanelMain.Location = Properties.Settings.Default.FPIPPanelLocation;
 
             Rectangle r = Screen.PrimaryScreen.WorkingArea;
             this.StartPosition = FormStartPosition.Manual;
@@ -479,26 +482,31 @@ namespace MessengerBrowser
             Library.PIPPanelHeight = PENHEIGHT = PanelMain.Height;
             Library.PIPPanelLocation = PanelMain.Location;
             PENX = PanelMain.Location.X;
+            PENY = PanelMain.Location.Y;
             //PanelMain.Location = new System.Drawing.Point(x, y);
         }
 
 
         public void previewPIPPanelSize(int width, int height)
         {
-            MessageBox.Show(PENX.ToString());
+            //MessageBox.Show(PENX.ToString());
             if (!Library.is_PIP)
                 startPIP();
-            Library.PIPPanelWidth = PanelMain.Width = width;
-            Library.PIPPanelHeight = PanelMain.Height = height;
+            //Library.PIPPanelWidth = PanelMain.Width = width;
+            //Library.PIPPanelHeight = PanelMain.Height = height;
             //PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
             //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-            int int_WIDTH = (PENWIDTH == 0) ? Properties.Settings.Default.FPIPPanelWidth : PENWIDTH;
-            int int_HEIGHT = (PENHEIGHT == 0) ? Properties.Settings.Default.FPIPPanelHeight : PENHEIGHT;
-            int int_X = (PENX == 0) ? Properties.Settings.Default.FPIPPanelLocation.X : PENX;
+            //int int_WIDTH = (PENWIDTH == 0) ? Properties.Settings.Default.FPIPPanelWidth : PENWIDTH;
+            //int int_HEIGHT = (PENHEIGHT == 0) ? Properties.Settings.Default.FPIPPanelHeight : PENHEIGHT;
+            //int int_X = (PENX == 0) ? Library.PIPPanelLocation.X : PENX;
+            //int int_y = (PENY == 0) ? Library.PIPPanelLocation.Y : PENY;
             //int x = Properties.Settings.Default.FPIPPanelLocation.X;
-            int y = Properties.Settings.Default.FPIPPanelLocation.Y;
-            PanelMain.Location = new System.Drawing.Point(PENX + ((int_WIDTH - width)), y + (int_HEIGHT - height));
+            //int y = Properties.Settings.Default.FPIPPanelLocation.Y;
+            //MessageBox.Show((Library.PIPPanelHeight - (Library.PIPPanelHeight - height)).ToString());
+            PanelMain.Height = (PanelMain.Height - height);
+            PanelMain.Location = new Point(PanelMain.Location.X, PanelMain.Location.Y + ((Library.PIPPanelHeight - (Library.PIPPanelHeight - height))));
             Library.PIPPanelLocation = PanelMain.Location;
+            Library.PIPPanelHeight = PanelMain.Height;
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
@@ -634,6 +642,11 @@ namespace MessengerBrowser
                     pnFA.BackColor = colorOfPanelTab;
                     break;
             }
+        }
+
+        private void PanelMain_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void defaultColorTabmenu()

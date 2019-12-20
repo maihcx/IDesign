@@ -210,6 +210,7 @@
     <None Include="Resources\done.png" />
     <None Include="Resources\done_red.png" />
     <None Include="Resources\close_red.png" />
+    <None Include="Resources\Sicons-Basic-Round-Social-Facebook.ico" />
     <Content Include="TextTemplate.ico" />
     <None Include="Resources\messenger-app-icon-28.jpg" />
     <None Include="Resources\rest.png" />
