@@ -463,17 +463,42 @@ namespace MessengerBrowser
             //this.Show();
 
         }
-
+        int PENWIDTH = 0, PENHEIGHT = 0;
+        int PENX = 0, PENY = 0;
         public void previewPIPSize(int width, int height)
         {
             if (!Library.is_PIP)
                 startPIP();
             this.Height = height;
             this.Width = width;
-            Library.PIPPanelWidth = PanelMain.Width;
-            Library.PIPPanelHeight = PanelMain.Height;
             //PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
+            //int x = Properties.Settings.Default.FPIPPanelLocation.X;
+            //int y = Properties.Settings.Default.FPIPPanelLocation.Y;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            Library.PIPPanelWidth = PENWIDTH = PanelMain.Width;
+            Library.PIPPanelHeight = PENHEIGHT = PanelMain.Height;
+            Library.PIPPanelLocation = PanelMain.Location;
+            PENX = PanelMain.Location.X;
+            //PanelMain.Location = new System.Drawing.Point(x, y);
+        }
+
+
+        public void previewPIPPanelSize(int width, int height)
+        {
+            MessageBox.Show(PENX.ToString());
+            if (!Library.is_PIP)
+                startPIP();
+            Library.PIPPanelWidth = PanelMain.Width = width;
+            Library.PIPPanelHeight = PanelMain.Height = height;
+            //PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            int int_WIDTH = (PENWIDTH == 0) ? Properties.Settings.Default.FPIPPanelWidth : PENWIDTH;
+            int int_HEIGHT = (PENHEIGHT == 0) ? Properties.Settings.Default.FPIPPanelHeight : PENHEIGHT;
+            int int_X = (PENX == 0) ? Properties.Settings.Default.FPIPPanelLocation.X : PENX;
+            //int x = Properties.Settings.Default.FPIPPanelLocation.X;
+            int y = Properties.Settings.Default.FPIPPanelLocation.Y;
+            PanelMain.Location = new System.Drawing.Point(PENX + ((int_WIDTH - width)), y + (int_HEIGHT - height));
+            Library.PIPPanelLocation = PanelMain.Location;
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)

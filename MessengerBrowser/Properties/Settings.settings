@@ -35,5 +35,8 @@
     <Setting Name="FEnableFA" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="FPIPPanelLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">-70, -45</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

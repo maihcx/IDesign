@@ -154,5 +154,17 @@ namespace MessengerBrowser.Properties {
                 this["FEnableFA"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-70, -45")]
+        public global::System.Drawing.Point FPIPPanelLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["FPIPPanelLocation"]));
+            }
+            set {
+                this["FPIPPanelLocation"] = value;
+            }
+        }
     }
 }
