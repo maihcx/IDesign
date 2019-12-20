@@ -45,7 +45,7 @@
             // 
             this.pnPIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnPIP.BackColor = System.Drawing.Color.Transparent;
-            this.pnPIP.Location = new System.Drawing.Point(567, 6);
+            this.pnPIP.Location = new System.Drawing.Point(567, 5);
             this.pnPIP.Name = "pnPIP";
             this.pnPIP.Size = new System.Drawing.Size(25, 18);
             this.pnPIP.TabIndex = 0;
@@ -59,7 +59,7 @@
             this.pnAutoPIP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnAutoPIP.Location = new System.Drawing.Point(95, 3);
             this.pnAutoPIP.Name = "pnAutoPIP";
-            this.pnAutoPIP.Size = new System.Drawing.Size(23, 23);
+            this.pnAutoPIP.Size = new System.Drawing.Size(21, 21);
             this.pnAutoPIP.TabIndex = 3;
             this.pnAutoPIP.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnAutoPIP_MouseClick);
             // 
@@ -71,7 +71,7 @@
             this.pnEndprocess.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnEndprocess.Location = new System.Drawing.Point(51, 2);
             this.pnEndprocess.Name = "pnEndprocess";
-            this.pnEndprocess.Size = new System.Drawing.Size(24, 24);
+            this.pnEndprocess.Size = new System.Drawing.Size(22, 22);
             this.pnEndprocess.TabIndex = 3;
             this.pnEndprocess.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbEndprocess_MouseClick);
             // 
@@ -85,7 +85,7 @@
             this.pnFA.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnFA.Location = new System.Drawing.Point(635, 4);
             this.pnFA.Name = "pnFA";
-            this.pnFA.Size = new System.Drawing.Size(26, 22);
+            this.pnFA.Size = new System.Drawing.Size(24, 20);
             this.pnFA.TabIndex = 0;
             this.pnFA.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnFA_MouseClick);
             // 
@@ -98,7 +98,7 @@
             this.pnMess.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnMess.Location = new System.Drawing.Point(613, 4);
             this.pnMess.Name = "pnMess";
-            this.pnMess.Size = new System.Drawing.Size(22, 22);
+            this.pnMess.Size = new System.Drawing.Size(20, 20);
             this.pnMess.TabIndex = 0;
             this.pnMess.Click += new System.EventHandler(this.pnMess_Click);
             // 
@@ -107,7 +107,7 @@
             this.pnDF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDF.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.pnDF.Location = new System.Drawing.Point(1, 24);
+            this.pnDF.Location = new System.Drawing.Point(1, 23);
             this.pnDF.Name = "pnDF";
             this.pnDF.Size = new System.Drawing.Size(674, 9);
             this.pnDF.TabIndex = 10;
@@ -131,7 +131,7 @@
             this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnClose.Location = new System.Drawing.Point(3, 4);
             this.pnClose.Name = "pnClose";
-            this.pnClose.Size = new System.Drawing.Size(20, 20);
+            this.pnClose.Size = new System.Drawing.Size(19, 19);
             this.pnClose.TabIndex = 17;
             this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
             // 
@@ -143,7 +143,7 @@
             this.pnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnMaximize.Location = new System.Drawing.Point(27, 4);
             this.pnMaximize.Name = "pnMaximize";
-            this.pnMaximize.Size = new System.Drawing.Size(20, 20);
+            this.pnMaximize.Size = new System.Drawing.Size(19, 19);
             this.pnMaximize.TabIndex = 18;
             this.pnMaximize.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnMaximize_MouseClick);
             // 
