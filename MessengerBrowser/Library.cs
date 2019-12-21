@@ -361,5 +361,17 @@ namespace MessengerBrowser
                 }
             }
         }
+
+        public static void EndProgram()
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).EndProgram();
+                    break;
+                }
+            }
+        }
     }
 }

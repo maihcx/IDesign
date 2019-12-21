@@ -184,5 +184,12 @@ namespace MessengerBrowser
             }
             PIPNameFirstStart = false;
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            frmUpdateDownload frm = new frmUpdateDownload();
+            frm.Show();
+            this.Close();
+        }
     }
 }
