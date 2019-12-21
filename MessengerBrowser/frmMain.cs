@@ -40,6 +40,7 @@ namespace MessengerBrowser
         frmBrowserFacebook frmface = new frmBrowserFacebook();
         System.Windows.Forms.Timer tm = new System.Windows.Forms.Timer();
         bool winstate = false;
+        bool isEndProcess = false;
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -108,8 +109,6 @@ namespace MessengerBrowser
             textTool.SetToolTip(pnFA, "Truy cập nhanh vào Facebook");
         }
 
-        public void PanelCanVisible() => PanelMain.Visible = true;
-
         private void pnMess_Click(object sender, EventArgs e)
         {
             Library.int_windows = 0;
@@ -122,29 +121,27 @@ namespace MessengerBrowser
             //}
         }
 
-        public void ShowNotification(string str_Text)
-        {
-            Library.showNotification("Messenger", str_Text, 2000);
-        }
-
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isNotExit)
+            if (!isEndProcess)
             {
-                e.Cancel = isNotExit;
-                frmHide();
-            }
-            else
-            {
-                if (MetroMessageBox.Show(this, "Bạn có muốn thoát ?", "Alert !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (isNotExit)
                 {
-                    SaveSettingForm.SaveForm(this);
-                    frmClose();
+                    e.Cancel = isNotExit;
+                    frmHide();
                 }
                 else
                 {
-                    isNotExit = true;
-                    e.Cancel = true;
+                    if (MetroMessageBox.Show(this, "Bạn có muốn thoát ?", "Alert !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        SaveSettingForm.SaveForm(this);
+                        frmClose();
+                    }
+                    else
+                    {
+                        isNotExit = true;
+                        e.Cancel = true;
+                    }
                 }
             }
         }
@@ -182,19 +179,6 @@ namespace MessengerBrowser
             return Library.is_openedwindows = !Library.is_openedwindows;
         }
 
-        public void ShowOfHideMain()
-        {
-            if (checkTrue_False())
-            {
-                frmShow();
-                StateWindow = true;
-            }
-            else
-            {
-                frmHide();
-            }
-        }
-
         private void ntfCT_BalloonTipClosed(object sender, EventArgs e)
         {
             if (StateWindow)
@@ -206,6 +190,193 @@ namespace MessengerBrowser
         private void ntfCT_BalloonTipShown(object sender, EventArgs e)
         {
             StateWindow = false;
+        }
+
+        private void frmHide()
+        {
+            BlueformFrameworkUse.Hide(this, 10);
+            StateWindow = false;
+            Library.is_openedwindows = false;
+        }
+
+        private void frmShow()
+        {
+            this.Opacity = 0;
+            this.Show();
+
+            BlueformFrameworkUse.Show(this, 10);
+            Library.str_TextShow = string.Empty;
+            Library.is_openedwindows = true;
+        }
+
+        private void frmClose()
+        {
+            this.Show();
+            for (double i = 1; i > .0; i -= 0.03)
+            {
+                Thread.Sleep(1);
+                this.Opacity = i;
+            }
+            Cef.Shutdown();
+        }
+
+        private void hidebrowser(Form form_input)
+        {
+            PanelMain.Controls.Remove(form_input);
+            if (!Properties.Settings.Default.FEnableFA)
+            {
+                frmface = new frmBrowserFacebook();
+                Library.FacebookCefShutdow();
+            }
+        }
+
+        private void pnFA_MouseClick(object sender, MouseEventArgs e)
+        {
+            Library.int_windows = 1;
+            painPanels(1, Color.DarkGray);
+            changeControlIcon(1, string.Empty);
+        }
+
+        private void pnPIP_Click(object sender, EventArgs e)
+        {
+            //Library.is_PIP = true;
+
+            //Library.hideMain_PIP();
+            //Library.frm.Show();
+            //Library.frm = new frmPictureInPicture();
+            if (Library.int_windows == 0)
+            {
+                startPIP();
+            }
+        }
+
+        private void showPanels(bool k)
+        {
+            pnMess.Visible = k;
+            pnFA.Visible = k;
+            pnPIP.Visible = k;
+            pnDF.Visible = k;
+            pnEndprocess.Visible = k;
+            pnAutoPIP.Visible = k;
+        }
+
+        private void frmMain_SizeChanged(object sender, EventArgs e)
+        {
+            if (is_resize && WindowState == FormWindowState.Normal)
+            {
+                Library.int_formWidth = this.Width;
+                Library.int_formHeight = this.Height;
+                Library.int_formLocationX = this.Location.X;
+                Library.int_formLocationY = this.Location.Y;
+
+                Library.int_controlWidth = PanelMain.Width;
+                Library.int_controlHeight = PanelMain.Height;
+                Library.int_controlLocationX = PanelMain.Location.X;
+                Library.int_controlLocationY = PanelMain.Location.Y;
+            }
+        }
+
+        private void frmMain_Move(object sender, EventArgs e)
+        {
+            if (is_resize)
+            {
+                Library.int_formLocationX = this.Location.X;
+                Library.int_formLocationY = this.Location.Y;
+            }
+        }
+
+        private void pnClose_MouseHover(object sender, EventArgs e)
+        {
+            pnClose.BackgroundImage = Properties.Resources.mac_ico_close2;
+        }
+
+        private void pnClose_MouseLeave(object sender, EventArgs e)
+        {
+            pnClose.BackgroundImage = Properties.Resources.mac_ico_close1;
+        }
+
+        private void pnMaximize_MouseHover(object sender, EventArgs e)
+        {
+            pnMaximize.BackgroundImage = Properties.Resources.icon_mac_maximize2;
+        }
+
+        private void pnMaximize_MouseLeave(object sender, EventArgs e)
+        {
+            pnMaximize.BackgroundImage = Properties.Resources.icon_mac_maximize1;
+        }
+
+        private void pnClose_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                this.Close();
+        }
+
+        private void pnMaximize_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (Library.is_PIP)
+                {
+                    stopPIP();
+                }
+                else
+                {
+                    this.WindowState = (this.WindowState == FormWindowState.Normal) ? FormWindowState.Maximized : FormWindowState.Normal;
+
+                }
+            }
+        }
+
+        private void pbEndprocess_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isNotExit = false;
+                this.Close();
+            }
+        }
+
+        private void PanelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void defaultColorTabmenu()
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    foreach (Control crt in frm.Controls)
+                    {
+                        if (crt is Panel)
+                        {
+                            if (crt.Name != "pnDF")
+                                crt.BackColor = Color.Transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void PanelCanVisible() => PanelMain.Visible = true;
+
+        public void ShowNotification(string str_Text)
+        {
+            Library.showNotification("Messenger", str_Text, 2000);
+        }
+
+        public void ShowOfHideMain()
+        {
+            if (checkTrue_False())
+            {
+                frmShow();
+                StateWindow = true;
+            }
+            else
+            {
+                frmHide();
+            }
         }
 
         public void balloonClosed()
@@ -234,23 +405,6 @@ namespace MessengerBrowser
             Library.is_openedwindows = false;
         }
 
-        private void frmHide()
-        {
-            BlueformFrameworkUse.Hide(this, 10);
-            StateWindow = false;
-            Library.is_openedwindows = false;
-        }
-
-        private void frmShow()
-        {
-            this.Opacity = 0;
-            this.Show();
-
-            BlueformFrameworkUse.Show(this, 10);
-            Library.str_TextShow = string.Empty;
-            Library.is_openedwindows = true;
-        }
-
         public void showMain_PIP()
         {
             this.Opacity = 0;
@@ -258,17 +412,6 @@ namespace MessengerBrowser
 
             BlueformFrameworkUse.Show(this, 10);
             Library.str_TextShow = string.Empty;
-        }
-
-        private void frmClose()
-        {
-            this.Show();
-            for (double i = 1; i > .0; i -= 0.03)
-            {
-                Thread.Sleep(1);
-                this.Opacity = i;
-            }
-            Cef.Shutdown();
         }
 
         public void MessengerFirs()
@@ -364,47 +507,29 @@ namespace MessengerBrowser
             }
         }
 
-        private void hidebrowser(Form form_input)
+        private void pnAutoPIP_MouseClick(object sender, MouseEventArgs e)
         {
-            PanelMain.Controls.Remove(form_input);
-            if (!Properties.Settings.Default.FEnableFA)
+            if (e.Button == MouseButtons.Left)
             {
-                frmface = new frmBrowserFacebook();
-                Library.FacebookCefShutdow();
+                Properties.Settings.Default.FAutoPIP = !Properties.Settings.Default.FAutoPIP;
+                Properties.Settings.Default.Save();
+
+                //pnAutoPIP.BackgroundImage = (Properties.Settings.Default.FAutoPIP) ? Properties.Resources.done_red : Properties.Resources.done;
+
+                if (Properties.Settings.Default.FAutoPIP)
+                {
+                    pnAutoPIP.BackgroundImage = Properties.Resources.done_red;
+                    pnDF.BackColor = Color.IndianRed;
+                }
+                else
+                {
+                    pnAutoPIP.BackgroundImage = Properties.Resources.done;
+                    pnDF.BackColor = Color.MediumSeaGreen;
+                }
             }
         }
 
-        private void pnFA_MouseClick(object sender, MouseEventArgs e)
-        {
-            Library.int_windows = 1;
-            painPanels(1, Color.DarkGray);
-            changeControlIcon(1, string.Empty);
-        }
-
-        private void pnPIP_Click(object sender, EventArgs e)
-        {
-            //Library.is_PIP = true;
-
-            //Library.hideMain_PIP();
-            //Library.frm.Show();
-            //Library.frm = new frmPictureInPicture();
-            if (Library.int_windows == 0)
-            {
-                startPIP();
-            }
-        }
-
-        private void showPanels(bool k)
-        {
-            pnMess.Visible = k;
-            pnFA.Visible = k;
-            pnPIP.Visible = k;
-            pnDF.Visible = k;
-            pnEndprocess.Visible = k;
-            pnAutoPIP.Visible = k;
-        }
-
-        public void startPIP()
+         public void startPIP()
         {
             if (WindowState == FormWindowState.Maximized)
             {
@@ -509,31 +634,6 @@ namespace MessengerBrowser
             Library.PIPPanelHeight = PanelMain.Height;
         }
 
-        private void frmMain_SizeChanged(object sender, EventArgs e)
-        {
-            if (is_resize && WindowState == FormWindowState.Normal)
-            {
-                Library.int_formWidth = this.Width;
-                Library.int_formHeight = this.Height;
-                Library.int_formLocationX = this.Location.X;
-                Library.int_formLocationY = this.Location.Y;
-
-                Library.int_controlWidth = PanelMain.Width;
-                Library.int_controlHeight = PanelMain.Height;
-                Library.int_controlLocationX = PanelMain.Location.X;
-                Library.int_controlLocationY = PanelMain.Location.Y;
-            }
-        }
-
-        private void frmMain_Move(object sender, EventArgs e)
-        {
-            if (is_resize)
-            {
-                Library.int_formLocationX = this.Location.X;
-                Library.int_formLocationY = this.Location.Y;
-            }
-        }
-
         public void visibleMain(bool is_show)
         {
             this.Visible = is_show;
@@ -579,57 +679,6 @@ namespace MessengerBrowser
             //}
         }
 
-        private void pnClose_MouseHover(object sender, EventArgs e)
-        {
-            pnClose.BackgroundImage = Properties.Resources.mac_ico_close2;
-        }
-
-        private void pnClose_MouseLeave(object sender, EventArgs e)
-        {
-            pnClose.BackgroundImage = Properties.Resources.mac_ico_close1;
-        }
-
-        private void pnMaximize_MouseHover(object sender, EventArgs e)
-        {
-            pnMaximize.BackgroundImage = Properties.Resources.icon_mac_maximize2;
-        }
-
-        private void pnMaximize_MouseLeave(object sender, EventArgs e)
-        {
-            pnMaximize.BackgroundImage = Properties.Resources.icon_mac_maximize1;
-        }
-
-        private void pnClose_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-                this.Close();
-        }
-
-        private void pnMaximize_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (Library.is_PIP)
-                {
-                    stopPIP();
-                }
-                else
-                {
-                    this.WindowState = (this.WindowState == FormWindowState.Normal) ? FormWindowState.Maximized : FormWindowState.Normal;
-
-                }
-            }
-        }
-
-        private void pbEndprocess_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                isNotExit = false;
-                this.Close();
-            }
-        }
-
         public void painPanels(int int_panelwindows, Color colorOfPanelTab)
         {
             defaultColorTabmenu();
@@ -644,49 +693,10 @@ namespace MessengerBrowser
             }
         }
 
-        private void PanelMain_Paint(object sender, PaintEventArgs e)
+        public void EndProgram()
         {
-
-        }
-
-        private void defaultColorTabmenu()
-        {
-            foreach (Form frm in Application.OpenForms)
-            {
-                if (frm is frmMain)
-                {
-                    foreach (Control crt in frm.Controls)
-                    {
-                        if (crt is Panel)
-                        {
-                            if (crt.Name != "pnDF")
-                                crt.BackColor = Color.Transparent;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void pnAutoPIP_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Properties.Settings.Default.FAutoPIP = !Properties.Settings.Default.FAutoPIP;
-                Properties.Settings.Default.Save();
-
-                //pnAutoPIP.BackgroundImage = (Properties.Settings.Default.FAutoPIP) ? Properties.Resources.done_red : Properties.Resources.done;
-
-                if (Properties.Settings.Default.FAutoPIP)
-                {
-                    pnAutoPIP.BackgroundImage = Properties.Resources.done_red;
-                    pnDF.BackColor = Color.IndianRed;
-                }
-                else
-                {
-                    pnAutoPIP.BackgroundImage = Properties.Resources.done;
-                    pnDF.BackColor = Color.MediumSeaGreen;
-                }
-            }
+            isEndProcess = true;
+            this.Close();
         }
     }
 }
