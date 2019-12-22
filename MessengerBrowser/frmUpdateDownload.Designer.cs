@@ -56,7 +56,7 @@
             // 
             this.lblstatus.AutoSize = true;
             this.lblstatus.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblstatus.Location = new System.Drawing.Point(124, 87);
+            this.lblstatus.Location = new System.Drawing.Point(124, 77);
             this.lblstatus.Name = "lblstatus";
             this.lblstatus.Size = new System.Drawing.Size(54, 13);
             this.lblstatus.TabIndex = 7;
@@ -73,6 +73,7 @@
             this.Controls.Add(this.progressWork);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmUpdateDownload";
+            this.Resizable = false;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Update";

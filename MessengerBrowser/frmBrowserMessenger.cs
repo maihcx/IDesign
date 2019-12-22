@@ -9,6 +9,9 @@ using System.Threading;
 using CefSharp.Internals;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Net;
+using System.IO;
 
 namespace MessengerBrowser
 {
@@ -27,6 +30,7 @@ namespace MessengerBrowser
 
         #region
         public ChromiumWebBrowser browser;
+        bool is_firstStart = false;
         #endregion
 
         public void load()
@@ -129,7 +133,40 @@ namespace MessengerBrowser
                 }
                 Library.endLoading();
                 Library.BrowserVisible();
+
+                //new Thread(new ThreadStart(() => {
+                if (!is_firstStart)
+                {
+                    UpdateCheck();
+                    is_firstStart = true;
+                }
+                //})) { IsBackground = true }.Start();
                 //
+            }
+        }
+
+        private void UpdateCheck()
+        {
+            string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+            WebResponse wrpUpdate = wrsUpdate.GetResponse();
+            StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
+
+            string response = srdUpdate.ReadToEnd();
+            var reponseStr = response.Split('\n');
+            string newver = reponseStr[0].Trim();
+
+            if (thisver != newver)
+            {
+                if (MetroMessageBox.Show(this, "Đã phát hiện cập nhật mới, Bạn có muốn cập nhật ?\nNew version: " + newver + " your curent version: " + thisver, "Update..", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    //new Thread(() =>
+                    //{
+                    frmUpdateDownload frmupdate = new frmUpdateDownload();
+                    frmupdate.Show();
+                    //})
+                    //{ IsBackground = false }.Start();
+                }
             }
         }
 

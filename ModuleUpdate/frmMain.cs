@@ -58,20 +58,15 @@ namespace ModuleUpdate
                     string sourceFile = path + @"\" + filename;
                     string destinationFile = Path_Location + @"\" + filename;
 
-                    // To move a file or folder to a new location:
-                    //try
-                    //{
-                    //    System.IO.File.Move(sourceFile, destinationFile);
-                    //}
-                    //catch
-                    //{
-                    //    //MessageBox.Show();
-                    //    System.IO.Directory.Delete(destinationFile, true);
-                    //    System.IO.File.Move(sourceFile, destinationFile);
-                    //}
-
-                    File.Copy(sourceFile, destinationFile, true);
-                    File.Delete(sourceFile);
+                    try
+                    {
+                        File.Copy(sourceFile, destinationFile, true);
+                        File.Delete(sourceFile);
+                    }
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Some error on update, plese try again later!", "Messenger !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                     // To move an entire directory. To programmatically modify or combine
                     // path strings, use the System.IO.Path class.
@@ -83,7 +78,7 @@ namespace ModuleUpdate
                     }
                     catch
                     {
-                        MetroMessageBox.Show(this, "Error File!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MetroMessageBox.Show(this, "Error File!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     lblstatus.Text = "Complete install file: " + filename;

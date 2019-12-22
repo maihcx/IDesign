@@ -58,6 +58,7 @@
             this.cbFA = new MetroFramework.Controls.MetroCheckBox();
             this.pnClose = new System.Windows.Forms.Panel();
             this.btnUpdate = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
             this.theme.SuspendLayout();
@@ -74,10 +75,11 @@
             this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.pipSetting);
             this.PanelControls.Controls.Add(this.multiThread);
+            this.PanelControls.Controls.Add(this.metroTabPage1);
             this.PanelControls.Location = new System.Drawing.Point(11, 63);
             this.PanelControls.Name = "PanelControls";
             this.PanelControls.SelectedIndex = 0;
-            this.PanelControls.Size = new System.Drawing.Size(403, 297);
+            this.PanelControls.Size = new System.Drawing.Size(492, 308);
             this.PanelControls.TabIndex = 0;
             this.PanelControls.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.PanelControls.UseSelectable = true;
@@ -96,7 +98,7 @@
             this.system.HorizontalScrollbarSize = 10;
             this.system.Location = new System.Drawing.Point(4, 38);
             this.system.Name = "system";
-            this.system.Size = new System.Drawing.Size(395, 255);
+            this.system.Size = new System.Drawing.Size(484, 266);
             this.system.TabIndex = 0;
             this.system.Text = "Hệ thống";
             this.system.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -107,7 +109,7 @@
             // cbDisableGPU
             // 
             this.cbDisableGPU.AutoSize = true;
-            this.cbDisableGPU.Location = new System.Drawing.Point(85, 123);
+            this.cbDisableGPU.Location = new System.Drawing.Point(126, 123);
             this.cbDisableGPU.Name = "cbDisableGPU";
             this.cbDisableGPU.Size = new System.Drawing.Size(251, 15);
             this.cbDisableGPU.TabIndex = 7;
@@ -118,7 +120,7 @@
             // cbClear
             // 
             this.cbClear.AutoSize = true;
-            this.cbClear.Location = new System.Drawing.Point(85, 102);
+            this.cbClear.Location = new System.Drawing.Point(126, 102);
             this.cbClear.Name = "cbClear";
             this.cbClear.Size = new System.Drawing.Size(120, 15);
             this.cbClear.TabIndex = 6;
@@ -128,7 +130,7 @@
             // 
             // btnOKSystem
             // 
-            this.btnOKSystem.Location = new System.Drawing.Point(148, 166);
+            this.btnOKSystem.Location = new System.Drawing.Point(189, 166);
             this.btnOKSystem.Name = "btnOKSystem";
             this.btnOKSystem.Size = new System.Drawing.Size(101, 42);
             this.btnOKSystem.TabIndex = 5;
@@ -140,7 +142,7 @@
             // cbHead
             // 
             this.cbHead.AutoSize = true;
-            this.cbHead.Location = new System.Drawing.Point(85, 81);
+            this.cbHead.Location = new System.Drawing.Point(126, 81);
             this.cbHead.Name = "cbHead";
             this.cbHead.Size = new System.Drawing.Size(156, 15);
             this.cbHead.TabIndex = 4;
@@ -152,7 +154,7 @@
             // cbOffNotifi
             // 
             this.cbOffNotifi.AutoSize = true;
-            this.cbOffNotifi.Location = new System.Drawing.Point(85, 60);
+            this.cbOffNotifi.Location = new System.Drawing.Point(126, 60);
             this.cbOffNotifi.Name = "cbOffNotifi";
             this.cbOffNotifi.Size = new System.Drawing.Size(117, 15);
             this.cbOffNotifi.TabIndex = 3;
@@ -164,7 +166,7 @@
             // cbOffSystem
             // 
             this.cbOffSystem.AutoSize = true;
-            this.cbOffSystem.Location = new System.Drawing.Point(85, 39);
+            this.cbOffSystem.Location = new System.Drawing.Point(126, 39);
             this.cbOffSystem.Name = "cbOffSystem";
             this.cbOffSystem.Size = new System.Drawing.Size(216, 15);
             this.cbOffSystem.TabIndex = 2;
@@ -184,7 +186,7 @@
             this.theme.HorizontalScrollbarSize = 10;
             this.theme.Location = new System.Drawing.Point(4, 38);
             this.theme.Name = "theme";
-            this.theme.Size = new System.Drawing.Size(395, 255);
+            this.theme.Size = new System.Drawing.Size(484, 266);
             this.theme.TabIndex = 1;
             this.theme.Text = "Giao diện";
             this.theme.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -256,7 +258,7 @@
             this.pipSetting.HorizontalScrollbarSize = 10;
             this.pipSetting.Location = new System.Drawing.Point(4, 38);
             this.pipSetting.Name = "pipSetting";
-            this.pipSetting.Size = new System.Drawing.Size(395, 255);
+            this.pipSetting.Size = new System.Drawing.Size(484, 266);
             this.pipSetting.TabIndex = 2;
             this.pipSetting.Text = "Tùy chỉnh PIP";
             this.pipSetting.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -267,7 +269,7 @@
             // rdbHideName
             // 
             this.rdbHideName.AutoSize = true;
-            this.rdbHideName.Location = new System.Drawing.Point(218, 121);
+            this.rdbHideName.Location = new System.Drawing.Point(255, 121);
             this.rdbHideName.Name = "rdbHideName";
             this.rdbHideName.Size = new System.Drawing.Size(73, 15);
             this.rdbHideName.TabIndex = 15;
@@ -279,7 +281,7 @@
             // rdbShowName
             // 
             this.rdbShowName.AutoSize = true;
-            this.rdbShowName.Location = new System.Drawing.Point(82, 121);
+            this.rdbShowName.Location = new System.Drawing.Point(119, 121);
             this.rdbShowName.Name = "rdbShowName";
             this.rdbShowName.Size = new System.Drawing.Size(100, 15);
             this.rdbShowName.TabIndex = 14;
@@ -345,7 +347,7 @@
             // trackHeight
             // 
             this.trackHeight.BackColor = System.Drawing.Color.Transparent;
-            this.trackHeight.Location = new System.Drawing.Point(101, 66);
+            this.trackHeight.Location = new System.Drawing.Point(138, 66);
             this.trackHeight.Maximum = 500;
             this.trackHeight.Minimum = 320;
             this.trackHeight.Name = "trackHeight";
@@ -359,7 +361,7 @@
             // trackWidth
             // 
             this.trackWidth.BackColor = System.Drawing.Color.Transparent;
-            this.trackWidth.Location = new System.Drawing.Point(101, 37);
+            this.trackWidth.Location = new System.Drawing.Point(138, 37);
             this.trackWidth.Maximum = 550;
             this.trackWidth.Minimum = 325;
             this.trackWidth.Name = "trackWidth";
@@ -372,7 +374,7 @@
             // 
             // btnOKPIP
             // 
-            this.btnOKPIP.Location = new System.Drawing.Point(151, 185);
+            this.btnOKPIP.Location = new System.Drawing.Point(188, 185);
             this.btnOKPIP.Name = "btnOKPIP";
             this.btnOKPIP.Size = new System.Drawing.Size(101, 42);
             this.btnOKPIP.TabIndex = 7;
@@ -386,7 +388,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(23, 70);
+            this.label2.Location = new System.Drawing.Point(60, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 5;
@@ -397,7 +399,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(23, 41);
+            this.label1.Location = new System.Drawing.Point(60, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 3;
@@ -412,7 +414,7 @@
             this.multiThread.HorizontalScrollbarSize = 10;
             this.multiThread.Location = new System.Drawing.Point(4, 38);
             this.multiThread.Name = "multiThread";
-            this.multiThread.Size = new System.Drawing.Size(395, 255);
+            this.multiThread.Size = new System.Drawing.Size(484, 266);
             this.multiThread.TabIndex = 3;
             this.multiThread.Text = "Đa nhiệm trang";
             this.multiThread.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -422,7 +424,7 @@
             // 
             // btnOKMulti
             // 
-            this.btnOKMulti.Location = new System.Drawing.Point(151, 185);
+            this.btnOKMulti.Location = new System.Drawing.Point(200, 185);
             this.btnOKMulti.Name = "btnOKMulti";
             this.btnOKMulti.Size = new System.Drawing.Size(101, 42);
             this.btnOKMulti.TabIndex = 8;
@@ -458,7 +460,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(309, 15);
+            this.btnUpdate.Location = new System.Drawing.Point(398, 15);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(101, 42);
             this.btnUpdate.TabIndex = 8;
@@ -467,11 +469,26 @@
             this.btnUpdate.UseSelectable = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(484, 266);
+            this.metroTabPage1.TabIndex = 4;
+            this.metroTabPage1.Text = "Update Log";
+            this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 369);
+            this.ClientSize = new System.Drawing.Size(513, 380);
             this.ControlBox = false;
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.pnClose);
@@ -530,5 +547,6 @@
         private MetroFramework.Controls.MetroRadioButton rdbHideName;
         private MetroFramework.Controls.MetroRadioButton rdbShowName;
         private MetroFramework.Controls.MetroButton btnUpdate;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
     }
 }

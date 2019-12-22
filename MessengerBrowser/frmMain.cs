@@ -5,10 +5,10 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using BlueformFramework;
-
-using MaterialSkin;
-using MaterialSkin.Controls;
 using System.Drawing;
+using System.Reflection;
+using System.Net;
+using System.IO;
 
 namespace MessengerBrowser
 {
@@ -72,7 +72,7 @@ namespace MessengerBrowser
                 frmicon.Show();
             }
 
-            new Thread(() =>
+            Thread thload = new Thread(new ThreadStart((() =>
             {
                 if (this.InvokeRequired)
                 {
@@ -85,10 +85,21 @@ namespace MessengerBrowser
                 {
                     load();
                 }
-            })
-            { IsBackground = true }.Start();
-
-
+            })));
+            thload.Start();
+            //new Thread(() =>
+            //{
+            //    if (this.InvokeRequired)
+            //    {
+            //        UpdateCheck();
+            //    }
+            //    else
+            //    {
+            //        UpdateCheck();
+            //    }
+            //    Application.ExitThread();
+            //})
+            //{ IsBackground = true }.Start();
         }
 
         private void load()
@@ -529,7 +540,7 @@ namespace MessengerBrowser
             }
         }
 
-         public void startPIP()
+        public void startPIP()
         {
             if (WindowState == FormWindowState.Maximized)
             {
