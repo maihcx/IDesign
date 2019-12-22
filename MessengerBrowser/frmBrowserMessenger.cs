@@ -85,7 +85,6 @@ namespace MessengerBrowser
             browser.RequestHandler = new RequestHandler();
             browser.KeyboardHandler = new KeyboardHandler();
 
-
             //browser
             //thload = new Thread(showfrmload);
             //thload.IsBackground = true;
@@ -107,8 +106,11 @@ namespace MessengerBrowser
         {
             this.Invoke(new MethodInvoker(() =>
             {
-                Library.str_inputTitle = e.Title;
-                Library.NotificationShow();
+                if (Properties.Settings.Default.FIsShowMessenger)
+                {
+                    Library.str_inputTitle = e.Title;
+                    Library.NotificationShow();
+                }
             }));
         }
 
@@ -135,10 +137,13 @@ namespace MessengerBrowser
                 Library.BrowserVisible();
 
                 //new Thread(new ThreadStart(() => {
-                if (!is_firstStart)
+                if (Properties.Settings.Default.FIsAutoUpdate)
                 {
-                    UpdateCheck();
-                    is_firstStart = true;
+                    if (!is_firstStart)
+                    {
+                        UpdateCheck();
+                        is_firstStart = true;
+                    }
                 }
                 //})) { IsBackground = true }.Start();
                 //
@@ -147,27 +152,34 @@ namespace MessengerBrowser
 
         private void UpdateCheck()
         {
-            string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
-            WebResponse wrpUpdate = wrsUpdate.GetResponse();
-            StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
-
-            string response = srdUpdate.ReadToEnd();
-            var reponseStr = response.Split('\n');
-            string newver = reponseStr[0].Trim();
-
-            if (thisver != newver)
+            new Thread(() =>
             {
-                if (MetroMessageBox.Show(this, "Đã phát hiện cập nhật mới, Bạn có muốn cập nhật ?\nNew version: " + newver + " your curent version: " + thisver, "Update..", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                try
                 {
-                    //new Thread(() =>
-                    //{
-                    frmUpdateDownload frmupdate = new frmUpdateDownload();
-                    frmupdate.Show();
-                    //})
-                    //{ IsBackground = false }.Start();
+                    string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+                    WebResponse wrpUpdate = wrsUpdate.GetResponse();
+                    StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
+
+                    string response = srdUpdate.ReadToEnd();
+                    var reponseStr = response.Split('\n');
+                    string newver = reponseStr[0].Trim();
+
+                    if (thisver != newver)
+                    {
+                        if (Library.MessengerMain("Đã phát hiện cập nhật mới, Bạn có muốn cập nhật ?\nNew version: " + newver + " your curent version: " + thisver, "Update..", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            frmUpdateDownload frmupdate = new frmUpdateDownload();
+                            frmupdate.ShowDialog();
+                        }
+                    }
                 }
-            }
+                catch
+                {
+                    Library.MessengerMain("Có lỗi xảy ra khi kết nối đến server, vui lòng thử lại sau !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            })
+            { IsBackground = false }.Start();
         }
 
         private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)

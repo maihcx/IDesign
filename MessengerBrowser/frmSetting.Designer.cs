@@ -30,6 +30,7 @@
         {
             this.PanelControls = new MetroFramework.Controls.MetroTabControl();
             this.system = new MetroFramework.Controls.MetroTabPage();
+            this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
             this.cbDisableGPU = new MetroFramework.Controls.MetroCheckBox();
             this.cbClear = new MetroFramework.Controls.MetroCheckBox();
             this.btnOKSystem = new MetroFramework.Controls.MetroButton();
@@ -56,14 +57,18 @@
             this.multiThread = new MetroFramework.Controls.MetroTabPage();
             this.btnOKMulti = new MetroFramework.Controls.MetroButton();
             this.cbFA = new MetroFramework.Controls.MetroCheckBox();
-            this.pnClose = new System.Windows.Forms.Panel();
-            this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnOKUpdate = new MetroFramework.Controls.MetroButton();
+            this.cbOffUpdate = new MetroFramework.Controls.MetroCheckBox();
+            this.btnUpdate = new MetroFramework.Controls.MetroButton();
+            this.pnClose = new System.Windows.Forms.Panel();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
             this.theme.SuspendLayout();
             this.pipSetting.SuspendLayout();
             this.multiThread.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelControls
@@ -87,12 +92,14 @@
             // system
             // 
             this.system.BackColor = System.Drawing.SystemColors.Control;
+            this.system.Controls.Add(this.metroCheckBox1);
             this.system.Controls.Add(this.cbDisableGPU);
             this.system.Controls.Add(this.cbClear);
             this.system.Controls.Add(this.btnOKSystem);
             this.system.Controls.Add(this.cbHead);
             this.system.Controls.Add(this.cbOffNotifi);
             this.system.Controls.Add(this.cbOffSystem);
+            this.system.HorizontalScrollbar = true;
             this.system.HorizontalScrollbarBarColor = true;
             this.system.HorizontalScrollbarHighlightOnWheel = false;
             this.system.HorizontalScrollbarSize = 10;
@@ -102,9 +109,22 @@
             this.system.TabIndex = 0;
             this.system.Text = "Hệ thống";
             this.system.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.system.VerticalScrollbar = true;
             this.system.VerticalScrollbarBarColor = true;
             this.system.VerticalScrollbarHighlightOnWheel = false;
             this.system.VerticalScrollbarSize = 10;
+            // 
+            // metroCheckBox1
+            // 
+            this.metroCheckBox1.AutoSize = true;
+            this.metroCheckBox1.Location = new System.Drawing.Point(126, 144);
+            this.metroCheckBox1.Name = "metroCheckBox1";
+            this.metroCheckBox1.Size = new System.Drawing.Size(156, 15);
+            this.metroCheckBox1.TabIndex = 8;
+            this.metroCheckBox1.Text = "Khởi chạy cùng hệ thống";
+            this.metroCheckBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroCheckBox1.UseSelectable = true;
+            this.metroCheckBox1.Visible = false;
             // 
             // cbDisableGPU
             // 
@@ -130,7 +150,7 @@
             // 
             // btnOKSystem
             // 
-            this.btnOKSystem.Location = new System.Drawing.Point(189, 166);
+            this.btnOKSystem.Location = new System.Drawing.Point(197, 200);
             this.btnOKSystem.Name = "btnOKSystem";
             this.btnOKSystem.Size = new System.Drawing.Size(101, 42);
             this.btnOKSystem.TabIndex = 5;
@@ -149,19 +169,17 @@
             this.cbHead.Text = "Luôn hiện phía trên cùng";
             this.cbHead.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbHead.UseSelectable = true;
-            this.cbHead.Visible = false;
             // 
             // cbOffNotifi
             // 
             this.cbOffNotifi.AutoSize = true;
             this.cbOffNotifi.Location = new System.Drawing.Point(126, 60);
             this.cbOffNotifi.Name = "cbOffNotifi";
-            this.cbOffNotifi.Size = new System.Drawing.Size(117, 15);
+            this.cbOffNotifi.Size = new System.Drawing.Size(100, 15);
             this.cbOffNotifi.TabIndex = 3;
-            this.cbOffNotifi.Text = "Tắt thông báo nổi";
+            this.cbOffNotifi.Text = "Thông báo nổi";
             this.cbOffNotifi.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbOffNotifi.UseSelectable = true;
-            this.cbOffNotifi.Visible = false;
             // 
             // cbOffSystem
             // 
@@ -173,7 +191,6 @@
             this.cbOffSystem.Text = "Tắt chạy ngầm (Không khuyến nghị)";
             this.cbOffSystem.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbOffSystem.UseSelectable = true;
-            this.cbOffSystem.Visible = false;
             // 
             // theme
             // 
@@ -208,7 +225,7 @@
             // 
             // btnOKTheme
             // 
-            this.btnOKTheme.Location = new System.Drawing.Point(148, 166);
+            this.btnOKTheme.Location = new System.Drawing.Point(197, 200);
             this.btnOKTheme.Name = "btnOKTheme";
             this.btnOKTheme.Size = new System.Drawing.Size(101, 42);
             this.btnOKTheme.TabIndex = 6;
@@ -374,7 +391,7 @@
             // 
             // btnOKPIP
             // 
-            this.btnOKPIP.Location = new System.Drawing.Point(188, 185);
+            this.btnOKPIP.Location = new System.Drawing.Point(197, 200);
             this.btnOKPIP.Name = "btnOKPIP";
             this.btnOKPIP.Size = new System.Drawing.Size(101, 42);
             this.btnOKPIP.TabIndex = 7;
@@ -424,7 +441,7 @@
             // 
             // btnOKMulti
             // 
-            this.btnOKMulti.Location = new System.Drawing.Point(200, 185);
+            this.btnOKMulti.Location = new System.Drawing.Point(197, 200);
             this.btnOKMulti.Name = "btnOKMulti";
             this.btnOKMulti.Size = new System.Drawing.Size(101, 42);
             this.btnOKMulti.TabIndex = 8;
@@ -444,6 +461,81 @@
             this.cbFA.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbFA.UseSelectable = true;
             // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Controls.Add(this.listBox1);
+            this.metroTabPage1.Controls.Add(this.btnOKUpdate);
+            this.metroTabPage1.Controls.Add(this.cbOffUpdate);
+            this.metroTabPage1.Controls.Add(this.btnUpdate);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(484, 266);
+            this.metroTabPage1.TabIndex = 4;
+            this.metroTabPage1.Text = "Update Clone";
+            this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.MenuText;
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Items.AddRange(new object[] {
+            "Change Log: <Date: [22/12/2019] | [15:00]>",
+            "   1) Fix lag khi chuyển chat messeage.",
+            "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
+            "   3) Thay đổi tab cài đặt:",
+            "     3.1) Thêm Tab Update Clone trong cài đặt.",
+            "     3.2) Thêm cho phép tắt tự động cập nhật.",
+            "     3.3) Thêm cho phép tắt chạy ngầm.",
+            "     3.4) Thêm cho phép tắt thông báo nổi khi có thư đến.",
+            "     3.5) Thêm luôn xuất hiện trên cùng."});
+            this.listBox1.Location = new System.Drawing.Point(0, 18);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(345, 244);
+            this.listBox1.TabIndex = 11;
+            // 
+            // btnOKUpdate
+            // 
+            this.btnOKUpdate.Location = new System.Drawing.Point(355, 173);
+            this.btnOKUpdate.Name = "btnOKUpdate";
+            this.btnOKUpdate.Size = new System.Drawing.Size(129, 42);
+            this.btnOKUpdate.TabIndex = 10;
+            this.btnOKUpdate.Text = "Xác nhận";
+            this.btnOKUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnOKUpdate.UseSelectable = true;
+            this.btnOKUpdate.Click += new System.EventHandler(this.btnOKUpdate_Click);
+            // 
+            // cbOffUpdate
+            // 
+            this.cbOffUpdate.AutoSize = true;
+            this.cbOffUpdate.Location = new System.Drawing.Point(359, 129);
+            this.cbOffUpdate.Name = "cbOffUpdate";
+            this.cbOffUpdate.Size = new System.Drawing.Size(116, 15);
+            this.cbOffUpdate.TabIndex = 9;
+            this.cbOffUpdate.Text = "Tự động cập nhật";
+            this.cbOffUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbOffUpdate.UseSelectable = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(355, 63);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(129, 42);
+            this.btnUpdate.TabIndex = 8;
+            this.btnUpdate.Text = "Check update";
+            this.btnUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnUpdate.UseSelectable = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // pnClose
             // 
             this.pnClose.BackColor = System.Drawing.Color.Transparent;
@@ -458,39 +550,12 @@
             this.pnClose.MouseLeave += new System.EventHandler(this.pnClose_MouseLeave);
             this.pnClose.MouseHover += new System.EventHandler(this.pnClose_MouseHover);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(398, 15);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(101, 42);
-            this.btnUpdate.TabIndex = 8;
-            this.btnUpdate.Text = "Check update";
-            this.btnUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.btnUpdate.UseSelectable = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // metroTabPage1
-            // 
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(484, 266);
-            this.metroTabPage1.TabIndex = 4;
-            this.metroTabPage1.Text = "Update Log";
-            this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
-            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 380);
             this.ControlBox = false;
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.pnClose);
             this.Controls.Add(this.PanelControls);
             this.Name = "frmSetting";
@@ -501,6 +566,7 @@
             this.Text = "Cài đặt";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSetting_FormClosing);
             this.Load += new System.EventHandler(this.frmSetting_Load);
             this.PanelControls.ResumeLayout(false);
             this.system.ResumeLayout(false);
@@ -511,6 +577,8 @@
             this.pipSetting.PerformLayout();
             this.multiThread.ResumeLayout(false);
             this.multiThread.PerformLayout();
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -548,5 +616,9 @@
         private MetroFramework.Controls.MetroRadioButton rdbShowName;
         private MetroFramework.Controls.MetroButton btnUpdate;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private System.Windows.Forms.ListBox listBox1;
+        private MetroFramework.Controls.MetroButton btnOKUpdate;
+        private MetroFramework.Controls.MetroCheckBox cbOffUpdate;
+        private MetroFramework.Controls.MetroCheckBox metroCheckBox1;
     }
 }

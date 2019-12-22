@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using CefSharp;
 using MetroFramework;
 using MetroFramework.Forms;
+using System.Threading;
+using BlueformFramework;
 
 namespace MessengerBrowser
 {
@@ -22,6 +24,8 @@ namespace MessengerBrowser
         bool PIPNameFirstStart = true;
         private void frmSetting_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
+            BlueformFrameworkUse.Show(this, 10);
             //string[] arrStrColor = { "Default", "Black", "White", "Silver", "Blue", "Green", "Lime", "Teal", "Orange", "Brown", "Pink", "Magenta", "Purple", "Red", "Yellow" };
             //for (int i = 0; i < arrStrColor.Length; i++)
             //{
@@ -29,24 +33,32 @@ namespace MessengerBrowser
             //    cbbColor.Items.IndexOf(i);
             //}
             //this.Theme = MetroThemeStyle.Dark;
-            if (!Library.is_openedwindows)
+            new Thread(() =>
             {
-                Library.ShowOrHideForm();
-            }
-            cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
-            trackWidth.Value = Properties.Settings.Default.FPIPWidth;
-            trackHeight.Value = Properties.Settings.Default.FPIPHeight;
-            cbFA.Checked = Properties.Settings.Default.FEnableFA;
-            trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
-            trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
-            if (Properties.Settings.Default.FPIPIsShowName)
-            {
-                rdbShowName.Checked = true;
-            }
-            else
-            {
-                rdbHideName.Checked = true;
-            }
+                if (!Library.is_openedwindows)
+                {
+                    Library.ShowOrHideForm();
+                }
+                cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
+                trackWidth.Value = Properties.Settings.Default.FPIPWidth;
+                trackHeight.Value = Properties.Settings.Default.FPIPHeight;
+                cbFA.Checked = Properties.Settings.Default.FEnableFA;
+                trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
+                trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
+                if (Properties.Settings.Default.FPIPIsShowName)
+                {
+                    rdbShowName.Checked = true;
+                }
+                else
+                {
+                    rdbHideName.Checked = true;
+                }
+                cbHead.Checked = Properties.Settings.Default.FIsShowTop;
+                cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
+                cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
+                cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
+            })
+            { IsBackground = true }.Start();
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -128,7 +140,20 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FPIPIsShowName = true;
                 }
 
+                if (Properties.Settings.Default.FIsShowTop != cbHead.Checked)
+                {
+                    is_restartThread = true;
+                }
+
+                Properties.Settings.Default.FIsRunbackground = !cbOffSystem.Checked;
+
+                Properties.Settings.Default.FIsShowMessenger = cbOffNotifi.Checked;
+
+                Properties.Settings.Default.FIsShowTop = cbHead.Checked;
+
                 Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
+
+                Properties.Settings.Default.FIsAutoUpdate = cbOffUpdate.Checked;
 
                 Properties.Settings.Default.Save();
 
@@ -137,6 +162,7 @@ namespace MessengerBrowser
                     Application.ExitThread();
                     Application.Restart();
                 }
+
 
                 this.Close();
             }
@@ -190,6 +216,21 @@ namespace MessengerBrowser
             frmUpdateDownload frm = new frmUpdateDownload();
             frm.Show();
             this.Close();
+        }
+
+        private void btnOKUpdate_Click(object sender, EventArgs e)
+        {
+            OKBTN();
+        }
+
+        private void frmSetting_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    Library.RunTopMost(cbHead.Checked);
+            //});
+
+            //Thread.Sleep(500);
         }
     }
 }
