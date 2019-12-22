@@ -32,12 +32,15 @@ namespace MessengerBrowser
             //
             new Thread(() =>
             {
+                string Path_Location = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Substring(6);
+                string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
                 lblstatus.Text = "Stating..";
                 progressWork.Value += 20;
                 WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
                 Thread.Sleep(200);
 
-                lblstatus.Text = "Connecting..";
+                lblstatus.Text = "Connecting.. \nYour version: " + thisver;
                 progressWork.Value += 30;
                 WebResponse wrpUpdate = wrsUpdate.GetResponse();
 
@@ -47,8 +50,7 @@ namespace MessengerBrowser
                 Thread.Sleep(300);
 
                 Thread.Sleep(350);
-                string Path_Location = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Substring(6);
-                string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
                 string response = srdUpdate.ReadToEnd();
                 var reponseStr = response.Split('\n');
                 string newver = reponseStr[0].Trim();
