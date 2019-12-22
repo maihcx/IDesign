@@ -178,5 +178,53 @@ namespace MessengerBrowser.Properties {
                 this["FPIPIsShowName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FIsShowTop {
+            get {
+                return ((bool)(this["FIsShowTop"]));
+            }
+            set {
+                this["FIsShowTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FIsAutoUpdate {
+            get {
+                return ((bool)(this["FIsAutoUpdate"]));
+            }
+            set {
+                this["FIsAutoUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FIsShowMessenger {
+            get {
+                return ((bool)(this["FIsShowMessenger"]));
+            }
+            set {
+                this["FIsShowMessenger"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FIsRunbackground {
+            get {
+                return ((bool)(this["FIsRunbackground"]));
+            }
+            set {
+                this["FIsRunbackground"] = value;
+            }
+        }
     }
 }

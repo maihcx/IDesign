@@ -63,6 +63,8 @@ namespace MessengerBrowser
 
             Library.is_openedwindows = true;
 
+            this.TopMost = Properties.Settings.Default.FIsShowTop;
+
             frmShow();
 
             if (!is_showicontray)
@@ -105,7 +107,7 @@ namespace MessengerBrowser
         private void load()
         {
             this.TopLevel = true;
-            changeControlIcon(0, string.Empty);
+            changeBrowserControl(0, string.Empty);
         }
 
         private void toolTipText()
@@ -124,7 +126,7 @@ namespace MessengerBrowser
         {
             Library.int_windows = 0;
             painPanels(0, Color.DarkGray);
-            changeControlIcon(0, string.Empty);
+            changeBrowserControl(0, string.Empty);
             //if (MetroMessageBox.Show(this, "Bạn có chắc muốn xóa ?\nViệc này sẽ xóa mọi mật khẩu đã lưu và sẽ tắt trình duyệt này, bạn có chắc muốn thực hiện ?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             //{
             //    Cef.GetGlobalCookieManager().DeleteCookies("", "");
@@ -134,7 +136,7 @@ namespace MessengerBrowser
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isEndProcess)
+            if (!isEndProcess && Properties.Settings.Default.FIsRunbackground)
             {
                 if (isNotExit)
                 {
@@ -245,7 +247,7 @@ namespace MessengerBrowser
         {
             Library.int_windows = 1;
             painPanels(1, Color.DarkGray);
-            changeControlIcon(1, string.Empty);
+            changeBrowserControl(1, string.Empty);
         }
 
         private void pnPIP_Click(object sender, EventArgs e)
@@ -425,9 +427,10 @@ namespace MessengerBrowser
             Library.str_TextShow = string.Empty;
         }
 
-        public void MessengerFirs()
+        public DialogResult MessengerMain(string strtext, string strtitle, MessageBoxButtons button, MessageBoxIcon icon)
         {
             //MetroMessageBox.Show(this,"Hệ thống đang trong quá trình phát triển, vì vậy có một số tính năng không ổn định, vui lòng đợi bản cập nhật trong tương lai", "Messenging", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return MetroMessageBox.Show(this, strtext, strtitle, button, icon);
         }
 
         private void btnReload_Click(object sender, EventArgs e)
@@ -441,7 +444,7 @@ namespace MessengerBrowser
             this.Close();
         }
 
-        public void changeControlIcon(int int_inputNumIcon, string str_url)
+        public void changeBrowserControl(int int_inputNumIcon, string str_url)
         {
             switch (int_inputNumIcon)
             {
@@ -587,7 +590,7 @@ namespace MessengerBrowser
             PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
 
             this.Location = new Point(Library.int_formLocationX, Library.int_formLocationY);
-            this.TopMost = false;
+            this.TopMost = Properties.Settings.Default.FIsShowTop;
             is_resize = true;
             //Thread.Sleep(100);
             BlueformFrameworkUse.Show(this, 10);
@@ -708,6 +711,11 @@ namespace MessengerBrowser
         {
             isEndProcess = true;
             this.Close();
+        }
+
+        public void RunTopMost(bool istop)
+        {
+            this.TopMost = istop;
         }
     }
 }

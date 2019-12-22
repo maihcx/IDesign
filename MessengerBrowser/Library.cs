@@ -65,16 +65,17 @@ namespace MessengerBrowser
                 }
             }
         }
-        public static void MessengerFirs()
+        public static DialogResult MessengerMain(string strtext, string strtitle, MessageBoxButtons btn, MessageBoxIcon ico)
         {
-            foreach(Form frm in Application.OpenForms)
+            foreach (Form frm in Application.OpenForms)
             {
                 if (frm is frmMain)
                 {
-                    ((frmMain)frm).MessengerFirs();
+                    return ((frmMain)frm).MessengerMain(strtext, strtitle, btn, ico);
                     break;
                 }
             }
+            return DialogResult.No;
         }
 
         public static void Reload()
@@ -190,7 +191,7 @@ namespace MessengerBrowser
             {
                 if (frm is frmMain)
                 {
-                    ((frmMain)frm).changeControlIcon(int_BrowserChange, str_url);
+                    ((frmMain)frm).changeBrowserControl(int_BrowserChange, str_url);
                     break;
                 }
             }
@@ -369,6 +370,18 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     ((frmMain)frm).EndProgram();
+                    break;
+                }
+            }
+        }
+
+        public static void RunTopMost(bool istop)
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).RunTopMost(istop);
                     break;
                 }
             }

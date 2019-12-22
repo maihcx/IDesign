@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using BlueformFramework;
 
 namespace MessengerBrowser
 {
@@ -20,6 +21,7 @@ namespace MessengerBrowser
         //public ChromiumWebBrowser browser;
         private void frmUpdateDownload_Load(object sender, EventArgs e)
         {
+            BlueformFrameworkUse.Show(this, 10);
             //DisplayHandler displayer = new DisplayHandler();
             //browser = new ChromiumWebBrowser();
             //browser.DownloadHandler = new DownloadHandler();
@@ -35,65 +37,72 @@ namespace MessengerBrowser
                 string Path_Location = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Substring(6);
                 string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                lblstatus.Text = "Stating..";
-                progressWork.Value += 20;
-                WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
-                Thread.Sleep(200);
-
-                lblstatus.Text = "Connecting.. \nYour version: " + thisver;
-                progressWork.Value += 30;
-                WebResponse wrpUpdate = wrsUpdate.GetResponse();
-
-                lblstatus.Text = "Checking Update..";
-                progressWork.Value += 30;
-                StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
-                Thread.Sleep(300);
-
-                Thread.Sleep(350);
-
-                string response = srdUpdate.ReadToEnd();
-                var reponseStr = response.Split('\n');
-                string newver = reponseStr[0].Trim();
-                if (thisver != newver)
+                try
                 {
-                    if (MetroMessageBox.Show(this, "Version: " + newver + " are ready for download, do you want continue ?", "Question ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    lblstatus.Text = "Stating..";
+                    progressWork.Value += 20;
+                    WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+                    Thread.Sleep(200);
+
+                    lblstatus.Text = "Connecting.. \nYour version: " + thisver;
+                    progressWork.Value += 30;
+                    WebResponse wrpUpdate = wrsUpdate.GetResponse();
+
+                    lblstatus.Text = "Checking Update..";
+                    progressWork.Value += 30;
+                    StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
+                    Thread.Sleep(300);
+
+                    Thread.Sleep(350);
+
+                    string response = srdUpdate.ReadToEnd();
+                    var reponseStr = response.Split('\n');
+                    string newver = reponseStr[0].Trim();
+                    if (thisver != newver)
                     {
-                        string path = @"D:\Messenger_Update";
-                        if (!Directory.Exists(path))
+                        if (MetroMessageBox.Show(this, "Version: " + newver + " are ready for download, do you want continue ?", "Question ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            Directory.CreateDirectory(path);
+                            string path = @"D:\Messenger_Update";
+                            if (!Directory.Exists(path))
+                            {
+                                Directory.CreateDirectory(path);
+                            }
+                            for (int i = 1; i < reponseStr.Length; i++)
+                            {
+                                var var_in = reponseStr[i].Trim().Split(' ');
+                                string filename = var_in[0].Trim();
+                                string filelink = var_in[1].Trim();
+                                lblstatus.Text = i + "/" + (reponseStr.Length - 1) + " Downloading file: " + filename;
+                                downloadAPI.DownloadFileFromURLToPath(filelink, @"D:\Messenger_Update\" + filename);
+                                lblstatus.Text = "Complete download file: " + filename;
+                                Thread.Sleep(300);
+                            }
+                            lblstatus.Text = "Complete download all file. Waiting for instal!";
+                            progressWork.Value += 20;
+                            Thread.Sleep(800);
+                            Process.Start(Path.Combine(AppDomain
+                                .CurrentDomain.BaseDirectory
+                                .SolutionFolder()
+                                , Path_Location + @"\ModuleUpdate.exe"));
+                            Library.EndProgram();
                         }
-                        for (int i = 1; i < reponseStr.Length; i++)
+                        else
                         {
-                            var var_in = reponseStr[i].Trim().Split(' ');
-                            string filename = var_in[0].Trim();
-                            string filelink = var_in[1].Trim();
-                            lblstatus.Text = i + "/" + (reponseStr.Length - 1) + " Downloading file: " + filename;
-                            downloadAPI.DownloadFileFromURLToPath(filelink, @"D:\Messenger_Update\" + filename);
-                            lblstatus.Text = "Complete download file: " + filename;
-                            Thread.Sleep(300);
+                            lblstatus.Text = "Download is cancel!";
+                            progressWork.Value += 20;
                         }
-                        lblstatus.Text = "Complete download all file. Waiting for instal!";
-                        progressWork.Value += 20;
-                        Thread.Sleep(800);
-                        Process.Start(Path.Combine(AppDomain
-                            .CurrentDomain.BaseDirectory
-                            .SolutionFolder()
-                            , Path_Location + @"\ModuleUpdate.exe"));
-                        Library.EndProgram();
                     }
                     else
                     {
-                        lblstatus.Text = "Download is cancel!";
                         progressWork.Value += 20;
+                        lblstatus.Text = "Your Application is release\nYour version: " + thisver;
                     }
+                    Application.ExitThread();
                 }
-                else
+                catch
                 {
-                    progressWork.Value += 20;
-                    lblstatus.Text = "Your Application is release\nYour version: " + thisver;
+                    lblstatus.Text = "Error Can't connect to server, try later\nYour version: " + thisver;
                 }
-                Application.ExitThread();
             })
             { IsBackground = true }.Start();
             //th.Join();

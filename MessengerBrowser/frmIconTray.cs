@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -60,7 +61,17 @@ namespace MessengerBrowser
         private void càiĐặtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSetting frmst = new frmSetting();
-            frmst.ShowDialog();
+            if (frmst == null || frmst.IsDisposed)
+                frmst = new frmSetting();
+            frmst.TopLevel = true;
+            try
+            {
+                frmst.ShowDialog();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
