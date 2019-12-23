@@ -57,6 +57,7 @@ namespace MessengerBrowser
                 cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
                 cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
                 cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
+                cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
             })
             { IsBackground = true }.Start();
         }
@@ -144,6 +145,8 @@ namespace MessengerBrowser
                 {
                     is_restartThread = true;
                 }
+
+                Properties.Settings.Default.FIsOutApplication = cbOutApplication.Checked;
 
                 Properties.Settings.Default.FIsRunbackground = !cbOffSystem.Checked;
 

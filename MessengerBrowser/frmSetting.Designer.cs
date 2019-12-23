@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetting));
             this.PanelControls = new MetroFramework.Controls.MetroTabControl();
             this.system = new MetroFramework.Controls.MetroTabPage();
-            this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
+            this.cbStartup = new MetroFramework.Controls.MetroCheckBox();
             this.cbDisableGPU = new MetroFramework.Controls.MetroCheckBox();
             this.cbClear = new MetroFramework.Controls.MetroCheckBox();
             this.btnOKSystem = new MetroFramework.Controls.MetroButton();
@@ -55,8 +56,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.multiThread = new MetroFramework.Controls.MetroTabPage();
-            this.btnOKMulti = new MetroFramework.Controls.MetroButton();
+            this.cbOutApplication = new MetroFramework.Controls.MetroCheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbFA = new MetroFramework.Controls.MetroCheckBox();
+            this.btnOKMulti = new MetroFramework.Controls.MetroButton();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnOKUpdate = new MetroFramework.Controls.MetroButton();
@@ -68,6 +71,7 @@
             this.theme.SuspendLayout();
             this.pipSetting.SuspendLayout();
             this.multiThread.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,10 +81,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelControls.Controls.Add(this.system);
+            this.PanelControls.Controls.Add(this.metroTabPage1);
             this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.pipSetting);
             this.PanelControls.Controls.Add(this.multiThread);
-            this.PanelControls.Controls.Add(this.metroTabPage1);
             this.PanelControls.Location = new System.Drawing.Point(11, 63);
             this.PanelControls.Name = "PanelControls";
             this.PanelControls.SelectedIndex = 0;
@@ -92,7 +96,7 @@
             // system
             // 
             this.system.BackColor = System.Drawing.SystemColors.Control;
-            this.system.Controls.Add(this.metroCheckBox1);
+            this.system.Controls.Add(this.cbStartup);
             this.system.Controls.Add(this.cbDisableGPU);
             this.system.Controls.Add(this.cbClear);
             this.system.Controls.Add(this.btnOKSystem);
@@ -114,17 +118,17 @@
             this.system.VerticalScrollbarHighlightOnWheel = false;
             this.system.VerticalScrollbarSize = 10;
             // 
-            // metroCheckBox1
+            // cbStartup
             // 
-            this.metroCheckBox1.AutoSize = true;
-            this.metroCheckBox1.Location = new System.Drawing.Point(126, 144);
-            this.metroCheckBox1.Name = "metroCheckBox1";
-            this.metroCheckBox1.Size = new System.Drawing.Size(156, 15);
-            this.metroCheckBox1.TabIndex = 8;
-            this.metroCheckBox1.Text = "Khởi chạy cùng hệ thống";
-            this.metroCheckBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroCheckBox1.UseSelectable = true;
-            this.metroCheckBox1.Visible = false;
+            this.cbStartup.AutoSize = true;
+            this.cbStartup.Location = new System.Drawing.Point(126, 144);
+            this.cbStartup.Name = "cbStartup";
+            this.cbStartup.Size = new System.Drawing.Size(156, 15);
+            this.cbStartup.TabIndex = 8;
+            this.cbStartup.Text = "Khởi chạy cùng hệ thống";
+            this.cbStartup.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbStartup.UseSelectable = true;
+            this.cbStartup.Visible = false;
             // 
             // cbDisableGPU
             // 
@@ -164,9 +168,9 @@
             this.cbHead.AutoSize = true;
             this.cbHead.Location = new System.Drawing.Point(126, 81);
             this.cbHead.Name = "cbHead";
-            this.cbHead.Size = new System.Drawing.Size(156, 15);
+            this.cbHead.Size = new System.Drawing.Size(305, 15);
             this.cbHead.TabIndex = 4;
-            this.cbHead.Text = "Luôn hiện phía trên cùng";
+            this.cbHead.Text = "Luôn hiện phía trên cùng (Luôn hiện trên mọi cửa sổ)";
             this.cbHead.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbHead.UseSelectable = true;
             // 
@@ -175,9 +179,9 @@
             this.cbOffNotifi.AutoSize = true;
             this.cbOffNotifi.Location = new System.Drawing.Point(126, 60);
             this.cbOffNotifi.Name = "cbOffNotifi";
-            this.cbOffNotifi.Size = new System.Drawing.Size(100, 15);
+            this.cbOffNotifi.Size = new System.Drawing.Size(215, 15);
             this.cbOffNotifi.TabIndex = 3;
-            this.cbOffNotifi.Text = "Thông báo nổi";
+            this.cbOffNotifi.Text = "Thông báo nổi (Thông báo tin nhắn)";
             this.cbOffNotifi.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbOffNotifi.UseSelectable = true;
             // 
@@ -424,8 +428,9 @@
             // 
             // multiThread
             // 
+            this.multiThread.Controls.Add(this.cbOutApplication);
+            this.multiThread.Controls.Add(this.groupBox1);
             this.multiThread.Controls.Add(this.btnOKMulti);
-            this.multiThread.Controls.Add(this.cbFA);
             this.multiThread.HorizontalScrollbarBarColor = true;
             this.multiThread.HorizontalScrollbarHighlightOnWheel = false;
             this.multiThread.HorizontalScrollbarSize = 10;
@@ -433,11 +438,45 @@
             this.multiThread.Name = "multiThread";
             this.multiThread.Size = new System.Drawing.Size(484, 266);
             this.multiThread.TabIndex = 3;
-            this.multiThread.Text = "Đa nhiệm trang";
+            this.multiThread.Text = "Đa nhiệm - Trang";
             this.multiThread.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.multiThread.VerticalScrollbarBarColor = true;
             this.multiThread.VerticalScrollbarHighlightOnWheel = false;
             this.multiThread.VerticalScrollbarSize = 10;
+            // 
+            // cbOutApplication
+            // 
+            this.cbOutApplication.AutoSize = true;
+            this.cbOutApplication.Location = new System.Drawing.Point(143, 176);
+            this.cbOutApplication.Name = "cbOutApplication";
+            this.cbOutApplication.Size = new System.Drawing.Size(209, 15);
+            this.cbOutApplication.TabIndex = 10;
+            this.cbOutApplication.Text = "Cho phép truy cập ngoài ứng dụng";
+            this.cbOutApplication.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbOutApplication.UseSelectable = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Black;
+            this.groupBox1.Controls.Add(this.cbFA);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(8, 14);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(467, 153);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Giữ cho ứng dụng đa nhiệm";
+            // 
+            // cbFA
+            // 
+            this.cbFA.AutoSize = true;
+            this.cbFA.Location = new System.Drawing.Point(18, 32);
+            this.cbFA.Name = "cbFA";
+            this.cbFA.Size = new System.Drawing.Size(74, 15);
+            this.cbFA.TabIndex = 2;
+            this.cbFA.Text = "Facebook";
+            this.cbFA.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbFA.UseSelectable = true;
             // 
             // btnOKMulti
             // 
@@ -449,17 +488,6 @@
             this.btnOKMulti.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btnOKMulti.UseSelectable = true;
             this.btnOKMulti.Click += new System.EventHandler(this.btnOKMulti_Click);
-            // 
-            // cbFA
-            // 
-            this.cbFA.AutoSize = true;
-            this.cbFA.Location = new System.Drawing.Point(36, 27);
-            this.cbFA.Name = "cbFA";
-            this.cbFA.Size = new System.Drawing.Size(74, 15);
-            this.cbFA.TabIndex = 2;
-            this.cbFA.Text = "Facebook";
-            this.cbFA.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cbFA.UseSelectable = true;
             // 
             // metroTabPage1
             // 
@@ -489,7 +517,11 @@
             this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
-            "Change Log: <Date: [22/12/2019] | [15:00]>",
+            "Change Log: ",
+            "<Date: [23/12/2019] | [18:10]>",
+            "   1) Fix lỗi đa nhiệm khi sử sụng crtl + tab.",
+            "   2) Thêm cho phép truy cập vào link bên ngoài ứng dụng (Trong phần cài đặt).",
+            "<Date: [22/12/2019] | [15:00]>",
             "   1) Fix lag khi chuyển chat messeage.",
             "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
             "   3) Thay đổi tab cài đặt:",
@@ -539,16 +571,14 @@
             // pnClose
             // 
             this.pnClose.BackColor = System.Drawing.Color.Transparent;
-            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close1;
+            this.pnClose.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close2;
             this.pnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnClose.Location = new System.Drawing.Point(1, 6);
+            this.pnClose.Location = new System.Drawing.Point(492, 6);
             this.pnClose.Name = "pnClose";
             this.pnClose.Size = new System.Drawing.Size(20, 20);
             this.pnClose.TabIndex = 2;
             this.pnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
-            this.pnClose.MouseLeave += new System.EventHandler(this.pnClose_MouseLeave);
-            this.pnClose.MouseHover += new System.EventHandler(this.pnClose_MouseHover);
             // 
             // frmSetting
             // 
@@ -558,6 +588,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.pnClose);
             this.Controls.Add(this.PanelControls);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSetting";
             this.Opacity = 0.9D;
             this.Resizable = false;
@@ -577,6 +608,8 @@
             this.pipSetting.PerformLayout();
             this.multiThread.ResumeLayout(false);
             this.multiThread.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -619,6 +652,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private MetroFramework.Controls.MetroButton btnOKUpdate;
         private MetroFramework.Controls.MetroCheckBox cbOffUpdate;
-        private MetroFramework.Controls.MetroCheckBox metroCheckBox1;
+        private MetroFramework.Controls.MetroCheckBox cbStartup;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private MetroFramework.Controls.MetroCheckBox cbOutApplication;
     }
 }

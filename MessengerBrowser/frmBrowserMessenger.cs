@@ -152,8 +152,8 @@ namespace MessengerBrowser
 
         private void UpdateCheck()
         {
-            new Thread(() =>
-            {
+            //new Thread(() =>
+            //{
                 try
                 {
                     string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -178,8 +178,8 @@ namespace MessengerBrowser
                 {
                     Library.MessengerMain("Có lỗi xảy ra khi kết nối đến server, vui lòng thử lại sau !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            })
-            { IsBackground = false }.Start();
+            //})
+            //{ IsBackground = false }.Start();
         }
 
         private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
