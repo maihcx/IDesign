@@ -118,20 +118,30 @@ namespace MessengerBrowser
         bool IRequestHandler.OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
         {
             // If the url
-            if (request.Url.ToString().Contains("facebook.com"))
+
+            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("messenger.com"))
             {
-                // Open Google in Default browser 
-                Library.EndFace = true;
-                Library.changeBrowser(1, request.Url.ToString());
-                Library.painPanels(1, Color.DarkGray);
-                browser.CloseBrowser(true);
-                Library.stopPIP();
-                return true;
+                if (request.Url.ToString().Contains("facebook.com"))
+                {
+                    // Open Google in Default browser 
+                    Library.EndFace = true;
+                    Library.changeBrowser(1, request.Url.ToString());
+                    Library.painPanels(1, Color.DarkGray);
+                    browser.CloseBrowser(true);
+                    Library.stopPIP();
+                    return true;
+                }
+                else
+                {
+                    // Url except open in CefSharp's Chromium browser
+                    return false;
+                }
             }
             else
             {
-                // Url except open in CefSharp's Chromium browser
-                return false;
+                System.Diagnostics.Process.Start(request.Url);
+                browser.CloseBrowser(true);
+                return true;
             }
         }
 
@@ -214,7 +224,7 @@ namespace MessengerBrowser
                         Library.sendHostKey(-2);
                         Library.int_windows = 1;
                         Library.painPanels(1, Color.DarkGray);
-                        Library.changeBrowser(1, "http://www.facebook.com");
+                        Library.changeBrowser(1, string.Empty);
                     }
                     else
                     {
