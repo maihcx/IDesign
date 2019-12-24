@@ -78,7 +78,7 @@ namespace MessengerBrowser
             browser.Dock = DockStyle.Fill;
             panel1.Controls.Add(browser);
             browser.DisplayHandler = displayer;
-            //browser.AddressChanged += Browser_AddressChanged;
+            browser.AddressChanged += Browser_AddressChanged;
             browser.TitleChanged += Browser_TitleChanged;
             browser.LoadingStateChanged += browser_LoadingStateChanged;
             browser.MenuHandler = new MenuHandler();
@@ -154,30 +154,30 @@ namespace MessengerBrowser
         {
             //new Thread(() =>
             //{
-                try
+            try
+            {
+                string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+                WebResponse wrpUpdate = wrsUpdate.GetResponse();
+                StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
+
+                string response = srdUpdate.ReadToEnd();
+                var reponseStr = response.Split('\n');
+                string newver = reponseStr[0].Trim();
+
+                if (thisver != newver)
                 {
-                    string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
-                    WebResponse wrpUpdate = wrsUpdate.GetResponse();
-                    StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
-
-                    string response = srdUpdate.ReadToEnd();
-                    var reponseStr = response.Split('\n');
-                    string newver = reponseStr[0].Trim();
-
-                    if (thisver != newver)
+                    if (Library.MessengerMain("Đã phát hiện cập nhật mới, Bạn có muốn cập nhật ?\nNew version: " + newver + " your curent version: " + thisver, "Update..", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        if (Library.MessengerMain("Đã phát hiện cập nhật mới, Bạn có muốn cập nhật ?\nNew version: " + newver + " your curent version: " + thisver, "Update..", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            frmUpdateDownload frmupdate = new frmUpdateDownload();
-                            frmupdate.ShowDialog();
-                        }
+                        frmUpdateDownload frmupdate = new frmUpdateDownload();
+                        frmupdate.ShowDialog();
                     }
                 }
-                catch
-                {
-                    Library.MessengerMain("Có lỗi xảy ra khi kết nối đến server, vui lòng thử lại sau !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch
+            {
+                Library.MessengerMain("Có lỗi xảy ra khi kết nối đến server, vui lòng thử lại sau !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //})
             //{ IsBackground = false }.Start();
         }
@@ -192,6 +192,18 @@ namespace MessengerBrowser
             //    //    browser.Load("https://www.messenger.com/t");
             //    //}
             //}));
+            this.Invoke(new MethodInvoker(() =>
+            {
+                Text = e.Address;
+                //MessageBox.Show(Text);
+                if (!(Text.Contains("messenger.com")))
+                {
+                    System.Diagnostics.Process.Start(Text);
+                    browser.Back();
+                }
+                //browser.Forward();
+
+            }));
         }
 
         public void ReloadWeb()

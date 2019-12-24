@@ -43,11 +43,11 @@
             // 
             // btnOKSystem
             // 
-            this.btnOKSystem.Location = new System.Drawing.Point(228, 197);
+            this.btnOKSystem.Location = new System.Drawing.Point(234, 197);
             this.btnOKSystem.Name = "btnOKSystem";
             this.btnOKSystem.Size = new System.Drawing.Size(101, 42);
             this.btnOKSystem.TabIndex = 6;
-            this.btnOKSystem.Text = "Xác nhận";
+            this.btnOKSystem.Text = "Đóng";
             this.btnOKSystem.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btnOKSystem.UseSelectable = true;
             this.btnOKSystem.Click += new System.EventHandler(this.btnOKSystem_Click);
