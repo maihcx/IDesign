@@ -43,11 +43,11 @@
             // 
             // btnOKSystem
             // 
-            this.btnOKSystem.Location = new System.Drawing.Point(228, 197);
+            this.btnOKSystem.Location = new System.Drawing.Point(234, 197);
             this.btnOKSystem.Name = "btnOKSystem";
             this.btnOKSystem.Size = new System.Drawing.Size(101, 42);
             this.btnOKSystem.TabIndex = 6;
-            this.btnOKSystem.Text = "Xác nhận";
+            this.btnOKSystem.Text = "Đóng";
             this.btnOKSystem.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btnOKSystem.UseSelectable = true;
             this.btnOKSystem.Click += new System.EventHandler(this.btnOKSystem_Click);
@@ -78,7 +78,6 @@
             this.ShowInTaskbar = false;
             this.Text = "Update";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmUpdateDownload_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

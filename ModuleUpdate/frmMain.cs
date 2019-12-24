@@ -25,6 +25,9 @@ namespace ModuleUpdate
                 lblstatus.Text = "Stating..";
                 progressWork.Value += 20;
                 WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+                // 64bit: https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download
+                // 32bit: https://drive.google.com/uc?authuser=0&id=1o1hX4BK6CU4TXkGefdaTyvVUMHHpwQCI&export=download
+                // test: https://drive.google.com/uc?authuser=0&id=1hTH1a6sc0YitvYVbWZZBpqD61AUWZFqC&export=download
                 Thread.Sleep(200);
 
                 lblstatus.Text = "Checking file..";

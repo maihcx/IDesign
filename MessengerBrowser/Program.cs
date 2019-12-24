@@ -42,6 +42,8 @@ namespace MessengerBrowser
             settings.CefCommandLineArgs.Add("enable-media-stream", "1");
             settings.CefCommandLineArgs.Add("enable_spellchecking", "0");
             settings.WindowlessRenderingEnabled = true;
+            settings.EnableNetSecurityExpiration = true;
+            settings.BackgroundColor = Cef.ColorSetARGB(255, 85, 85, 85);
             if (Properties.Settings.Default.FStopGPU)
             {
                 settings.SetOffScreenRenderingBestPerformanceArgs();
