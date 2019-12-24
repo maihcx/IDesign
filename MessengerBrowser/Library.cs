@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MessengerBrowser
@@ -30,14 +31,36 @@ namespace MessengerBrowser
         internal static int PIPPanelWidth = Properties.Settings.Default.FPIPPanelWidth;
         internal static int PIPPanelHeight = Properties.Settings.Default.FPIPPanelHeight;
         internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
+        //varible in the application privited
+        static string str_messenging = "";
+        static string str_title_save = "";
         internal static void NotificationShow()
         {
+            if (str_inputTitle.Contains("("))
+            {
+                if (str_inputTitle.Trim() != str_title_save)
+                {
+                    str_messenging = "";
+                    for (int i = 0; i < str_inputTitle.Length; i++)
+                    {
+                        str_title_save = str_inputTitle.Trim();
+                        try
+                        {
+                            str_messenging += int.Parse(str_inputTitle.Substring(i, 1)).ToString();
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
             if (!(str_inputTitle.Contains("(") || str_inputTitle.Contains("Messenger") || str_inputTitle.Contains("Đăng nhập")))
             {
                 if (str_inputTitle != str_TextShow)
                 {
                     str_TextShow = str_inputTitle;
-                    ShowNoty();
+                    ShowNoty(str_messenging);
                 }
             }
         }
@@ -54,13 +77,13 @@ namespace MessengerBrowser
             }
         }
 
-        public static void ShowNoty()
+        public static void ShowNoty(string str_messenging_in)
         {
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm is frmMain)
+                if (frm is frmIconTray)
                 {
-                    ((frmMain)frm).ShowNotification(str_TextShow);
+                    ((frmIconTray)frm).ShowNotification("Bạn có ("+str_messenging_in+") tin nhắn mới", str_TextShow, 3000);
                     break;
                 }
             }
@@ -173,17 +196,17 @@ namespace MessengerBrowser
         /// <param name="text">The messenger you want for user know</param>
         /// <param name="title">Title for your messenger</param>
         /// <param name="time">Time to closed</param>
-        public static void showNotification(string text, string title, int time)
-        {
-            foreach (Form frm in Application.OpenForms)
-            {
-                if (frm is frmIconTray)
-                {
-                    ((frmIconTray)frm).ShowNotification(text, title, time);
-                    break;
-                }
-            }
-        }
+        //public static void showNotification(string text, string title, int time)
+        //{
+        //    foreach (Form frm in Application.OpenForms)
+        //    {
+        //        if (frm is frmIconTray)
+        //        {
+        //            ((frmIconTray)frm).ShowNotification(text, title, time);
+        //            break;
+        //        }
+        //    }
+        //}
 
         public static void changeBrowser(int int_BrowserChange, string str_url)
         {

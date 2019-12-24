@@ -55,6 +55,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 280);
+            this.ControlBox = false;
             this.Controls.Add(this.progressWork);
             this.Controls.Add(this.lblstatus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

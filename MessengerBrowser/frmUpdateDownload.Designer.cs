@@ -78,7 +78,6 @@
             this.ShowInTaskbar = false;
             this.Text = "Update";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmUpdateDownload_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

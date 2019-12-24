@@ -374,10 +374,10 @@ namespace MessengerBrowser
 
         public void PanelCanVisible() => PanelMain.Visible = true;
 
-        public void ShowNotification(string str_Text)
-        {
-            Library.showNotification("Messenger", str_Text, 2000);
-        }
+        //public void ShowNotification(string str_Text)
+        //{
+        //    Library.showNotification("Messenger", str_Text, 2000);
+        //}
 
         public void ShowOfHideMain()
         {
@@ -711,6 +711,7 @@ namespace MessengerBrowser
         {
             isEndProcess = true;
             this.Close();
+            Application.ExitThread();
         }
 
         public void RunTopMost(bool istop)

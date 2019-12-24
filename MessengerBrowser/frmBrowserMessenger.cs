@@ -85,11 +85,6 @@ namespace MessengerBrowser
             browser.RequestHandler = new RequestHandler();
             browser.KeyboardHandler = new KeyboardHandler();
 
-            //browser
-            //thload = new Thread(showfrmload);
-            //thload.IsBackground = true;
-            //thload.Start();
-
         }
 
         public void setZoomLever(double value)
@@ -136,17 +131,21 @@ namespace MessengerBrowser
                 Library.endLoading();
                 Library.BrowserVisible();
 
-                //new Thread(new ThreadStart(() => {
-                if (Properties.Settings.Default.FIsAutoUpdate)
+                new Thread(new ThreadStart(() =>
                 {
-                    if (!is_firstStart)
+                    if (Properties.Settings.Default.FIsAutoUpdate)
                     {
-                        UpdateCheck();
-                        is_firstStart = true;
+                        if (!is_firstStart)
+                        {
+                            UpdateCheck();
+                            is_firstStart = true;
+                        }
                     }
-                }
-                //})) { IsBackground = true }.Start();
+                }))
+                { IsBackground = true }.Start();
                 //
+                //browser.ExecuteScriptAsync("alert('x');");
+                browser.BackColor = System.Drawing.Color.DarkGray;
             }
         }
 
@@ -158,6 +157,9 @@ namespace MessengerBrowser
             {
                 string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 WebRequest wrsUpdate = WebRequest.Create("https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download");
+                // 64bit: https://drive.google.com/uc?authuser=0&id=1Sr_CrZB6dEZVGjLx3KxAUvQzclwDsxGh&export=download
+                // 32bit: https://drive.google.com/uc?authuser=0&id=1o1hX4BK6CU4TXkGefdaTyvVUMHHpwQCI&export=download
+                // test: https://drive.google.com/uc?authuser=0&id=1hTH1a6sc0YitvYVbWZZBpqD61AUWZFqC&export=download
                 WebResponse wrpUpdate = wrsUpdate.GetResponse();
                 StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
 
@@ -196,7 +198,7 @@ namespace MessengerBrowser
             {
                 Text = e.Address;
                 //MessageBox.Show(Text);
-                if (!(Text.Contains("messenger.com")))
+                if (!(Text.Contains("messenger.com")) && Properties.Settings.Default.FIsOutApplication)
                 {
                     System.Diagnostics.Process.Start(Text);
                     browser.Back();

@@ -1,15 +1,9 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
-using CefSharp.WinForms.Internals;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MessengerBrowser
@@ -77,6 +71,8 @@ namespace MessengerBrowser
             this.Controls.Add(browser);
             browser.DisplayHandler = displayer;
             browser.KeyboardHandler = new KeyboardHandler();
+            browser.RequestHandler = new RequestHandlerfb();
+            browser.AddressChanged += Browser_AddressChanged;
             //browser.LoadingStateChanged += browser_LoadingStateChanged;
 
             //thload = new Thread(showfrmload);
@@ -99,6 +95,20 @@ namespace MessengerBrowser
             }
         }
 
+        private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                Text = e.Address;
+                //MessageBox.Show(Text);
+                if (!(Text.Contains("facebook.com")) && Properties.Settings.Default.FIsOutApplication)
+                {
+                    System.Diagnostics.Process.Start(Text);
+                    browser.Back();
+                }
+            }));
+        }
+
         public void ChangeUrl(string str_url)
         {
             if (!string.IsNullOrEmpty(str_url))
@@ -113,6 +123,68 @@ namespace MessengerBrowser
         public void RestartFacebook()
         {
             browser.GetBrowser().Reload(true);
+        }
+    }
+
+    public class RequestHandlerfb : IRequestHandler
+    {
+        bool IRequestHandler.GetAuthCredentials(IWebBrowser chromiumWebBrowser, IBrowser browser, string originUrl, bool isProxy, string host, int port, string realm, string scheme, IAuthCallback callback)
+        {
+            return true;
+        }
+
+        IResourceRequestHandler IRequestHandler.GetResourceRequestHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool isNavigation, bool isDownload, string requestInitiator, ref bool disableDefaultHandling)
+        {
+            return null;
+        }
+
+        bool IRequestHandler.OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
+        {
+            // If the url
+
+            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("facebook.com"))
+            {
+                // Url except open in CefSharp's Chromium browser
+                return false;
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(request.Url);
+                browser.CloseBrowser(true);
+                return true;
+            }
+        }
+
+        bool IRequestHandler.OnCertificateError(IWebBrowser chromiumWebBrowser, IBrowser browser, CefErrorCode errorCode, string requestUrl, ISslInfo sslInfo, IRequestCallback callback)
+        {
+            return true;
+        }
+
+        bool IRequestHandler.OnOpenUrlFromTab(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, WindowOpenDisposition targetDisposition, bool userGesture)
+        {
+            return true;
+        }
+
+        void IRequestHandler.OnPluginCrashed(IWebBrowser chromiumWebBrowser, IBrowser browser, string pluginPath)
+        {
+        }
+
+        bool IRequestHandler.OnQuotaRequest(IWebBrowser chromiumWebBrowser, IBrowser browser, string originUrl, long newSize, IRequestCallback callback)
+        {
+            return true;
+        }
+
+        void IRequestHandler.OnRenderProcessTerminated(IWebBrowser chromiumWebBrowser, IBrowser browser, CefTerminationStatus status)
+        {
+        }
+
+        void IRequestHandler.OnRenderViewReady(IWebBrowser chromiumWebBrowser, IBrowser browser)
+        {
+        }
+
+        bool IRequestHandler.OnSelectClientCertificate(IWebBrowser chromiumWebBrowser, IBrowser browser, bool isProxy, string host, int port, X509Certificate2Collection certificates, ISelectClientCertificateCallback callback)
+        {
+            return true;
         }
     }
 }
