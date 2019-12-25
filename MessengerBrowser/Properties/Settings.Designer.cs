@@ -250,5 +250,17 @@ namespace MessengerBrowser.Properties {
                 this["FIsOutApplication"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FIntWinStyle {
+            get {
+                return ((int)(this["FIntWinStyle"]));
+            }
+            set {
+                this["FIntWinStyle"] = value;
+            }
+        }
     }
 }

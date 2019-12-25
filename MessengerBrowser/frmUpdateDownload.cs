@@ -22,20 +22,11 @@ namespace MessengerBrowser
         private void frmUpdateDownload_Load(object sender, EventArgs e)
         {
             BlueformFrameworkUse.Show(this, 10);
-            //DisplayHandler displayer = new DisplayHandler();
-            //browser = new ChromiumWebBrowser();
-            //browser.DownloadHandler = new DownloadHandler();
-            //Controls.Add(browser);
-            //browser.Dock = DockStyle.Fill;
-
-            ////browser.AddressChanged += Browser_AddressChanged;
-
-            //browser.DownloadHandler = new DownloadHandler();
-            //
             new Thread(() =>
             {
                 string Path_Location = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Substring(6);
-                string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                //string thisver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                string thisver = Library.systemversion;
 
                 try
                 {

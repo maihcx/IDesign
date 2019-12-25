@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MessengerBrowser
@@ -57,17 +58,23 @@ namespace MessengerBrowser
 
         private void càiĐặtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
             frmSetting frmst = new frmSetting();
-            if (frmst == null || frmst.IsDisposed)
-                frmst = new frmSetting();
-            frmst.TopLevel = true;
             try
             {
-                frmst.ShowDialog();
+                new Thread(() =>
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        frmst.ShowDialog();
+                    });
+                })
+                { IsBackground = true }.Start();
             }
             catch
             {
-
+                //frmst.ShowDialog();
             }
         }
 

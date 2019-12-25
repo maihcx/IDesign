@@ -37,38 +37,54 @@ namespace MessengerBrowser
             {
                 try
                 {
-                    if (!Library.is_openedwindows)
+                    if (this.InvokeRequired)
                     {
-                        Library.ShowOrHideForm();
-                    }
-                    cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
-                    trackWidth.Value = Properties.Settings.Default.FPIPWidth;
-                    trackHeight.Value = Properties.Settings.Default.FPIPHeight;
-                    cbFA.Checked = Properties.Settings.Default.FEnableFA;
-                    trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
-                    trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
-                    if (Properties.Settings.Default.FPIPIsShowName)
-                    {
-                        rdbShowName.Checked = true;
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            intialize();
+                        });
                     }
                     else
                     {
-                        rdbHideName.Checked = true;
+                        intialize();
                     }
-                    cbHead.Checked = Properties.Settings.Default.FIsShowTop;
-                    cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
-                    cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
-                    cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
-                    cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
                 }
                 catch (Exception ex)
                 {
                     MetroMessageBox.Show(this, "Hệ thống bị lỗi tương thích, hệ thống sẽ khôi phục cài đặt lại cho bạn!\nBạn vui lòng mở lại ứng dụng sau khi khôi phục.\nLỗi: " + ex.Message, "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Properties.Settings.Default.Reset();
                     Library.endProcessMain();
+                    Properties.Settings.Default.Reset();
                 }
             })
             { IsBackground = true }.Start();
+        }
+
+        private void intialize()
+        {
+            if (!Library.is_openedwindows)
+            {
+                Library.ShowOrHideForm();
+            }
+            cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
+            trackWidth.Value = Properties.Settings.Default.FPIPWidth;
+            trackHeight.Value = Properties.Settings.Default.FPIPHeight;
+            cbFA.Checked = Properties.Settings.Default.FEnableFA;
+            trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
+            trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
+            if (Properties.Settings.Default.FPIPIsShowName)
+            {
+                rdbShowName.Checked = true;
+            }
+            else
+            {
+                rdbHideName.Checked = true;
+            }
+            cbHead.Checked = Properties.Settings.Default.FIsShowTop;
+            cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
+            cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
+            cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
+            cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
+            cbbStyleWin.SelectedIndex = Properties.Settings.Default.FIntWinStyle;
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -110,11 +126,30 @@ namespace MessengerBrowser
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.Close();
+                this.Invoke((MethodInvoker)delegate
+                {
+                    Library.previewWindowsStyle(Properties.Settings.Default.FIntWinStyle);
+                });
+                this.Dispose();
             }
         }
 
         private void OKBTN()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    accepSetting();
+                });
+            }
+            else
+            {
+                accepSetting();
+            }
+        }
+
+        private void accepSetting()
         {
             bool is_restartThread = false;
             if (MetroMessageBox.Show(this, "Bạn có chắc muốn thực hiện hành động này ?, Có thể bạn sẽ phải đóng ứng dụng để áp dụng thiết lập này!", "Warning !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -154,8 +189,11 @@ namespace MessengerBrowser
 
                     if (Properties.Settings.Default.FIsShowTop != cbHead.Checked)
                     {
-                        is_restartThread = true;
+                        //is_restartThread = true;
+                        Library.RunTopMost(cbHead.Checked);
                     }
+
+                    Properties.Settings.Default.FIntWinStyle = cbbStyleWin.SelectedIndex;
 
                     Properties.Settings.Default.FIsOutApplication = cbOutApplication.Checked;
 
@@ -176,7 +214,7 @@ namespace MessengerBrowser
                         Application.ExitThread();
                         Application.Restart();
                     }
-                    this.Close();
+                    this.Dispose();
                 }
                 catch
                 {
@@ -248,6 +286,17 @@ namespace MessengerBrowser
             //});
 
             //Thread.Sleep(500);
+        }
+
+        private void cbbStyleWin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(cbbStyleWin.SelectedIndex.ToString());
+            Library.previewWindowsStyle(cbbStyleWin.SelectedIndex);
+        }
+
+        private void btnOKTheme_Click(object sender, EventArgs e)
+        {
+            OKBTN();
         }
     }
 }

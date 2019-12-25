@@ -40,6 +40,11 @@
             this.pnEndprocess = new System.Windows.Forms.Panel();
             this.pnFA = new System.Windows.Forms.Panel();
             this.pnMess = new System.Windows.Forms.Panel();
+            this.pnClose1 = new System.Windows.Forms.Panel();
+            this.pnFA1 = new System.Windows.Forms.Panel();
+            this.pnMess1 = new System.Windows.Forms.Panel();
+            this.pnMaximize1 = new System.Windows.Forms.Panel();
+            this.pnEndprocess1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // pnPIP
@@ -57,7 +62,7 @@
             this.pnDF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDF.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.pnDF.Location = new System.Drawing.Point(1, 23);
+            this.pnDF.Location = new System.Drawing.Point(0, 23);
             this.pnDF.Name = "pnDF";
             this.pnDF.Size = new System.Drawing.Size(674, 9);
             this.pnDF.TabIndex = 10;
@@ -72,7 +77,6 @@
             this.PanelMain.Name = "PanelMain";
             this.PanelMain.Size = new System.Drawing.Size(672, 493);
             this.PanelMain.TabIndex = 16;
-            this.PanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelMain_Paint);
             // 
             // lblhostkey
             // 
@@ -137,7 +141,7 @@
             this.pnEndprocess.BackgroundImage = global::MessengerBrowser.Properties.Resources.close_red;
             this.pnEndprocess.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnEndprocess.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnEndprocess.Location = new System.Drawing.Point(51, 3);
+            this.pnEndprocess.Location = new System.Drawing.Point(50, 3);
             this.pnEndprocess.Name = "pnEndprocess";
             this.pnEndprocess.Size = new System.Drawing.Size(22, 22);
             this.pnEndprocess.TabIndex = 3;
@@ -170,6 +174,75 @@
             this.pnMess.TabIndex = 0;
             this.pnMess.Click += new System.EventHandler(this.pnMess_Click);
             // 
+            // pnClose1
+            // 
+            this.pnClose1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnClose1.BackColor = System.Drawing.Color.Transparent;
+            this.pnClose1.BackgroundImage = global::MessengerBrowser.Properties.Resources.mac_ico_close2;
+            this.pnClose1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnClose1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnClose1.Location = new System.Drawing.Point(654, 4);
+            this.pnClose1.Name = "pnClose1";
+            this.pnClose1.Size = new System.Drawing.Size(19, 19);
+            this.pnClose1.TabIndex = 18;
+            this.pnClose1.Visible = false;
+            this.pnClose1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnClose_MouseClick);
+            // 
+            // pnFA1
+            // 
+            this.pnFA1.BackColor = System.Drawing.Color.Transparent;
+            this.pnFA1.BackgroundImage = global::MessengerBrowser.Properties.Resources.Sicons_Basic_Round_Social_Facebook;
+            this.pnFA1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnFA1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnFA1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.pnFA1.Location = new System.Drawing.Point(46, 5);
+            this.pnFA1.Name = "pnFA1";
+            this.pnFA1.Size = new System.Drawing.Size(18, 18);
+            this.pnFA1.TabIndex = 1;
+            this.pnFA1.Visible = false;
+            this.pnFA1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnFA_MouseClick);
+            // 
+            // pnMess1
+            // 
+            this.pnMess1.BackColor = System.Drawing.Color.Transparent;
+            this.pnMess1.BackgroundImage = global::MessengerBrowser.Properties.Resources.messenger_app_icon_28;
+            this.pnMess1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnMess1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMess1.Location = new System.Drawing.Point(23, 4);
+            this.pnMess1.Name = "pnMess1";
+            this.pnMess1.Size = new System.Drawing.Size(20, 20);
+            this.pnMess1.TabIndex = 1;
+            this.pnMess1.Visible = false;
+            this.pnMess1.Click += new System.EventHandler(this.pnMess_Click);
+            // 
+            // pnMaximize1
+            // 
+            this.pnMaximize1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnMaximize1.BackColor = System.Drawing.Color.Transparent;
+            this.pnMaximize1.BackgroundImage = global::MessengerBrowser.Properties.Resources.icon_mac_maximize2;
+            this.pnMaximize1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnMaximize1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMaximize1.Location = new System.Drawing.Point(630, 4);
+            this.pnMaximize1.Name = "pnMaximize1";
+            this.pnMaximize1.Size = new System.Drawing.Size(19, 19);
+            this.pnMaximize1.TabIndex = 19;
+            this.pnMaximize1.Visible = false;
+            this.pnMaximize1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnMaximize_MouseClick);
+            // 
+            // pnEndprocess1
+            // 
+            this.pnEndprocess1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnEndprocess1.BackColor = System.Drawing.Color.Transparent;
+            this.pnEndprocess1.BackgroundImage = global::MessengerBrowser.Properties.Resources.close_red;
+            this.pnEndprocess1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnEndprocess1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnEndprocess1.Location = new System.Drawing.Point(606, 3);
+            this.pnEndprocess1.Name = "pnEndprocess1";
+            this.pnEndprocess1.Size = new System.Drawing.Size(21, 21);
+            this.pnEndprocess1.TabIndex = 4;
+            this.pnEndprocess1.Visible = false;
+            this.pnEndprocess1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbEndprocess_MouseClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,6 +250,8 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(674, 524);
             this.ControlBox = false;
+            this.Controls.Add(this.pnClose1);
+            this.Controls.Add(this.pnMaximize1);
             this.Controls.Add(this.pnReset);
             this.Controls.Add(this.lblhostkey);
             this.Controls.Add(this.pnMaximize);
@@ -186,8 +261,11 @@
             this.Controls.Add(this.pnAutoPIP);
             this.Controls.Add(this.pnEndprocess);
             this.Controls.Add(this.pnPIP);
+            this.Controls.Add(this.pnEndprocess1);
             this.Controls.Add(this.pnFA);
             this.Controls.Add(this.pnMess);
+            this.Controls.Add(this.pnMess1);
+            this.Controls.Add(this.pnFA1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -216,6 +294,11 @@
         private System.Windows.Forms.Panel pnMaximize;
         private System.Windows.Forms.Label lblhostkey;
         private System.Windows.Forms.Panel pnReset;
+        private System.Windows.Forms.Panel pnClose1;
+        private System.Windows.Forms.Panel pnFA1;
+        private System.Windows.Forms.Panel pnMess1;
+        private System.Windows.Forms.Panel pnMaximize1;
+        private System.Windows.Forms.Panel pnEndprocess1;
     }
 }
 
