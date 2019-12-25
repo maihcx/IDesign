@@ -34,16 +34,16 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitMessengerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.càiĐặtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.popupNoty = new Tulpep.NotificationWindow.PopupNotifier();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // IconTray
             // 
-            this.IconTray.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.IconTray.BalloonTipTitle = "Messenger";
             this.IconTray.ContextMenuStrip = this.contextMenu;
             this.IconTray.Icon = ((System.Drawing.Icon)(resources.GetObject("IconTray.Icon")));
-            this.IconTray.Text = "Messenger";
+            this.IconTray.Text = "sky";
             this.IconTray.Visible = true;
             this.IconTray.BalloonTipClicked += new System.EventHandler(this.IconTray_BalloonTipClicked);
             this.IconTray.BalloonTipClosed += new System.EventHandler(this.IconTray_BalloonTipClosed);
@@ -56,21 +56,34 @@
             this.exitMessengerToolStripMenuItem,
             this.càiĐặtToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(181, 70);
+            this.contextMenu.Size = new System.Drawing.Size(154, 48);
             // 
             // exitMessengerToolStripMenuItem
             // 
             this.exitMessengerToolStripMenuItem.Name = "exitMessengerToolStripMenuItem";
-            this.exitMessengerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitMessengerToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.exitMessengerToolStripMenuItem.Text = "Exit messenger";
             this.exitMessengerToolStripMenuItem.Click += new System.EventHandler(this.exitMessengerToolStripMenuItem_Click);
             // 
             // càiĐặtToolStripMenuItem
             // 
             this.càiĐặtToolStripMenuItem.Name = "càiĐặtToolStripMenuItem";
-            this.càiĐặtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.càiĐặtToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.càiĐặtToolStripMenuItem.Text = "Cài đặt";
             this.càiĐặtToolStripMenuItem.Click += new System.EventHandler(this.càiĐặtToolStripMenuItem_Click);
+            // 
+            // popupNoty
+            // 
+            this.popupNoty.ContentFont = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.popupNoty.ContentText = null;
+            this.popupNoty.Image = global::MessengerBrowser.Properties.Resources.messenger_app_icon_28;
+            this.popupNoty.ImageSize = new System.Drawing.Size(20, 20);
+            this.popupNoty.IsRightToLeft = false;
+            this.popupNoty.OptionsMenu = null;
+            this.popupNoty.Size = new System.Drawing.Size(400, 100);
+            this.popupNoty.TitleFont = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.popupNoty.TitleText = null;
+            this.popupNoty.Click += new System.EventHandler(this.popupNoty_Click);
             // 
             // frmIconTray
             // 
@@ -96,5 +109,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMessengerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem càiĐặtToolStripMenuItem;
+        private Tulpep.NotificationWindow.PopupNotifier popupNoty;
     }
 }

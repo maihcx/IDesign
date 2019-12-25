@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MessengerBrowser
@@ -38,7 +31,7 @@ namespace MessengerBrowser
 
         private void IconTray_BalloonTipClosed(object sender, EventArgs e)
         {
-            Library.balloonClosed();
+            //Library.balloonClosed();
         }
 
         private void IconTray_BalloonTipShown(object sender, EventArgs e)
@@ -51,11 +44,15 @@ namespace MessengerBrowser
             Library.balloonClicked();
         }
 
-        public void ShowNotification(string text, string title, int time)
+        public void ShowNotification(string text, string title)
         {
-            IconTray.BalloonTipText = text;
-            IconTray.BalloonTipTitle = title;
-            IconTray.ShowBalloonTip(time);
+            //IconTray.BalloonTipText = text;
+            //IconTray.BalloonTipTitle = title;
+            //IconTray.ShowBalloonTip(time);
+
+            popupNoty.ContentText = text;
+            popupNoty.TitleText = title;
+            popupNoty.Popup();
         }
 
         private void càiĐặtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -72,6 +69,12 @@ namespace MessengerBrowser
             {
 
             }
+        }
+
+        private void popupNoty_Click(object sender, EventArgs e)
+        {
+            Library.balloonClicked();
+            popupNoty.Hide();
         }
     }
 }

@@ -112,10 +112,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Apis.Core, Version=1.42.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.42.0\lib\net45\Google.Apis.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -274,6 +270,7 @@
     <None Include="Resources\done_red.png" />
     <None Include="Resources\close_red.png" />
     <None Include="Resources\Sicons-Basic-Round-Social-Facebook.ico" />
+    <None Include="Resources\bug-vector-png-1-300x200.png" />
     <Content Include="TextTemplate.ico" />
     <None Include="Resources\messenger-app-icon-28.jpg" />
     <None Include="Resources\rest.png" />

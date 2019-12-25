@@ -33,6 +33,7 @@
             this.pnDF = new System.Windows.Forms.Panel();
             this.PanelMain = new System.Windows.Forms.Panel();
             this.lblhostkey = new System.Windows.Forms.Label();
+            this.pnReset = new System.Windows.Forms.Panel();
             this.pnMaximize = new System.Windows.Forms.Panel();
             this.pnClose = new System.Windows.Forms.Panel();
             this.pnAutoPIP = new System.Windows.Forms.Panel();
@@ -80,6 +81,19 @@
             this.lblhostkey.Name = "lblhostkey";
             this.lblhostkey.Size = new System.Drawing.Size(0, 13);
             this.lblhostkey.TabIndex = 19;
+            // 
+            // pnReset
+            // 
+            this.pnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnReset.BackColor = System.Drawing.Color.Transparent;
+            this.pnReset.BackgroundImage = global::MessengerBrowser.Properties.Resources.bug_vector_png_1_300x200;
+            this.pnReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnReset.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnReset.Location = new System.Drawing.Point(541, 4);
+            this.pnReset.Name = "pnReset";
+            this.pnReset.Size = new System.Drawing.Size(19, 19);
+            this.pnReset.TabIndex = 4;
+            this.pnReset.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnReset_MouseClick);
             // 
             // pnMaximize
             // 
@@ -163,6 +177,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(674, 524);
             this.ControlBox = false;
+            this.Controls.Add(this.pnReset);
             this.Controls.Add(this.lblhostkey);
             this.Controls.Add(this.pnMaximize);
             this.Controls.Add(this.pnClose);
@@ -200,6 +215,7 @@
         private System.Windows.Forms.Panel pnClose;
         private System.Windows.Forms.Panel pnMaximize;
         private System.Windows.Forms.Label lblhostkey;
+        private System.Windows.Forms.Panel pnReset;
     }
 }
 

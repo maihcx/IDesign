@@ -35,29 +35,38 @@ namespace MessengerBrowser
             //this.Theme = MetroThemeStyle.Dark;
             new Thread(() =>
             {
-                if (!Library.is_openedwindows)
+                try
                 {
-                    Library.ShowOrHideForm();
+                    if (!Library.is_openedwindows)
+                    {
+                        Library.ShowOrHideForm();
+                    }
+                    cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
+                    trackWidth.Value = Properties.Settings.Default.FPIPWidth;
+                    trackHeight.Value = Properties.Settings.Default.FPIPHeight;
+                    cbFA.Checked = Properties.Settings.Default.FEnableFA;
+                    trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
+                    trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
+                    if (Properties.Settings.Default.FPIPIsShowName)
+                    {
+                        rdbShowName.Checked = true;
+                    }
+                    else
+                    {
+                        rdbHideName.Checked = true;
+                    }
+                    cbHead.Checked = Properties.Settings.Default.FIsShowTop;
+                    cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
+                    cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
+                    cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
+                    cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
                 }
-                cbDisableGPU.Checked = Properties.Settings.Default.FStopGPU;
-                trackWidth.Value = Properties.Settings.Default.FPIPWidth;
-                trackHeight.Value = Properties.Settings.Default.FPIPHeight;
-                cbFA.Checked = Properties.Settings.Default.FEnableFA;
-                trackPIPPanelHeight.Value = Properties.Settings.Default.FPIPPanelHeight;
-                trackPIPPanelWidth.Value = Properties.Settings.Default.FPIPPanelWidth;
-                if (Properties.Settings.Default.FPIPIsShowName)
+                catch (Exception ex)
                 {
-                    rdbShowName.Checked = true;
+                    MetroMessageBox.Show(this, "Hệ thống bị lỗi tương thích, hệ thống sẽ khôi phục cài đặt lại cho bạn!\nBạn vui lòng mở lại ứng dụng sau khi khôi phục.\nLỗi: " + ex.Message, "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Properties.Settings.Default.Reset();
+                    Library.endProcessMain();
                 }
-                else
-                {
-                    rdbHideName.Checked = true;
-                }
-                cbHead.Checked = Properties.Settings.Default.FIsShowTop;
-                cbOffUpdate.Checked = Properties.Settings.Default.FIsAutoUpdate;
-                cbOffNotifi.Checked = Properties.Settings.Default.FIsShowMessenger;
-                cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
-                cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
             })
             { IsBackground = true }.Start();
         }
@@ -110,64 +119,69 @@ namespace MessengerBrowser
             bool is_restartThread = false;
             if (MetroMessageBox.Show(this, "Bạn có chắc muốn thực hiện hành động này ?, Có thể bạn sẽ phải đóng ứng dụng để áp dụng thiết lập này!", "Warning !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Properties.Settings.Default.FPIPWidth = trackWidth.Value;
-                Properties.Settings.Default.FPIPHeight = trackHeight.Value;
-                Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
-                Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
-                Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
-                Properties.Settings.Default.FEnableFA = cbFA.Checked;
-                Library.PIPWidth = trackWidth.Value;
-                Library.PIPHeight = trackHeight.Value;
-                this.Close();
-
-                if (cbClear.Checked)
+                try
                 {
-                    Cef.GetGlobalCookieManager().DeleteCookies("", "");
-                    Library.RestartMessenger();
-                }
+                    Properties.Settings.Default.FPIPWidth = trackWidth.Value;
+                    Properties.Settings.Default.FPIPHeight = trackHeight.Value;
+                    Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
+                    Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
+                    Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
+                    Properties.Settings.Default.FEnableFA = cbFA.Checked;
+                    Library.PIPWidth = trackWidth.Value;
+                    Library.PIPHeight = trackHeight.Value;
+                    this.Close();
 
-                if (Properties.Settings.Default.FStopGPU != cbDisableGPU.Checked)
+                    if (cbClear.Checked)
+                    {
+                        Cef.GetGlobalCookieManager().DeleteCookies("", "");
+                        Library.RestartMessenger();
+                    }
+
+                    if (Properties.Settings.Default.FStopGPU != cbDisableGPU.Checked)
+                    {
+                        Properties.Settings.Default.FStopGPU = cbDisableGPU.Checked;
+                        is_restartThread = true;
+                    }
+
+                    if (rdbHideName.Checked)
+                    {
+                        Properties.Settings.Default.FPIPIsShowName = false;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.FPIPIsShowName = true;
+                    }
+
+                    if (Properties.Settings.Default.FIsShowTop != cbHead.Checked)
+                    {
+                        is_restartThread = true;
+                    }
+
+                    Properties.Settings.Default.FIsOutApplication = cbOutApplication.Checked;
+
+                    Properties.Settings.Default.FIsRunbackground = !cbOffSystem.Checked;
+
+                    Properties.Settings.Default.FIsShowMessenger = cbOffNotifi.Checked;
+
+                    Properties.Settings.Default.FIsShowTop = cbHead.Checked;
+
+                    Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
+
+                    Properties.Settings.Default.FIsAutoUpdate = cbOffUpdate.Checked;
+
+                    Properties.Settings.Default.Save();
+
+                    if (is_restartThread)
+                    {
+                        Application.ExitThread();
+                        Application.Restart();
+                    }
+                    this.Close();
+                }
+                catch
                 {
-                    Properties.Settings.Default.FStopGPU = cbDisableGPU.Checked;
-                    is_restartThread = true;
+                    MetroMessageBox.Show(this, "Hệ thống gặp lỗi không xác định!", "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                if (rdbHideName.Checked)
-                {
-                    Properties.Settings.Default.FPIPIsShowName = false;
-                }
-                else
-                {
-                    Properties.Settings.Default.FPIPIsShowName = true;
-                }
-
-                if (Properties.Settings.Default.FIsShowTop != cbHead.Checked)
-                {
-                    is_restartThread = true;
-                }
-
-                Properties.Settings.Default.FIsOutApplication = cbOutApplication.Checked;
-
-                Properties.Settings.Default.FIsRunbackground = !cbOffSystem.Checked;
-
-                Properties.Settings.Default.FIsShowMessenger = cbOffNotifi.Checked;
-
-                Properties.Settings.Default.FIsShowTop = cbHead.Checked;
-
-                Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
-
-                Properties.Settings.Default.FIsAutoUpdate = cbOffUpdate.Checked;
-
-                Properties.Settings.Default.Save();
-
-                if (is_restartThread)
-                {
-                    Application.ExitThread();
-                    Application.Restart();
-                }
-
-
-                this.Close();
             }
         }
 

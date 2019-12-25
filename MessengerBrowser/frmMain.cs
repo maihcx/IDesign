@@ -120,6 +120,7 @@ namespace MessengerBrowser
             textTool.SetToolTip(pnEndprocess, "Đóng hoàn toàn chương trình");
             textTool.SetToolTip(pnMess, "Truy cập nhanh vào Messenger");
             textTool.SetToolTip(pnFA, "Truy cập nhanh vào Facebook");
+            textTool.SetToolTip(pnReset, "Khôi phục cài đặt gốc");
         }
 
         private void pnMess_Click(object sender, EventArgs e)
@@ -192,19 +193,6 @@ namespace MessengerBrowser
             return Library.is_openedwindows = !Library.is_openedwindows;
         }
 
-        private void ntfCT_BalloonTipClosed(object sender, EventArgs e)
-        {
-            if (StateWindow)
-            {
-                Library.str_TextShow = string.Empty;
-            }
-        }
-
-        private void ntfCT_BalloonTipShown(object sender, EventArgs e)
-        {
-            StateWindow = false;
-        }
-
         private void frmHide()
         {
             BlueformFrameworkUse.Hide(this, 10);
@@ -224,13 +212,21 @@ namespace MessengerBrowser
 
         private void frmClose()
         {
-            this.Show();
-            for (double i = 1; i > .0; i -= 0.03)
+            try
             {
-                Thread.Sleep(1);
-                this.Opacity = i;
+                this.Show();
+                for (double i = 1; i > .0; i -= 0.03)
+                {
+                    Thread.Sleep(1);
+                    this.Opacity = i;
+                }
+                Cef.Shutdown();
             }
-            Cef.Shutdown();
+            catch
+            {
+                Application.ExitThread();
+            }
+           
         }
 
         private void hidebrowser(Form form_input)
@@ -271,6 +267,7 @@ namespace MessengerBrowser
             pnDF.Visible = k;
             pnEndprocess.Visible = k;
             pnAutoPIP.Visible = k;
+            pnReset.Visible = k;
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
@@ -704,6 +701,16 @@ namespace MessengerBrowser
                 case 1:
                     pnFA.BackColor = colorOfPanelTab;
                     break;
+            }
+        }
+
+        private void pnReset_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (MetroMessageBox.Show(this, "Khi hệ thống gặp lỗi, bạn nên khôi phục bằng tùy chọn này.\nBạn có muốn tiếp tục ? Việc này sẽ khôi phục lại toàn bộ cài đặt của bạn !", "Cảnh báo !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Properties.Settings.Default.Reset();
+                Application.ExitThread();
+                Application.Restart();
             }
         }
 

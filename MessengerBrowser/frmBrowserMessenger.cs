@@ -144,8 +144,6 @@ namespace MessengerBrowser
                 }))
                 { IsBackground = true }.Start();
                 //
-                //browser.ExecuteScriptAsync("alert('x');");
-                browser.BackColor = System.Drawing.Color.DarkGray;
             }
         }
 
