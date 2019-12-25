@@ -6,6 +6,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
+        internal static string systemversion = "1.0.5.1";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static int int_ChangeIconUrl = 0;
@@ -35,7 +36,7 @@ namespace MessengerBrowser
         static string str_messenging = "";
         static string str_messenging_e = "";
         static string str_title_save = "";
-        static string str_input_save = "";
+        public static string str_input_save = "";
         internal static void NotificationShow()
         {
             if (str_inputTitle.Contains("("))
@@ -421,6 +422,18 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     ((frmMain)frm).RunTopMost(istop);
+                    break;
+                }
+            }
+        }
+
+        public static void previewWindowsStyle(int int_style)
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).previewWindowsStyle(int_style);
                     break;
                 }
             }

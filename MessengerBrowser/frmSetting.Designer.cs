@@ -39,6 +39,8 @@
             this.cbOffNotifi = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffSystem = new MetroFramework.Controls.MetroCheckBox();
             this.theme = new MetroFramework.Controls.MetroTabPage();
+            this.cbbStyleWin = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroRadioButton3 = new MetroFramework.Controls.MetroRadioButton();
             this.btnOKTheme = new MetroFramework.Controls.MetroButton();
             this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
@@ -198,6 +200,8 @@
             // 
             // theme
             // 
+            this.theme.Controls.Add(this.cbbStyleWin);
+            this.theme.Controls.Add(this.metroLabel1);
             this.theme.Controls.Add(this.metroRadioButton3);
             this.theme.Controls.Add(this.btnOKTheme);
             this.theme.Controls.Add(this.metroRadioButton2);
@@ -215,10 +219,37 @@
             this.theme.VerticalScrollbarHighlightOnWheel = false;
             this.theme.VerticalScrollbarSize = 10;
             // 
+            // cbbStyleWin
+            // 
+            this.cbbStyleWin.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbbStyleWin.FormattingEnabled = true;
+            this.cbbStyleWin.ItemHeight = 19;
+            this.cbbStyleWin.Items.AddRange(new object[] {
+            "Trái",
+            "Phải"});
+            this.cbbStyleWin.Location = new System.Drawing.Point(250, 69);
+            this.cbbStyleWin.Name = "cbbStyleWin";
+            this.cbbStyleWin.Size = new System.Drawing.Size(108, 25);
+            this.cbbStyleWin.TabIndex = 8;
+            this.cbbStyleWin.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbbStyleWin.UseSelectable = true;
+            this.cbbStyleWin.SelectedIndexChanged += new System.EventHandler(this.cbbStyleWin_SelectedIndexChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(97, 74);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(150, 15);
+            this.metroLabel1.TabIndex = 7;
+            this.metroLabel1.Text = "Chiều của các nút điều khiển: ";
+            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
             // metroRadioButton3
             // 
             this.metroRadioButton3.AutoSize = true;
-            this.metroRadioButton3.Location = new System.Drawing.Point(44, 93);
+            this.metroRadioButton3.Location = new System.Drawing.Point(370, 242);
             this.metroRadioButton3.Name = "metroRadioButton3";
             this.metroRadioButton3.Size = new System.Drawing.Size(112, 15);
             this.metroRadioButton3.TabIndex = 2;
@@ -236,11 +267,12 @@
             this.btnOKTheme.Text = "Xác nhận";
             this.btnOKTheme.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btnOKTheme.UseSelectable = true;
+            this.btnOKTheme.Click += new System.EventHandler(this.btnOKTheme_Click);
             // 
             // metroRadioButton2
             // 
             this.metroRadioButton2.AutoSize = true;
-            this.metroRadioButton2.Location = new System.Drawing.Point(44, 72);
+            this.metroRadioButton2.Location = new System.Drawing.Point(370, 221);
             this.metroRadioButton2.Name = "metroRadioButton2";
             this.metroRadioButton2.Size = new System.Drawing.Size(116, 15);
             this.metroRadioButton2.TabIndex = 1;
@@ -252,7 +284,7 @@
             // metroRadioButton1
             // 
             this.metroRadioButton1.AutoSize = true;
-            this.metroRadioButton1.Location = new System.Drawing.Point(44, 51);
+            this.metroRadioButton1.Location = new System.Drawing.Point(370, 200);
             this.metroRadioButton1.Name = "metroRadioButton1";
             this.metroRadioButton1.Size = new System.Drawing.Size(105, 15);
             this.metroRadioButton1.TabIndex = 0;
@@ -517,17 +549,26 @@
             this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
-            "Change Log: ",
+            "Change Log:",
+            "<Date: [25/12/2019] | [17:50]> //Khẩn cấp//",
+            "</1.0.5.1/>",
+            "   1) Fix lỗi báo tin nhắn không hoạt động.",
+            "   2) Thêm tùy chọn chuyển nút về bên trái - phải trong phần cài đặt.",
+            "   3) Fix lỗi crash ứng dụng khi đang áp dụng cài đặt.",
+            "   4) Lưu lại cài đặt ứng dụng sau khi nâng cấp.",
             "<Date: [25/12/2019] | [10:00]>",
+            "</1.0.5.0/>",
             "   1) Fix lỗi crash ứng dụng khi vào cài đặt.",
             "   2) Viết lại thanh báo tin nhắn mới.",
             "   3) Ổn định lại hệ thống.",
-            "   4 Hỗ trợ cho máy tính 32bit(x86).",
+            "   4) Hỗ trợ cho máy tính 32bit(x86).",
             "   5) Thêm nút khôi phục cài đặt gốc.",
             "<Date: [23/12/2019] | [18:10]>",
+            "</1.0.4.9/>",
             "   1) Fix lỗi đa nhiệm khi sử sụng crtl + tab.",
             "   2) Thêm cho phép truy cập vào link bên ngoài ứng dụng (Trong phần cài đặt).",
             "<Date: [22/12/2019] | [15:00]>",
+            "</1.0.4.8/>",
             "   1) Fix lag khi chuyển chat messeage.",
             "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
             "   3) Thay đổi tab cài đặt:",
@@ -661,5 +702,7 @@
         private MetroFramework.Controls.MetroCheckBox cbStartup;
         private System.Windows.Forms.GroupBox groupBox1;
         private MetroFramework.Controls.MetroCheckBox cbOutApplication;
+        private MetroFramework.Controls.MetroComboBox cbbStyleWin;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

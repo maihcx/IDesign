@@ -44,6 +44,7 @@ namespace MessengerBrowser
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            checkIntStyleWinform();
             //Properties.Settings.Default.Reset();
             SaveSettingForm.IntializeForm(this);
 
@@ -89,19 +90,37 @@ namespace MessengerBrowser
                 }
             })));
             thload.Start();
-            //new Thread(() =>
-            //{
-            //    if (this.InvokeRequired)
-            //    {
-            //        UpdateCheck();
-            //    }
-            //    else
-            //    {
-            //        UpdateCheck();
-            //    }
-            //    Application.ExitThread();
-            //})
-            //{ IsBackground = true }.Start();
+        }
+
+        private void checkIntStyleWinform()
+        {
+            switch (Properties.Settings.Default.FIntWinStyle)
+            {
+                case 0:
+                    pnClose1.Visible = false;
+                    pnEndprocess1.Visible = false;
+                    pnMaximize1.Visible = false;
+                    pnMess1.Visible = false;
+                    pnFA1.Visible = false;
+                    pnMess.Visible = true;
+                    pnFA.Visible = true;
+                    pnClose.Visible = true;
+                    pnMaximize.Visible = true;
+                    pnEndprocess.Visible = true;
+                    break;
+                case 1:
+                    pnClose1.Visible = true;
+                    pnEndprocess1.Visible = true;
+                    pnMaximize1.Visible = true;
+                    pnMess1.Visible = true;
+                    pnFA1.Visible = true;
+                    pnMess.Visible = false;
+                    pnFA.Visible = false;
+                    pnClose.Visible = false;
+                    pnMaximize.Visible = false;
+                    pnEndprocess.Visible = false;
+                    break;
+            }
         }
 
         private void load()
@@ -121,6 +140,11 @@ namespace MessengerBrowser
             textTool.SetToolTip(pnMess, "Truy cập nhanh vào Messenger");
             textTool.SetToolTip(pnFA, "Truy cập nhanh vào Facebook");
             textTool.SetToolTip(pnReset, "Khôi phục cài đặt gốc");
+            textTool.SetToolTip(pnClose1, "Đóng giao diện(Vẫn chạy ngầm)");
+            textTool.SetToolTip(pnMaximize1, "Phóng to/Thu Nhỏ/Tắt PIP");
+            textTool.SetToolTip(pnEndprocess1, "Đóng hoàn toàn chương trình");
+            textTool.SetToolTip(pnMess1, "Truy cập nhanh vào Messenger");
+            textTool.SetToolTip(pnFA1, "Truy cập nhanh vào Facebook");
         }
 
         private void pnMess_Click(object sender, EventArgs e)
@@ -128,11 +152,6 @@ namespace MessengerBrowser
             Library.int_windows = 0;
             painPanels(0, Color.DarkGray);
             changeBrowserControl(0, string.Empty);
-            //if (MetroMessageBox.Show(this, "Bạn có chắc muốn xóa ?\nViệc này sẽ xóa mọi mật khẩu đã lưu và sẽ tắt trình duyệt này, bạn có chắc muốn thực hiện ?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            //{
-            //    Cef.GetGlobalCookieManager().DeleteCookies("", "");
-            //    Application.Exit();
-            //}
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -158,12 +177,6 @@ namespace MessengerBrowser
                     }
                 }
             }
-        }
-
-        private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
-        {
-            frmShow();
-            Library.str_TextShow = string.Empty;
         }
 
         private void exitMessengerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -198,6 +211,7 @@ namespace MessengerBrowser
             BlueformFrameworkUse.Hide(this, 10);
             StateWindow = false;
             Library.is_openedwindows = false;
+            Library.str_input_save = string.Empty;
         }
 
         private void frmShow()
@@ -207,6 +221,7 @@ namespace MessengerBrowser
 
             BlueformFrameworkUse.Show(this, 10);
             Library.str_TextShow = string.Empty;
+            Library.str_input_save = string.Empty;
             Library.is_openedwindows = true;
         }
 
@@ -248,11 +263,6 @@ namespace MessengerBrowser
 
         private void pnPIP_Click(object sender, EventArgs e)
         {
-            //Library.is_PIP = true;
-
-            //Library.hideMain_PIP();
-            //Library.frm.Show();
-            //Library.frm = new frmPictureInPicture();
             if (Library.int_windows == 0)
             {
                 startPIP();
@@ -261,13 +271,39 @@ namespace MessengerBrowser
 
         private void showPanels(bool k)
         {
-            pnMess.Visible = k;
-            pnFA.Visible = k;
             pnPIP.Visible = k;
             pnDF.Visible = k;
             pnEndprocess.Visible = k;
             pnAutoPIP.Visible = k;
             pnReset.Visible = k;
+
+            switch (Properties.Settings.Default.FIntWinStyle)
+            {
+                case 0:
+                    pnClose1.Visible = false;
+                    pnEndprocess1.Visible = false;
+                    pnFA1.Visible = false;
+                    pnMaximize1.Visible = false;
+                    pnMess1.Visible = false;
+                    pnClose.Visible = true;
+                    pnMaximize.Visible = true;
+                    pnMess.Visible = k;
+                    pnFA.Visible = k;
+                    pnEndprocess.Visible = k;
+                    break;
+                case 1:
+                    pnClose.Visible = false;
+                    pnEndprocess.Visible = false;
+                    pnFA.Visible = false;
+                    pnMaximize.Visible = false;
+                    pnMess.Visible = false;
+                    pnClose1.Visible = true;
+                    pnMaximize1.Visible = true;
+                    pnMess1.Visible = k;
+                    pnFA1.Visible = k;
+                    pnEndprocess1.Visible = k;
+                    break;
+            }
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
@@ -346,11 +382,6 @@ namespace MessengerBrowser
             }
         }
 
-        private void PanelMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void defaultColorTabmenu()
         {
             foreach (Form frm in Application.OpenForms)
@@ -370,11 +401,6 @@ namespace MessengerBrowser
         }
 
         public void PanelCanVisible() => PanelMain.Visible = true;
-
-        //public void ShowNotification(string str_Text)
-        //{
-        //    Library.showNotification("Messenger", str_Text, 2000);
-        //}
 
         public void ShowOfHideMain()
         {
@@ -406,6 +432,7 @@ namespace MessengerBrowser
         {
             frmShow();
             Library.str_TextShow = string.Empty;
+            Library.str_input_save = string.Empty;
         }
 
         public void hideMain_PIP()
@@ -554,7 +581,6 @@ namespace MessengerBrowser
             //PanelMain.Visible = false;
 
             Library.setZoomLever(-1.3);
-            this.Hide();
             this.Width = Library.PIPWidth;
             this.Height = Library.PIPHeight;
             showPanels(false);
@@ -697,9 +723,11 @@ namespace MessengerBrowser
             {
                 case 0:
                     pnMess.BackColor = colorOfPanelTab;
+                    pnMess1.BackColor = colorOfPanelTab;
                     break;
                 case 1:
                     pnFA.BackColor = colorOfPanelTab;
+                    pnFA1.BackColor = colorOfPanelTab;
                     break;
             }
         }
@@ -724,6 +752,37 @@ namespace MessengerBrowser
         public void RunTopMost(bool istop)
         {
             this.TopMost = istop;
+        }
+
+        public void previewWindowsStyle(int int_style)
+        {
+            switch (int_style)
+            {
+                case 0:
+                    pnClose1.Visible = false;
+                    pnEndprocess1.Visible = false;
+                    pnMaximize1.Visible = false;
+                    pnMess1.Visible = false;
+                    pnFA1.Visible = false;
+                    pnMess.Visible = true;
+                    pnFA.Visible = true;
+                    pnClose.Visible = true;
+                    pnMaximize.Visible = true;
+                    pnEndprocess.Visible = true;
+                    break;
+                case 1:
+                    pnClose1.Visible = true;
+                    pnEndprocess1.Visible = true;
+                    pnMaximize1.Visible = true;
+                    pnMess1.Visible = true;
+                    pnFA1.Visible = true;
+                    pnMess.Visible = false;
+                    pnFA.Visible = false;
+                    pnClose.Visible = false;
+                    pnMaximize.Visible = false;
+                    pnEndprocess.Visible = false;
+                    break;
+            }
         }
     }
 }
