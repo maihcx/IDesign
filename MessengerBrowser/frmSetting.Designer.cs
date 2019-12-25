@@ -38,11 +38,6 @@
             this.cbHead = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffNotifi = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffSystem = new MetroFramework.Controls.MetroCheckBox();
-            this.UpdateClone = new MetroFramework.Controls.MetroTabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.btnOKUpdate = new MetroFramework.Controls.MetroButton();
-            this.cbOffUpdate = new MetroFramework.Controls.MetroCheckBox();
-            this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.theme = new MetroFramework.Controls.MetroTabPage();
             this.metroRadioButton3 = new MetroFramework.Controls.MetroRadioButton();
             this.btnOKTheme = new MetroFramework.Controls.MetroButton();
@@ -65,14 +60,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbFA = new MetroFramework.Controls.MetroCheckBox();
             this.btnOKMulti = new MetroFramework.Controls.MetroButton();
+            this.UpdateClone = new MetroFramework.Controls.MetroTabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnOKUpdate = new MetroFramework.Controls.MetroButton();
+            this.cbOffUpdate = new MetroFramework.Controls.MetroCheckBox();
+            this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.pnClose = new System.Windows.Forms.Panel();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
-            this.UpdateClone.SuspendLayout();
             this.theme.SuspendLayout();
             this.pipSetting.SuspendLayout();
             this.multiThread.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.UpdateClone.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelControls
@@ -195,85 +195,6 @@
             this.cbOffSystem.Text = "Tắt chạy ngầm (Không khuyến nghị)";
             this.cbOffSystem.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbOffSystem.UseSelectable = true;
-            // 
-            // UpdateClone
-            // 
-            this.UpdateClone.Controls.Add(this.listBox1);
-            this.UpdateClone.Controls.Add(this.btnOKUpdate);
-            this.UpdateClone.Controls.Add(this.cbOffUpdate);
-            this.UpdateClone.Controls.Add(this.btnUpdate);
-            this.UpdateClone.HorizontalScrollbarBarColor = true;
-            this.UpdateClone.HorizontalScrollbarHighlightOnWheel = false;
-            this.UpdateClone.HorizontalScrollbarSize = 10;
-            this.UpdateClone.Location = new System.Drawing.Point(4, 38);
-            this.UpdateClone.Name = "UpdateClone";
-            this.UpdateClone.Size = new System.Drawing.Size(484, 266);
-            this.UpdateClone.TabIndex = 4;
-            this.UpdateClone.Text = "Update Clone";
-            this.UpdateClone.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.UpdateClone.VerticalScrollbarBarColor = true;
-            this.UpdateClone.VerticalScrollbarHighlightOnWheel = false;
-            this.UpdateClone.VerticalScrollbarSize = 10;
-            // 
-            // listBox1
-            // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.MenuText;
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Items.AddRange(new object[] {
-            "Change Log: ",
-            "<Date: [23/12/2019] | [18:10]>",
-            "   1) Fix lỗi đa nhiệm khi sử sụng crtl + tab.",
-            "   2) Thêm cho phép truy cập vào link bên ngoài ứng dụng (Trong phần cài đặt).",
-            "<Date: [22/12/2019] | [15:00]>",
-            "   1) Fix lag khi chuyển chat messeage.",
-            "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
-            "   3) Thay đổi tab cài đặt:",
-            "     3.1) Thêm Tab Update Clone trong cài đặt.",
-            "     3.2) Thêm cho phép tắt tự động cập nhật.",
-            "     3.3) Thêm cho phép tắt chạy ngầm.",
-            "     3.4) Thêm cho phép tắt thông báo nổi khi có thư đến.",
-            "     3.5) Thêm luôn xuất hiện trên cùng."});
-            this.listBox1.Location = new System.Drawing.Point(0, 18);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(345, 244);
-            this.listBox1.TabIndex = 11;
-            // 
-            // btnOKUpdate
-            // 
-            this.btnOKUpdate.Location = new System.Drawing.Point(355, 173);
-            this.btnOKUpdate.Name = "btnOKUpdate";
-            this.btnOKUpdate.Size = new System.Drawing.Size(129, 42);
-            this.btnOKUpdate.TabIndex = 10;
-            this.btnOKUpdate.Text = "Xác nhận";
-            this.btnOKUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.btnOKUpdate.UseSelectable = true;
-            this.btnOKUpdate.Click += new System.EventHandler(this.btnOKUpdate_Click);
-            // 
-            // cbOffUpdate
-            // 
-            this.cbOffUpdate.AutoSize = true;
-            this.cbOffUpdate.Location = new System.Drawing.Point(359, 129);
-            this.cbOffUpdate.Name = "cbOffUpdate";
-            this.cbOffUpdate.Size = new System.Drawing.Size(116, 15);
-            this.cbOffUpdate.TabIndex = 9;
-            this.cbOffUpdate.Text = "Tự động cập nhật";
-            this.cbOffUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cbOffUpdate.UseSelectable = true;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(355, 63);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(129, 42);
-            this.btnUpdate.TabIndex = 8;
-            this.btnUpdate.Text = "Check update";
-            this.btnUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.btnUpdate.UseSelectable = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // theme
             // 
@@ -568,6 +489,91 @@
             this.btnOKMulti.UseSelectable = true;
             this.btnOKMulti.Click += new System.EventHandler(this.btnOKMulti_Click);
             // 
+            // UpdateClone
+            // 
+            this.UpdateClone.Controls.Add(this.listBox1);
+            this.UpdateClone.Controls.Add(this.btnOKUpdate);
+            this.UpdateClone.Controls.Add(this.cbOffUpdate);
+            this.UpdateClone.Controls.Add(this.btnUpdate);
+            this.UpdateClone.HorizontalScrollbarBarColor = true;
+            this.UpdateClone.HorizontalScrollbarHighlightOnWheel = false;
+            this.UpdateClone.HorizontalScrollbarSize = 10;
+            this.UpdateClone.Location = new System.Drawing.Point(4, 38);
+            this.UpdateClone.Name = "UpdateClone";
+            this.UpdateClone.Size = new System.Drawing.Size(484, 266);
+            this.UpdateClone.TabIndex = 4;
+            this.UpdateClone.Text = "Update Clone";
+            this.UpdateClone.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.UpdateClone.VerticalScrollbarBarColor = true;
+            this.UpdateClone.VerticalScrollbarHighlightOnWheel = false;
+            this.UpdateClone.VerticalScrollbarSize = 10;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.MenuText;
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Items.AddRange(new object[] {
+            "Change Log: ",
+            "<Date: [25/12/2019] | [10:00]>",
+            "   1) Fix lỗi crash ứng dụng khi vào cài đặt.",
+            "   2) Viết lại thanh báo tin nhắn mới.",
+            "   3) Ổn định lại hệ thống.",
+            "   4 Hỗ trợ cho máy tính 32bit(x86).",
+            "   5) Thêm nút khôi phục cài đặt gốc.",
+            "<Date: [23/12/2019] | [18:10]>",
+            "   1) Fix lỗi đa nhiệm khi sử sụng crtl + tab.",
+            "   2) Thêm cho phép truy cập vào link bên ngoài ứng dụng (Trong phần cài đặt).",
+            "<Date: [22/12/2019] | [15:00]>",
+            "   1) Fix lag khi chuyển chat messeage.",
+            "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
+            "   3) Thay đổi tab cài đặt:",
+            "     3.1) Thêm Tab Update Clone trong cài đặt.",
+            "     3.2) Thêm cho phép tắt tự động cập nhật.",
+            "     3.3) Thêm cho phép tắt chạy ngầm.",
+            "     3.4) Thêm cho phép tắt thông báo nổi khi có thư đến.",
+            "     3.5) Thêm luôn xuất hiện trên cùng."});
+            this.listBox1.Location = new System.Drawing.Point(0, 18);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(345, 244);
+            this.listBox1.TabIndex = 11;
+            // 
+            // btnOKUpdate
+            // 
+            this.btnOKUpdate.Location = new System.Drawing.Point(355, 173);
+            this.btnOKUpdate.Name = "btnOKUpdate";
+            this.btnOKUpdate.Size = new System.Drawing.Size(129, 42);
+            this.btnOKUpdate.TabIndex = 10;
+            this.btnOKUpdate.Text = "Xác nhận";
+            this.btnOKUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnOKUpdate.UseSelectable = true;
+            this.btnOKUpdate.Click += new System.EventHandler(this.btnOKUpdate_Click);
+            // 
+            // cbOffUpdate
+            // 
+            this.cbOffUpdate.AutoSize = true;
+            this.cbOffUpdate.Location = new System.Drawing.Point(359, 129);
+            this.cbOffUpdate.Name = "cbOffUpdate";
+            this.cbOffUpdate.Size = new System.Drawing.Size(116, 15);
+            this.cbOffUpdate.TabIndex = 9;
+            this.cbOffUpdate.Text = "Tự động cập nhật";
+            this.cbOffUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbOffUpdate.UseSelectable = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(355, 63);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(129, 42);
+            this.btnUpdate.TabIndex = 8;
+            this.btnUpdate.Text = "Check update";
+            this.btnUpdate.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnUpdate.UseSelectable = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // pnClose
             // 
             this.pnClose.BackColor = System.Drawing.Color.Transparent;
@@ -602,8 +608,6 @@
             this.PanelControls.ResumeLayout(false);
             this.system.ResumeLayout(false);
             this.system.PerformLayout();
-            this.UpdateClone.ResumeLayout(false);
-            this.UpdateClone.PerformLayout();
             this.theme.ResumeLayout(false);
             this.theme.PerformLayout();
             this.pipSetting.ResumeLayout(false);
@@ -612,6 +616,8 @@
             this.multiThread.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.UpdateClone.ResumeLayout(false);
+            this.UpdateClone.PerformLayout();
             this.ResumeLayout(false);
 
         }

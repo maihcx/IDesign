@@ -33,7 +33,9 @@ namespace MessengerBrowser
         internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
         //varible in the application privited
         static string str_messenging = "";
+        static string str_messenging_e = "";
         static string str_title_save = "";
+        static string str_input_save = "";
         internal static void NotificationShow()
         {
             if (str_inputTitle.Contains("("))
@@ -57,12 +59,25 @@ namespace MessengerBrowser
             }
             if (!(str_inputTitle.Contains("(") || str_inputTitle.Contains("Messenger") || str_inputTitle.Contains("Đăng nhập")))
             {
-                if (str_inputTitle != str_TextShow)
+                if (str_inputTitle != str_input_save || str_messenging != str_messenging_e)
                 {
+                    str_messenging_e = str_messenging;
+                    str_input_save = str_inputTitle;
                     str_TextShow = str_inputTitle;
-                    ShowNoty(str_messenging);
+                    if (int.Parse(str_messenging) > 1)
+                    {
+                        string str_messenging_c = (int.Parse(str_messenging) - 1).ToString();
+                        int int_calculator = str_TextShow.Length - 20;
+                        str_TextShow = str_inputTitle.Substring(0, int_calculator) + " và " + str_messenging_c + " người khác đã nhắn tin cho bạn";
+                        ShowNoty(str_messenging);
+                    }
+                    else
+                    {
+                        ShowNoty(str_messenging);
+                    }
                 }
             }
+
         }
 
         public static void ShowOrHideForm()
@@ -83,7 +98,7 @@ namespace MessengerBrowser
             {
                 if (frm is frmIconTray)
                 {
-                    ((frmIconTray)frm).ShowNotification("Bạn có ("+str_messenging_in+") tin nhắn mới", str_TextShow, 3000);
+                    ((frmIconTray)frm).ShowNotification(str_TextShow, "Bạn có (" + str_messenging_in + ") tin nhắn mới");
                     break;
                 }
             }
