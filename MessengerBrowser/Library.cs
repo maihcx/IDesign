@@ -200,6 +200,7 @@ namespace MessengerBrowser
             {
                 if (frm is frmMain)
                 {
+                    str_input_save = "";
                     ((frmMain)frm).balloonClicked();
                     break;
                 }
