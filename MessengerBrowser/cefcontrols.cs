@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace MessengerBrowser
 {
-    
+
     public class DisplayHandler : IDisplayHandler
     {
         private Control parent;
@@ -217,7 +217,7 @@ namespace MessengerBrowser
                         Library.RestartFacebook();
                     }
                 }
-                if (modifiers == CefEventFlags.ControlDown && windowsKeyCode == 9)
+                else if (modifiers == CefEventFlags.ControlDown && windowsKeyCode == 9)
                 {
                     if (Library.int_windows == 0)
                     {
@@ -235,31 +235,64 @@ namespace MessengerBrowser
                     }
                 }
 
-                if (windowsKeyCode == 27)
+                else if (windowsKeyCode == 27)
                 {
                     Library.ShowOrHideForm();
-                    return false;
                 }
-                if (Library.int_windows == 0)
+                else if (windowsKeyCode == 109)
                 {
-                    if (modifiers == CefEventFlags.AltDown && windowsKeyCode == 80)
+                    Library.setZoomLever(Library.dou_zoomvalue -= 0.1);
+                    Library.sendHostKey(-3);
+                    return true;
+                }
+                else if (windowsKeyCode == 107)
+                {
+                    Library.setZoomLever(Library.dou_zoomvalue += 0.1);
+                    Library.sendHostKey(-3);
+                    return true;
+                }
+                else if (Library.int_windows == 0)
+                {
+                    //MessageBox.Show(windowsKeyCode.ToString());
+                    if (modifiers == CefEventFlags.AltDown)
                     {
-                        if (!Library.is_PIP)
+                        if (windowsKeyCode == 80)
                         {
-                            //Library.setZoomLever(-0.43);
-                            //Library.hideMain_PIP();
-                            //Library.frm.ShowDialog();
-                            Library.startPIP();
+                            if (!Library.is_PIP)
+                            {
+                                //Library.setZoomLever(-0.43);
+                                //Library.hideMain_PIP();
+                                //Library.frm.ShowDialog();
+                                Library.startPIP();
+                            }
+                            else
+                            {
+                                //Library.showMain_PIP();
+                                //Library.frm.Close();
+                                //Library.frm = new frmPictureInPicture();
+                                //Library.setZoomLever(0);
+                                Library.stopPIP();
+                            }
+                            Library.sendHostKey(0);
                         }
-                        else
+                        else if (windowsKeyCode >= 16 && windowsKeyCode <= 18)
                         {
-                            //Library.showMain_PIP();
-                            //Library.frm.Close();
-                            //Library.frm = new frmPictureInPicture();
-                            //Library.setZoomLever(0);
-                            Library.stopPIP();
+                            Library.sendHostKey(windowsKeyCode);
                         }
-                        Library.sendHostKey(0);
+                    }
+                }
+                
+                if (modifiers == CefEventFlags.ControlDown)
+                {
+                    if (windowsKeyCode == 189)
+                    {
+                        Library.setZoomLever(Library.dou_zoomvalue -= 0.1);
+                        Library.sendHostKey(-3);
+                    }
+                    else if (windowsKeyCode == 187)
+                    {
+                        Library.setZoomLever(Library.dou_zoomvalue += 0.1);
+                        Library.sendHostKey(-3);
                     }
                     else if (windowsKeyCode >= 16 && windowsKeyCode <= 18)
                     {

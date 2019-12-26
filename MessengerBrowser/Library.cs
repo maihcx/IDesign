@@ -6,7 +6,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.1";
+        internal static string systemversion = "1.0.5.2";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static int int_ChangeIconUrl = 0;
@@ -32,6 +32,7 @@ namespace MessengerBrowser
         internal static int PIPPanelWidth = Properties.Settings.Default.FPIPPanelWidth;
         internal static int PIPPanelHeight = Properties.Settings.Default.FPIPPanelHeight;
         internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
+        internal static double dou_zoomvalue = 0;
         //varible in the application privited
         static string str_messenging = "";
         static string str_messenging_e = "";
@@ -286,12 +287,26 @@ namespace MessengerBrowser
 
         public static void setZoomLever(double value)
         {
-            foreach (Form frm in Application.OpenForms)
+            if (int_windows == 0)
             {
-                if (frm is frmBrowserMessenger)
+                foreach (Form frm in Application.OpenForms)
                 {
-                    ((frmBrowserMessenger)frm).setZoomLever(value);
-                    break;
+                    if (frm is frmBrowserMessenger)
+                    {
+                        ((frmBrowserMessenger)frm).setZoomLever(value);
+                        break;
+                    }
+                }
+            }
+            else if (int_windows == 1)
+            {
+                foreach (Form frm in Application.OpenForms)
+                {
+                    if (frm is frmBrowserFacebook)
+                    {
+                        ((frmBrowserFacebook)frm).setZoomLever(value);
+                        break;
+                    }
                 }
             }
         }

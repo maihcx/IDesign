@@ -124,6 +124,16 @@ namespace MessengerBrowser
         {
             browser.GetBrowser().Reload(true);
         }
+
+        public void setZoomLever(double value)
+        {
+            //ChromiumWebBrowser web = (ChromiumWebBrowser)sender;
+            //if (!web.IsLoading)
+            //{
+            browser.SetZoomLevel(value);
+            //}
+
+        }
     }
 
     public class RequestHandlerfb : IRequestHandler

@@ -89,12 +89,7 @@ namespace MessengerBrowser
 
         public void setZoomLever(double value)
         {
-            //ChromiumWebBrowser web = (ChromiumWebBrowser)sender;
-            //if (!web.IsLoading)
-            //{
             browser.SetZoomLevel(value);
-            //}
-
         }
 
         private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
