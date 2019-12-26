@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using MetroFramework;
@@ -22,6 +15,7 @@ namespace MessengerBrowser
             InitializeComponent();
         }
         bool PIPNameFirstStart = true;
+        int PIPNameDPI = 0;
         private void frmSetting_Load(object sender, EventArgs e)
         {
             this.Opacity = 0;
@@ -129,6 +123,12 @@ namespace MessengerBrowser
                 this.Invoke((MethodInvoker)delegate
                 {
                     Library.previewWindowsStyle(Properties.Settings.Default.FIntWinStyle);
+                    if (Library.is_PIP)
+                    {
+                    Library.previewPIPPanelSize(Properties.Settings.Default.FPIPPanelWidth, PIPNameDPI);
+                    Library.previewPIPSize(Properties.Settings.Default.FPIPWidth, Properties.Settings.Default.FPIPHeight);
+                        
+                    }
                 });
                 this.Dispose();
             }
@@ -253,6 +253,7 @@ namespace MessengerBrowser
             if (rdbHideName.Checked && !PIPNameFirstStart)
             {
                 Library.previewPIPPanelSize(trackPIPPanelWidth.Value, -60);
+                PIPNameDPI -= -60;
             }
             PIPNameFirstStart = false;
         }
@@ -262,6 +263,7 @@ namespace MessengerBrowser
             if (rdbShowName.Checked && !PIPNameFirstStart)
             {
                 Library.previewPIPPanelSize(trackPIPPanelWidth.Value, 60);
+                PIPNameDPI -= 60;
             }
             PIPNameFirstStart = false;
         }

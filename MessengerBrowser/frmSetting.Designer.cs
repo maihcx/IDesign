@@ -550,6 +550,11 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [26/12/2019] | [18:20]> //Khẩn cấp//",
+            "</1.0.5.2/>",
+            "   1) Fix lỗi UI hoạt động không chuẩn xác với tính năng chuyển chiều điều kiển",
+            "   2) Thêm phóng to, phu nhỏ bằng dấu: +, - và crtl -, crtl =",
+            "   3) Sửa lỗi notification không hoạt động chuẩn xác.",
             "<Date: [25/12/2019] | [17:50]> //Khẩn cấp//",
             "</1.0.5.1/>",
             "   1) Fix lỗi báo tin nhắn không hoạt động.",
