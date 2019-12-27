@@ -248,6 +248,7 @@ namespace MessengerBrowser
                         else if (Library.int_windows == 1)
                             Library.setZoomLeverFA(Library.dou_zoomvalueFA -= 0.1);
                         Library.sendHostKey(-3);
+                        return true;
                     }
                 }
                 else if (windowsKeyCode == 107)
@@ -259,6 +260,7 @@ namespace MessengerBrowser
                         else if (Library.int_windows == 1)
                             Library.setZoomLeverFA(Library.dou_zoomvalueFA += 0.1);
                         Library.sendHostKey(-3);
+                        return true;
                     }
                 }
                 else if (Library.int_windows == 0)
