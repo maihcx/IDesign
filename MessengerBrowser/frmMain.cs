@@ -570,7 +570,7 @@ namespace MessengerBrowser
             BlueformFrameworkUse.Hide(this, 10);
             //PanelMain.Visible = false;
 
-            Library.setZoomLever(-1.3);
+            Library.setZoomLeverMS(-1.3);
             this.Width = Library.PIPWidth;
             this.Height = Library.PIPHeight;
             showPanels(false);
@@ -594,7 +594,7 @@ namespace MessengerBrowser
             Library.is_PIP = false;
             BlueformFrameworkUse.Hide(this, 10);
             //Thread.Sleep(300);
-            Library.setZoomLever(0);
+            Library.setZoomLeverMS(0);
             this.Width = Library.int_formWidth;
             this.Height = Library.int_formHeight;
             showPanels(true);
@@ -677,7 +677,7 @@ namespace MessengerBrowser
             switch (icontrolkey)
             {
                 case -3:
-                    str_show = "Kích thước: " + (1 + Library.dou_zoomvalue).ToString("#0.##%");
+                    str_show = "Kích thước: " + (1 + ((Library.int_windows == 0) ? Library.dou_zoomvalueMS :Library.dou_zoomvalueFA)).ToString("#0.##%");
                     break;
                 case -2:
                     str_show = "Jum Tab Facebook";

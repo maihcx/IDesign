@@ -550,6 +550,12 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [27/12/2019] | [15:20]> //Vá lỗi//",
+            "</1.0.5.3/>",
+            "   1) Sửa đổi mã nguồn nhân hệ thống.",
+            "   2) Thêm phím tắt crtl + D để đưa chế độ Zoom về 100%.",
+            "   3) Tách chế độ Zoom của Messenger và Facebook.",
+            "   4) Sửa lỗi luồn chính sử dụng quá nhiều ram.",
             "<Date: [26/12/2019] | [18:20]> //Khẩn cấp//",
             "</1.0.5.2/>",
             "   1) Fix lỗi UI hoạt động không chuẩn xác với tính năng chuyển chiều điều kiển",
@@ -574,7 +580,7 @@
             "   2) Thêm cho phép truy cập vào link bên ngoài ứng dụng (Trong phần cài đặt).",
             "<Date: [22/12/2019] | [15:00]>",
             "</1.0.4.8/>",
-            "   1) Fix lag khi chuyển chat messeage.",
+            "   1) Fix lag khi chuyển chat message.",
             "   2) Fix lỗi văng app khi không thể kết nối đến server để cập nhật.",
             "   3) Thay đổi tab cài đặt:",
             "     3.1) Thêm Tab Update Clone trong cài đặt.",

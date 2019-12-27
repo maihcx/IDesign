@@ -215,6 +215,7 @@ namespace MessengerBrowser
                         Application.Restart();
                     }
                     this.Dispose();
+                    GC.Collect();
                 }
                 catch
                 {
@@ -288,6 +289,7 @@ namespace MessengerBrowser
             //});
 
             //Thread.Sleep(500);
+            GC.Collect();
         }
 
         private void cbbStyleWin_SelectedIndexChanged(object sender, EventArgs e)
