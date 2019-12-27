@@ -55,27 +55,53 @@ namespace MessengerBrowser
             popupNoty.TitleText = title;
             popupNoty.Popup();
         }
-
+        System.Windows.Forms.Timer tmruner = new System.Windows.Forms.Timer();
+        frmSetting frmst = new frmSetting();
         private void càiĐặtToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-
-            frmSetting frmst = new frmSetting();
-            try
+            if (!Library.is_openedwindows)
             {
-                new Thread(() =>
+                Library.ShowOrHideForm();
+                int int_time_stack = 0;
+                tmruner.Stop();
+                tmruner = new System.Windows.Forms.Timer();
+                tmruner.Interval = 250;
+                tmruner.Tick += new EventHandler((object obj, EventArgs ev) =>
                 {
-                    this.Invoke((MethodInvoker)delegate
+                    int_time_stack++;
+                    if (int_time_stack > 0)
                     {
-                        frmst.ShowDialog();
-                    });
-                })
-                { IsBackground = true }.Start();
+                        tmruner.Stop();
+                        runformSetting();
+                    }
+                });
+                tmruner.Start();
             }
-            catch
+            else
             {
-                //frmst.ShowDialog();
+                try
+                {
+                    runformSetting();
+                }
+                catch
+                { }
             }
+        }
+
+        private void runformSetting()
+        {
+            GC.Collect();
+            frmst.Dispose();
+            if (string.IsNullOrEmpty(frmst.Text) || frmst.IsDisposed)
+            {
+                frmst = new frmSetting();
+            }
+            this.Invoke((MethodInvoker)delegate
+            {
+                frmst.ShowDialog();
+            });
+
         }
 
         private void popupNoty_Click(object sender, EventArgs e)

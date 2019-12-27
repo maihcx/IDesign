@@ -241,15 +241,25 @@ namespace MessengerBrowser
                 }
                 else if (windowsKeyCode == 109)
                 {
-                    Library.setZoomLever(Library.dou_zoomvalue -= 0.1);
-                    Library.sendHostKey(-3);
-                    return true;
+                    if (!Library.is_PIP)
+                    {
+                        if (Library.int_windows == 0)
+                            Library.setZoomLeverMS(Library.dou_zoomvalueMS -= 0.1);
+                        else if (Library.int_windows == 1)
+                            Library.setZoomLeverFA(Library.dou_zoomvalueFA -= 0.1);
+                        Library.sendHostKey(-3);
+                    }
                 }
                 else if (windowsKeyCode == 107)
                 {
-                    Library.setZoomLever(Library.dou_zoomvalue += 0.1);
-                    Library.sendHostKey(-3);
-                    return true;
+                    if (!Library.is_PIP)
+                    {
+                        if (Library.int_windows == 0)
+                            Library.setZoomLeverMS(Library.dou_zoomvalueMS += 0.1);
+                        else if (Library.int_windows == 1)
+                            Library.setZoomLeverFA(Library.dou_zoomvalueFA += 0.1);
+                        Library.sendHostKey(-3);
+                    }
                 }
                 else if (Library.int_windows == 0)
                 {
@@ -281,18 +291,41 @@ namespace MessengerBrowser
                         }
                     }
                 }
-                
+
                 if (modifiers == CefEventFlags.ControlDown)
                 {
                     if (windowsKeyCode == 189)
                     {
-                        Library.setZoomLever(Library.dou_zoomvalue -= 0.1);
-                        Library.sendHostKey(-3);
+                        if (!Library.is_PIP)
+                        {
+                            if (Library.int_windows == 0)
+                                Library.setZoomLeverMS(Library.dou_zoomvalueMS -= 0.1);
+                            else if (Library.int_windows == 1)
+                                Library.setZoomLeverFA(Library.dou_zoomvalueFA -= 0.1);
+                            Library.sendHostKey(-3);
+                        }
                     }
                     else if (windowsKeyCode == 187)
                     {
-                        Library.setZoomLever(Library.dou_zoomvalue += 0.1);
-                        Library.sendHostKey(-3);
+                        if (!Library.is_PIP)
+                        {
+                            if (Library.int_windows == 0)
+                                Library.setZoomLeverMS(Library.dou_zoomvalueMS += 0.1);
+                            else if (Library.int_windows == 1)
+                                Library.setZoomLeverFA(Library.dou_zoomvalueFA += 0.1);
+                            Library.sendHostKey(-3);
+                        }
+                    }
+                    else if (windowsKeyCode == 68)
+                    {
+                        if (!Library.is_PIP)
+                        {
+                            if (Library.int_windows == 0)
+                                Library.setZoomLeverMS(Library.dou_zoomvalueMS = 0);
+                            else if (Library.int_windows == 1)
+                                Library.setZoomLeverFA(Library.dou_zoomvalueFA = 0);
+                            Library.sendHostKey(-3);
+                        }
                     }
                     else if (windowsKeyCode >= 16 && windowsKeyCode <= 18)
                     {

@@ -6,7 +6,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.2";
+        internal static string systemversion = "1.0.5.3";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static int int_ChangeIconUrl = 0;
@@ -32,7 +32,8 @@ namespace MessengerBrowser
         internal static int PIPPanelWidth = Properties.Settings.Default.FPIPPanelWidth;
         internal static int PIPPanelHeight = Properties.Settings.Default.FPIPPanelHeight;
         internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
-        internal static double dou_zoomvalue = 0;
+        internal static double dou_zoomvalueMS = 0;
+        internal static double dou_zoomvalueFA = 0;
         //varible in the application privited
         static string str_messenging = "";
         static string str_messenging_e = "";
@@ -285,28 +286,26 @@ namespace MessengerBrowser
             }
         }
 
-        public static void setZoomLever(double value)
+        public static void setZoomLeverMS(double value)
         {
-            if (int_windows == 0)
+            foreach (Form frm in Application.OpenForms)
             {
-                foreach (Form frm in Application.OpenForms)
+                if (frm is frmBrowserMessenger)
                 {
-                    if (frm is frmBrowserMessenger)
-                    {
-                        ((frmBrowserMessenger)frm).setZoomLever(value);
-                        break;
-                    }
+                    ((frmBrowserMessenger)frm).setZoomLever(value);
+                    break;
                 }
             }
-            else if (int_windows == 1)
+        }
+
+        public static void setZoomLeverFA(double value)
+        {
+            foreach (Form frm in Application.OpenForms)
             {
-                foreach (Form frm in Application.OpenForms)
+                if (frm is frmBrowserFacebook)
                 {
-                    if (frm is frmBrowserFacebook)
-                    {
-                        ((frmBrowserFacebook)frm).setZoomLever(value);
-                        break;
-                    }
+                    ((frmBrowserFacebook)frm).setZoomLever(value);
+                    break;
                 }
             }
         }

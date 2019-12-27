@@ -194,9 +194,39 @@ namespace MessengerBrowser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mac_ico_close2_cv {
+            get {
+                object obj = ResourceManager.GetObject("mac_ico_close2_cv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mac_ico_close21 {
+            get {
+                object obj = ResourceManager.GetObject("mac_ico_close21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap messenger_app_icon_28 {
             get {
                 object obj = ResourceManager.GetObject("messenger-app-icon-28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap messenger_app_icon_281 {
+            get {
+                object obj = ResourceManager.GetObject("messenger-app-icon-281", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -118,6 +118,7 @@ namespace MessengerBrowser
         public void FacebookShutdow()
         {
             this.Close();
+            GC.Collect();
         }
 
         public void RestartFacebook()
