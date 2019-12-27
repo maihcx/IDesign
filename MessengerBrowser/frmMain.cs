@@ -594,7 +594,7 @@ namespace MessengerBrowser
             Library.is_PIP = false;
             BlueformFrameworkUse.Hide(this, 10);
             //Thread.Sleep(300);
-            Library.setZoomLeverMS(0);
+            Library.setZoomLeverMS(Library.dou_zoomvalueMS);
             this.Width = Library.int_formWidth;
             this.Height = Library.int_formHeight;
             showPanels(true);
