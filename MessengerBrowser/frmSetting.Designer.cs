@@ -38,14 +38,8 @@
             this.cbHead = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffNotifi = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffSystem = new MetroFramework.Controls.MetroCheckBox();
-            this.theme = new MetroFramework.Controls.MetroTabPage();
-            this.cbbStyleWin = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroRadioButton3 = new MetroFramework.Controls.MetroRadioButton();
-            this.btnOKTheme = new MetroFramework.Controls.MetroButton();
-            this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
-            this.metroRadioButton1 = new MetroFramework.Controls.MetroRadioButton();
             this.pipSetting = new MetroFramework.Controls.MetroTabPage();
+            this.cbbPIPTopMost = new MetroFramework.Controls.MetroCheckBox();
             this.rdbHideName = new MetroFramework.Controls.MetroRadioButton();
             this.rdbShowName = new MetroFramework.Controls.MetroRadioButton();
             this.trackPIPPanelWidth = new MetroFramework.Controls.MetroTrackBar();
@@ -57,6 +51,13 @@
             this.btnOKPIP = new MetroFramework.Controls.MetroButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.theme = new MetroFramework.Controls.MetroTabPage();
+            this.cbbStyleWin = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroRadioButton3 = new MetroFramework.Controls.MetroRadioButton();
+            this.btnOKTheme = new MetroFramework.Controls.MetroButton();
+            this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
+            this.metroRadioButton1 = new MetroFramework.Controls.MetroRadioButton();
             this.multiThread = new MetroFramework.Controls.MetroTabPage();
             this.cbOutApplication = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -70,8 +71,8 @@
             this.pnClose = new System.Windows.Forms.Panel();
             this.PanelControls.SuspendLayout();
             this.system.SuspendLayout();
-            this.theme.SuspendLayout();
             this.pipSetting.SuspendLayout();
+            this.theme.SuspendLayout();
             this.multiThread.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.UpdateClone.SuspendLayout();
@@ -83,8 +84,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelControls.Controls.Add(this.system);
-            this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.pipSetting);
+            this.PanelControls.Controls.Add(this.theme);
             this.PanelControls.Controls.Add(this.multiThread);
             this.PanelControls.Controls.Add(this.UpdateClone);
             this.PanelControls.Location = new System.Drawing.Point(11, 63);
@@ -198,103 +199,9 @@
             this.cbOffSystem.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.cbOffSystem.UseSelectable = true;
             // 
-            // theme
-            // 
-            this.theme.Controls.Add(this.cbbStyleWin);
-            this.theme.Controls.Add(this.metroLabel1);
-            this.theme.Controls.Add(this.metroRadioButton3);
-            this.theme.Controls.Add(this.btnOKTheme);
-            this.theme.Controls.Add(this.metroRadioButton2);
-            this.theme.Controls.Add(this.metroRadioButton1);
-            this.theme.HorizontalScrollbarBarColor = true;
-            this.theme.HorizontalScrollbarHighlightOnWheel = false;
-            this.theme.HorizontalScrollbarSize = 10;
-            this.theme.Location = new System.Drawing.Point(4, 38);
-            this.theme.Name = "theme";
-            this.theme.Size = new System.Drawing.Size(484, 266);
-            this.theme.TabIndex = 1;
-            this.theme.Text = "Giao diện";
-            this.theme.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.theme.VerticalScrollbarBarColor = true;
-            this.theme.VerticalScrollbarHighlightOnWheel = false;
-            this.theme.VerticalScrollbarSize = 10;
-            // 
-            // cbbStyleWin
-            // 
-            this.cbbStyleWin.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cbbStyleWin.FormattingEnabled = true;
-            this.cbbStyleWin.ItemHeight = 19;
-            this.cbbStyleWin.Items.AddRange(new object[] {
-            "Trái",
-            "Phải"});
-            this.cbbStyleWin.Location = new System.Drawing.Point(250, 69);
-            this.cbbStyleWin.Name = "cbbStyleWin";
-            this.cbbStyleWin.Size = new System.Drawing.Size(108, 25);
-            this.cbbStyleWin.TabIndex = 8;
-            this.cbbStyleWin.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cbbStyleWin.UseSelectable = true;
-            this.cbbStyleWin.SelectedIndexChanged += new System.EventHandler(this.cbbStyleWin_SelectedIndexChanged);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel1.Location = new System.Drawing.Point(97, 74);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(150, 15);
-            this.metroLabel1.TabIndex = 7;
-            this.metroLabel1.Text = "Chiều của các nút điều khiển: ";
-            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // metroRadioButton3
-            // 
-            this.metroRadioButton3.AutoSize = true;
-            this.metroRadioButton3.Location = new System.Drawing.Point(370, 242);
-            this.metroRadioButton3.Name = "metroRadioButton3";
-            this.metroRadioButton3.Size = new System.Drawing.Size(112, 15);
-            this.metroRadioButton3.TabIndex = 2;
-            this.metroRadioButton3.Text = "Chế độ mật định";
-            this.metroRadioButton3.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroRadioButton3.UseSelectable = true;
-            this.metroRadioButton3.Visible = false;
-            // 
-            // btnOKTheme
-            // 
-            this.btnOKTheme.Location = new System.Drawing.Point(197, 200);
-            this.btnOKTheme.Name = "btnOKTheme";
-            this.btnOKTheme.Size = new System.Drawing.Size(101, 42);
-            this.btnOKTheme.TabIndex = 6;
-            this.btnOKTheme.Text = "Xác nhận";
-            this.btnOKTheme.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.btnOKTheme.UseSelectable = true;
-            this.btnOKTheme.Click += new System.EventHandler(this.btnOKTheme_Click);
-            // 
-            // metroRadioButton2
-            // 
-            this.metroRadioButton2.AutoSize = true;
-            this.metroRadioButton2.Location = new System.Drawing.Point(370, 221);
-            this.metroRadioButton2.Name = "metroRadioButton2";
-            this.metroRadioButton2.Size = new System.Drawing.Size(116, 15);
-            this.metroRadioButton2.TabIndex = 1;
-            this.metroRadioButton2.Text = "Chế độ sáng màu";
-            this.metroRadioButton2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroRadioButton2.UseSelectable = true;
-            this.metroRadioButton2.Visible = false;
-            // 
-            // metroRadioButton1
-            // 
-            this.metroRadioButton1.AutoSize = true;
-            this.metroRadioButton1.Location = new System.Drawing.Point(370, 200);
-            this.metroRadioButton1.Name = "metroRadioButton1";
-            this.metroRadioButton1.Size = new System.Drawing.Size(105, 15);
-            this.metroRadioButton1.TabIndex = 0;
-            this.metroRadioButton1.Text = "Chế độ tối màu";
-            this.metroRadioButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroRadioButton1.UseSelectable = true;
-            this.metroRadioButton1.Visible = false;
-            // 
             // pipSetting
             // 
+            this.pipSetting.Controls.Add(this.cbbPIPTopMost);
             this.pipSetting.Controls.Add(this.rdbHideName);
             this.pipSetting.Controls.Add(this.rdbShowName);
             this.pipSetting.Controls.Add(this.trackPIPPanelWidth);
@@ -319,10 +226,22 @@
             this.pipSetting.VerticalScrollbarHighlightOnWheel = false;
             this.pipSetting.VerticalScrollbarSize = 10;
             // 
+            // cbbPIPTopMost
+            // 
+            this.cbbPIPTopMost.AutoSize = true;
+            this.cbbPIPTopMost.Location = new System.Drawing.Point(162, 104);
+            this.cbbPIPTopMost.Name = "cbbPIPTopMost";
+            this.cbbPIPTopMost.Size = new System.Drawing.Size(175, 15);
+            this.cbbPIPTopMost.TabIndex = 16;
+            this.cbbPIPTopMost.Text = "Cho phép PIP hiện trên cùng";
+            this.cbbPIPTopMost.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbbPIPTopMost.UseSelectable = true;
+            this.cbbPIPTopMost.CheckedChanged += new System.EventHandler(this.cbbPIPTopMost_CheckedChanged);
+            // 
             // rdbHideName
             // 
             this.rdbHideName.AutoSize = true;
-            this.rdbHideName.Location = new System.Drawing.Point(255, 121);
+            this.rdbHideName.Location = new System.Drawing.Point(274, 148);
             this.rdbHideName.Name = "rdbHideName";
             this.rdbHideName.Size = new System.Drawing.Size(73, 15);
             this.rdbHideName.TabIndex = 15;
@@ -334,7 +253,7 @@
             // rdbShowName
             // 
             this.rdbShowName.AutoSize = true;
-            this.rdbShowName.Location = new System.Drawing.Point(119, 121);
+            this.rdbShowName.Location = new System.Drawing.Point(138, 148);
             this.rdbShowName.Name = "rdbShowName";
             this.rdbShowName.Size = new System.Drawing.Size(100, 15);
             this.rdbShowName.TabIndex = 14;
@@ -458,6 +377,101 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Chiều dài:";
             // 
+            // theme
+            // 
+            this.theme.Controls.Add(this.cbbStyleWin);
+            this.theme.Controls.Add(this.metroLabel1);
+            this.theme.Controls.Add(this.metroRadioButton3);
+            this.theme.Controls.Add(this.btnOKTheme);
+            this.theme.Controls.Add(this.metroRadioButton2);
+            this.theme.Controls.Add(this.metroRadioButton1);
+            this.theme.HorizontalScrollbarBarColor = true;
+            this.theme.HorizontalScrollbarHighlightOnWheel = false;
+            this.theme.HorizontalScrollbarSize = 10;
+            this.theme.Location = new System.Drawing.Point(4, 38);
+            this.theme.Name = "theme";
+            this.theme.Size = new System.Drawing.Size(484, 266);
+            this.theme.TabIndex = 1;
+            this.theme.Text = "Giao diện";
+            this.theme.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.theme.VerticalScrollbarBarColor = true;
+            this.theme.VerticalScrollbarHighlightOnWheel = false;
+            this.theme.VerticalScrollbarSize = 10;
+            // 
+            // cbbStyleWin
+            // 
+            this.cbbStyleWin.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbbStyleWin.FormattingEnabled = true;
+            this.cbbStyleWin.ItemHeight = 19;
+            this.cbbStyleWin.Items.AddRange(new object[] {
+            "Trái",
+            "Phải"});
+            this.cbbStyleWin.Location = new System.Drawing.Point(250, 69);
+            this.cbbStyleWin.Name = "cbbStyleWin";
+            this.cbbStyleWin.Size = new System.Drawing.Size(108, 25);
+            this.cbbStyleWin.TabIndex = 8;
+            this.cbbStyleWin.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbbStyleWin.UseSelectable = true;
+            this.cbbStyleWin.SelectedIndexChanged += new System.EventHandler(this.cbbStyleWin_SelectedIndexChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(97, 74);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(150, 15);
+            this.metroLabel1.TabIndex = 7;
+            this.metroLabel1.Text = "Chiều của các nút điều khiển: ";
+            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // metroRadioButton3
+            // 
+            this.metroRadioButton3.AutoSize = true;
+            this.metroRadioButton3.Location = new System.Drawing.Point(370, 242);
+            this.metroRadioButton3.Name = "metroRadioButton3";
+            this.metroRadioButton3.Size = new System.Drawing.Size(112, 15);
+            this.metroRadioButton3.TabIndex = 2;
+            this.metroRadioButton3.Text = "Chế độ mật định";
+            this.metroRadioButton3.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroRadioButton3.UseSelectable = true;
+            this.metroRadioButton3.Visible = false;
+            // 
+            // btnOKTheme
+            // 
+            this.btnOKTheme.Location = new System.Drawing.Point(197, 200);
+            this.btnOKTheme.Name = "btnOKTheme";
+            this.btnOKTheme.Size = new System.Drawing.Size(101, 42);
+            this.btnOKTheme.TabIndex = 6;
+            this.btnOKTheme.Text = "Xác nhận";
+            this.btnOKTheme.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btnOKTheme.UseSelectable = true;
+            this.btnOKTheme.Click += new System.EventHandler(this.btnOKTheme_Click);
+            // 
+            // metroRadioButton2
+            // 
+            this.metroRadioButton2.AutoSize = true;
+            this.metroRadioButton2.Location = new System.Drawing.Point(370, 221);
+            this.metroRadioButton2.Name = "metroRadioButton2";
+            this.metroRadioButton2.Size = new System.Drawing.Size(116, 15);
+            this.metroRadioButton2.TabIndex = 1;
+            this.metroRadioButton2.Text = "Chế độ sáng màu";
+            this.metroRadioButton2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroRadioButton2.UseSelectable = true;
+            this.metroRadioButton2.Visible = false;
+            // 
+            // metroRadioButton1
+            // 
+            this.metroRadioButton1.AutoSize = true;
+            this.metroRadioButton1.Location = new System.Drawing.Point(370, 200);
+            this.metroRadioButton1.Name = "metroRadioButton1";
+            this.metroRadioButton1.Size = new System.Drawing.Size(105, 15);
+            this.metroRadioButton1.TabIndex = 0;
+            this.metroRadioButton1.Text = "Chế độ tối màu";
+            this.metroRadioButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroRadioButton1.UseSelectable = true;
+            this.metroRadioButton1.Visible = false;
+            // 
             // multiThread
             // 
             this.multiThread.Controls.Add(this.cbOutApplication);
@@ -550,6 +564,12 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [27/12/2019] | [15:20]> //Vá lỗi//",
+            "</1.0.5.3/>",
+            "   1) Thêm tính năng cho phép PIP bên dưới ứng dụng khác.",
+            "   2) Tối ưu ram.",
+            "   3) Thiết kế lại mã của tính năng PIP.",
+            "   4) Fix một số thông báo bị ẩn.",
             "<Date: [27/12/2019] | [15:20]> //Vá lỗi//",
             "</1.0.5.3/>",
             "   1) Sửa đổi mã nguồn nhân hệ thống.",
@@ -660,10 +680,10 @@
             this.PanelControls.ResumeLayout(false);
             this.system.ResumeLayout(false);
             this.system.PerformLayout();
-            this.theme.ResumeLayout(false);
-            this.theme.PerformLayout();
             this.pipSetting.ResumeLayout(false);
             this.pipSetting.PerformLayout();
+            this.theme.ResumeLayout(false);
+            this.theme.PerformLayout();
             this.multiThread.ResumeLayout(false);
             this.multiThread.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -715,5 +735,6 @@
         private MetroFramework.Controls.MetroCheckBox cbOutApplication;
         private MetroFramework.Controls.MetroComboBox cbbStyleWin;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroCheckBox cbbPIPTopMost;
     }
 }

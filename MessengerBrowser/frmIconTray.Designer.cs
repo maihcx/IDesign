@@ -43,7 +43,7 @@
             this.IconTray.BalloonTipTitle = "Messenger";
             this.IconTray.ContextMenuStrip = this.contextMenu;
             this.IconTray.Icon = ((System.Drawing.Icon)(resources.GetObject("IconTray.Icon")));
-            this.IconTray.Text = "sky";
+            this.IconTray.Text = "Messenger";
             this.IconTray.Visible = true;
             this.IconTray.BalloonTipClicked += new System.EventHandler(this.IconTray_BalloonTipClicked);
             this.IconTray.BalloonTipClosed += new System.EventHandler(this.IconTray_BalloonTipClosed);

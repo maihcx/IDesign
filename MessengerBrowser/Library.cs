@@ -6,7 +6,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.3";
+        internal static string systemversion = "1.0.5.4";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static int int_ChangeIconUrl = 0;
@@ -448,6 +448,18 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     ((frmMain)frm).previewWindowsStyle(int_style);
+                    break;
+                }
+            }
+        }
+
+        public static void focursMainForm()
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).focursMainForm();
                     break;
                 }
             }

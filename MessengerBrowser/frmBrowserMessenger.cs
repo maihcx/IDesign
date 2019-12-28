@@ -134,6 +134,7 @@ namespace MessengerBrowser
                         {
                             UpdateCheck();
                             is_firstStart = true;
+                            Library.focursMainForm();
                         }
                     }
                 }))

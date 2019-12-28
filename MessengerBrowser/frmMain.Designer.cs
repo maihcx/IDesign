@@ -189,7 +189,7 @@
             // pnMess1
             // 
             this.pnMess1.BackColor = System.Drawing.Color.Transparent;
-            this.pnMess1.BackgroundImage = global::MessengerBrowser.Properties.Resources.messenger_app_icon_281;
+            this.pnMess1.BackgroundImage = global::MessengerBrowser.Properties.Resources.picture64x64;
             this.pnMess1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnMess1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnMess1.Location = new System.Drawing.Point(1, -1);
@@ -241,7 +241,7 @@
             // 
             this.pnMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnMess.BackColor = System.Drawing.Color.Transparent;
-            this.pnMess.BackgroundImage = global::MessengerBrowser.Properties.Resources.messenger_app_icon_281;
+            this.pnMess.BackgroundImage = global::MessengerBrowser.Properties.Resources.picture64x64;
             this.pnMess.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnMess.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnMess.Location = new System.Drawing.Point(7, -1);

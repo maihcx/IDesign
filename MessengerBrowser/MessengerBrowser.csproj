@@ -270,6 +270,7 @@
     <None Include="Resources\messenger-app-icon-28.ico" />
     <None Include="Resources\mac_ico_close2.ico" />
     <None Include="Resources\mac_ico_close2_cv.png" />
+    <None Include="Resources\picture64x64.png" />
     <Content Include="TextTemplate.ico" />
     <None Include="Resources\messenger-app-icon-28.jpg" />
     <None Include="Resources\rest.png" />

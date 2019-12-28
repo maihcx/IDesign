@@ -15,6 +15,7 @@ namespace MessengerBrowser
             InitializeComponent();
         }
         bool PIPNameFirstStart = true;
+        bool IsPIPTopMostFirstStart = true;
         int PIPNameDPI = 0;
         private void frmSetting_Load(object sender, EventArgs e)
         {
@@ -79,6 +80,7 @@ namespace MessengerBrowser
             cbOffSystem.Checked = !Properties.Settings.Default.FIsRunbackground;
             cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
             cbbStyleWin.SelectedIndex = Properties.Settings.Default.FIntWinStyle;
+            cbbPIPTopMost.Checked = Properties.Settings.Default.FIsPIPTopMost;
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -125,9 +127,9 @@ namespace MessengerBrowser
                     Library.previewWindowsStyle(Properties.Settings.Default.FIntWinStyle);
                     if (Library.is_PIP)
                     {
-                    Library.previewPIPPanelSize(Properties.Settings.Default.FPIPPanelWidth, PIPNameDPI);
-                    Library.previewPIPSize(Properties.Settings.Default.FPIPWidth, Properties.Settings.Default.FPIPHeight);
-                        
+                        Library.previewPIPPanelSize(Properties.Settings.Default.FPIPPanelWidth, PIPNameDPI);
+                        Library.previewPIPSize(Properties.Settings.Default.FPIPWidth, Properties.Settings.Default.FPIPHeight);
+
                     }
                 });
                 this.Dispose();
@@ -192,6 +194,8 @@ namespace MessengerBrowser
                         //is_restartThread = true;
                         Library.RunTopMost(cbHead.Checked);
                     }
+
+                    Properties.Settings.Default.FIsPIPTopMost = cbbPIPTopMost.Checked;
 
                     Properties.Settings.Default.FIntWinStyle = cbbStyleWin.SelectedIndex;
 
@@ -301,6 +305,19 @@ namespace MessengerBrowser
         private void btnOKTheme_Click(object sender, EventArgs e)
         {
             OKBTN();
+        }
+
+        private void cbbPIPTopMost_CheckedChanged(object sender, EventArgs e)
+        {
+            //is_restartThread = true;
+            if (!IsPIPTopMostFirstStart)
+            {
+                if (!Library.is_PIP)
+                    Library.startPIP();
+                Library.RunTopMost(cbbPIPTopMost.Checked);
+            }
+            else
+                IsPIPTopMostFirstStart = false;
         }
     }
 }
