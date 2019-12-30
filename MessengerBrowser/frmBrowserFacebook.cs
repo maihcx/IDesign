@@ -1,7 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
 using System;
-using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
@@ -27,23 +26,6 @@ namespace MessengerBrowser
         public void load()
         {
             Library.int_windows = 1;
-            Library.painPanels(1, Color.DarkGray);
-            //Library.is_FaceOpened = true;
-            //new Thread(() =>
-            //{
-            //    if (this.InvokeRequired)
-            //    {
-            //        this.BeginInvoke((MethodInvoker)delegate ()
-            //        {
-            //            Library.startLoading();
-            //        });
-            //    }
-            //    else
-            //    {
-            //        Library.startLoading();
-            //    }
-            //})
-            //{ IsBackground = true }.Start();
             new Thread(() =>
             {
                 if (this.InvokeRequired)
@@ -72,12 +54,8 @@ namespace MessengerBrowser
             browser.DisplayHandler = displayer;
             browser.KeyboardHandler = new KeyboardHandler();
             browser.RequestHandler = new RequestHandlerfb();
+            browser.MenuHandler = new MenuHandler();
             browser.AddressChanged += Browser_AddressChanged;
-            //browser.LoadingStateChanged += browser_LoadingStateChanged;
-
-            //thload = new Thread(showfrmload);
-            //thload.IsBackground = true;
-            //thload.Start();
         }
 
         private void browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -128,12 +106,7 @@ namespace MessengerBrowser
 
         public void setZoomLever(double value)
         {
-            //ChromiumWebBrowser web = (ChromiumWebBrowser)sender;
-            //if (!web.IsLoading)
-            //{
             browser.SetZoomLevel(value);
-            //}
-
         }
     }
 
@@ -153,7 +126,7 @@ namespace MessengerBrowser
         {
             // If the url
 
-            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("facebook.com"))
+            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("facebook.com") || request.Url.ToString().Contains("devtools://devtools/devtools_app.html"))
             {
                 // Url except open in CefSharp's Chromium browser
                 return false;

@@ -6,9 +6,6 @@ using System.Threading;
 using System.Windows.Forms;
 using BlueformFramework;
 using System.Drawing;
-using System.Reflection;
-using System.Net;
-using System.IO;
 
 namespace MessengerBrowser
 {
@@ -156,8 +153,6 @@ namespace MessengerBrowser
 
         private void pnMess_Click(object sender, EventArgs e)
         {
-            Library.int_windows = 0;
-            painPanels(0, Color.DarkGray);
             changeBrowserControl(0, string.Empty);
         }
 
@@ -263,9 +258,8 @@ namespace MessengerBrowser
 
         private void pnFA_MouseClick(object sender, MouseEventArgs e)
         {
-            Library.int_windows = 1;
-            painPanels(1, Color.DarkGray);
-            changeBrowserControl(1, string.Empty);
+            if (Library.int_windows != 1)
+                changeBrowserControl(1, string.Empty);
         }
 
         private void pnPIP_Click(object sender, EventArgs e)
@@ -364,7 +358,6 @@ namespace MessengerBrowser
                 else
                 {
                     this.WindowState = (this.WindowState == FormWindowState.Normal) ? FormWindowState.Maximized : FormWindowState.Normal;
-
                 }
             }
         }
@@ -380,14 +373,12 @@ namespace MessengerBrowser
 
         private void defaultColorTabmenu()
         {
-            foreach (Form frm in Application.OpenForms)
-                if (frm is frmMain)
-                    foreach (Control crt in frm.Controls)
-                        if (crt is Panel)
-                            if (crt.Name == "pngrMSFA" || crt.Name == "pngrMSFA_1")
-                                foreach (Control crtc in crt.Controls)
-                                    if (crtc is Panel)
-                                        crtc.BackColor = Color.Transparent;
+            foreach (Control crt in this.Controls)
+                if (crt is Panel)
+                    if (crt.Name == "pngrMSFA" || crt.Name == "pngrMSFA_1")
+                        foreach (Control crtc in crt.Controls)
+                            if (crtc is Panel)
+                                crtc.BackColor = Color.Transparent;
         }
 
         public void PanelCanVisible() => PanelMain.Visible = true;
@@ -421,6 +412,10 @@ namespace MessengerBrowser
 
         public void balloonClicked()
         {
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             frmShow();
             Library.str_TextShow = string.Empty;
             Library.str_input_save = string.Empty;
@@ -464,6 +459,7 @@ namespace MessengerBrowser
             switch (int_inputNumIcon)
             {
                 case 0:
+                    Library.int_windows = 0;
                     Library.EndFace = false;
                     hidebrowser(frmface);
                     Library.str_url = string.Empty;
@@ -475,15 +471,15 @@ namespace MessengerBrowser
                         PanelMain.Controls.Add(frmmes);
                     });
                     frmmes.Show();
+                    painPanels(0, Color.DarkGray);
                     break;
                 case 1:
+                    Library.int_windows = 1;
                     hidebrowser(frmmes);
-
                     Library.str_url = str_url;
                     frmface.TopLevel = false;
                     frmface.Dock = DockStyle.Fill;
-                    //if (Library.is_FaceOpened)
-                    //{
+
                     if (this.InvokeRequired)
                     {
                         this.Invoke((MethodInvoker)delegate
@@ -529,6 +525,7 @@ namespace MessengerBrowser
                             frmface.Show();
                         }
                     }
+                    painPanels(1, Color.DarkGray);
                     break;
 
                 default:
@@ -599,7 +596,6 @@ namespace MessengerBrowser
         {
             tmrunPIP.Stop();
             Library.is_PIP = false;
-            //BlueformFrameworkUse.Hide(this, 10);
 
             PanelMain.Visible = false;
             Library.setZoomLeverMS(Library.dou_zoomvalueMS);
@@ -638,25 +634,30 @@ namespace MessengerBrowser
             });
             tmrunPIP.Start();
         }
-        int PENWIDTH = 0, PENHEIGHT = 0;
-        int PENX = 0, PENY = 0;
+
         public void previewPIPSize(int width, int height)
         {
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             if (!Library.is_PIP)
                 startPIP();
             this.Height = height;
             this.Width = width;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-            Library.PIPPanelWidth = PENWIDTH = PanelMain.Width;
-            Library.PIPPanelHeight = PENHEIGHT = PanelMain.Height;
+            Library.PIPPanelWidth = PanelMain.Width;
+            Library.PIPPanelHeight = PanelMain.Height;
             Library.PIPPanelLocation = PanelMain.Location;
-            PENX = PanelMain.Location.X;
-            PENY = PanelMain.Location.Y;
         }
 
 
         public void previewPIPPanelSize(int width, int height)
         {
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             if (!Library.is_PIP)
                 startPIP();
             PanelMain.Height = (PanelMain.Height - height);

@@ -3,11 +3,7 @@ using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MessengerBrowser
@@ -119,14 +115,13 @@ namespace MessengerBrowser
         {
             // If the url
 
-            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("messenger.com"))
+            if (!Properties.Settings.Default.FIsOutApplication || request.Url.ToString().Contains("messenger.com") || request.Url.ToString().Contains("devtools://devtools/devtools_app.html"))
             {
                 if (request.Url.ToString().Contains("facebook.com"))
                 {
                     // Open Google in Default browser 
                     Library.EndFace = true;
                     Library.changeBrowser(1, request.Url.ToString());
-                    Library.painPanels(1, Color.DarkGray);
                     browser.CloseBrowser(true);
                     Library.stopPIP();
                     return true;
@@ -187,23 +182,6 @@ namespace MessengerBrowser
 
         bool IKeyboardHandler.OnPreKeyEvent(IWebBrowser chromiumWebBrowser, IBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode, CefEventFlags modifiers, bool isSystemKey, ref bool isKeyboardShortcut)
         {
-            //MessageBox.Show(windowsKeyCode.ToString());
-
-            //if (Library.int_keyClick == 18 && windowsKeyCode == 88)
-            //{
-            //    if (!Library.is_visibleMain)
-            //    {
-            //        Library.is_visibleMain = true;
-            //        Library.visibleMain(false);
-            //    }
-            //    else
-            //    {
-            //        Library.is_visibleMain = false;
-            //        Library.visibleMain(false);
-            //    }
-            //}
-            //MessageBox.Show(windowsKeyCode.ToString());
-            //MessageBox.Show(windowsKeyCode.ToString());
             if (type == KeyType.RawKeyDown)
             {
                 if (windowsKeyCode == 116)
@@ -222,15 +200,11 @@ namespace MessengerBrowser
                     if (Library.int_windows == 0)
                     {
                         Library.sendHostKey(-2);
-                        Library.int_windows = 1;
-                        Library.painPanels(1, Color.DarkGray);
                         Library.changeBrowser(1, string.Empty);
                     }
                     else
                     {
                         Library.sendHostKey(-1);
-                        Library.int_windows = 0;
-                        Library.painPanels(0, Color.DarkGray);
                         Library.changeBrowser(0, string.Empty);
                     }
                 }
@@ -265,24 +239,16 @@ namespace MessengerBrowser
                 }
                 else if (Library.int_windows == 0)
                 {
-                    //MessageBox.Show(windowsKeyCode.ToString());
                     if (modifiers == CefEventFlags.AltDown)
                     {
                         if (windowsKeyCode == 80)
                         {
                             if (!Library.is_PIP)
                             {
-                                //Library.setZoomLever(-0.43);
-                                //Library.hideMain_PIP();
-                                //Library.frm.ShowDialog();
                                 Library.startPIP();
                             }
                             else
                             {
-                                //Library.showMain_PIP();
-                                //Library.frm.Close();
-                                //Library.frm = new frmPictureInPicture();
-                                //Library.setZoomLever(0);
                                 Library.stopPIP();
                             }
                             Library.sendHostKey(0);
@@ -356,7 +322,7 @@ namespace MessengerBrowser
             model.Remove(CefMenuCommand.ViewSource);
 
             //Add new custom menu items
-            model.AddItem((CefMenuCommand)ShowDevTools, "Show DevTools");
+            model.AddItem((CefMenuCommand)ShowDevTools, "Công cụ nhà phát triển");
             model.Remove((CefMenuCommand)S_TPIP);
             model.AddItem((CefMenuCommand)S_TPIP, (Library.is_PIP) ? "Close PIP" : "Start PIP");
             //model.AddItem((CefMenuCommand)ShowSetting, "Mở cài đặt");
@@ -398,28 +364,4 @@ namespace MessengerBrowser
             return false;
         }
     }
-
-    //    public class RenderProcessMessageHandler : IRenderProcessMessageHandler
-    //    {
-    //        public void OnContextReleased(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame)
-    //        {
-    //        }
-
-    //        public void OnFocusedNodeChanged(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IDomNode node)
-    //        {
-    //        }
-
-    //        public void OnUncaughtException(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, JavascriptException exception)
-    //        {
-    //        }
-
-    //        // Wait for the underlying JavaScript Context to be created. This is only called for the main frame.
-    //        // If the page has no JavaScript, no context will be created.
-    //        void IRenderProcessMessageHandler.OnContextCreated(IWebBrowser browserControl, IBrowser browser, IFrame frame)
-    //        {
-    //            const string script = "document.addEventListener('DOMContentLoaded', function(){ alert('DomLoaded'); });";
-
-    //            frame.ExecuteJavaScriptAsync(script);
-    //        }
-    //    }
 }

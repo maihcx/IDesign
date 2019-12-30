@@ -564,8 +564,15 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
-            "<Date: [27/12/2019] | [15:20]> //Vá lỗi//",
-            "</1.0.5.3/>",
+            "<Date: [30/12/2019] | [19:00]> //Vá lỗi - Thêm tính năng//",
+            "</1.0.5.5/>",
+            "   1) Sửa lỗi cài đặt khi còn ở Tab facebook.",
+            "   2) Tối ưu mã hệ thống.",
+            "   3) Đã thêm module hỗ trợ thêm tab cho sau này.",
+            "   4) Thêm tính năng nhà phát triển trên tab facebook.",
+            "   5) Fix lỗi out tab khi ấn vào deverlop tools ở tab messenger.",
+            "<Date: [28/12/2019] | [11:00]> //Vá lỗi//",
+            "</1.0.5.4/>",
             "   1) Thêm tính năng cho phép PIP bên dưới ứng dụng khác.",
             "   2) Tối ưu ram.",
             "   3) Thiết kế lại mã của tính năng PIP.",

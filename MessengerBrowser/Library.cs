@@ -6,14 +6,13 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.4";
+        internal static string systemversion = "1.0.5.5";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static int int_ChangeIconUrl = 0;
         internal static string str_url = "http://www.messenger.com";
         internal static bool EndFace = false;
         //internal static bool is_FaceOpened = false;
-        internal static int int_keyClick = 0;
         internal static bool is_PIP = false;
         internal static frmPictureInPicture frm = new frmPictureInPicture();
         internal static int int_formWidth = 0;
@@ -353,18 +352,6 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     ((frmMain)frm).SendHostKey(ihostkey);
-                    break;
-                }
-            }
-        }
-
-        public static void painPanels(int int_windows, Color colorOfPanelTab)
-        {
-            foreach (Form frm in Application.OpenForms)
-            {
-                if (frm is frmMain)
-                {
-                    ((frmMain)frm).painPanels(int_windows, colorOfPanelTab);
                     break;
                 }
             }

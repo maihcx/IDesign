@@ -163,7 +163,7 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
                     Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
                     Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
-                    Properties.Settings.Default.FEnableFA = cbFA.Checked;
+                    
                     Library.PIPWidth = trackWidth.Value;
                     Library.PIPHeight = trackHeight.Value;
                     this.Close();
@@ -193,6 +193,15 @@ namespace MessengerBrowser
                     {
                         //is_restartThread = true;
                         Library.RunTopMost(cbHead.Checked);
+                    }
+
+                    if (Properties.Settings.Default.FEnableFA != cbFA.Checked)
+                    {
+                        if (Library.int_windows != 1 && !cbFA.Checked)
+                        {
+                            Library.FacebookCefShutdow();
+                        }
+                        Properties.Settings.Default.FEnableFA = cbFA.Checked;
                     }
 
                     Properties.Settings.Default.FIsPIPTopMost = cbbPIPTopMost.Checked;

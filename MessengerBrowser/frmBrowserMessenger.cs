@@ -35,8 +35,6 @@ namespace MessengerBrowser
 
         public void load()
         {
-            Library.int_windows = 0;
-            Library.painPanels(0, System.Drawing.Color.DarkGray);
             new Thread(() =>
             {
                 if (this.InvokeRequired)
