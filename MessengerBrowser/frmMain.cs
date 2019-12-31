@@ -6,9 +6,6 @@ using System.Threading;
 using System.Windows.Forms;
 using BlueformFramework;
 using System.Drawing;
-using System.Reflection;
-using System.Net;
-using System.IO;
 
 namespace MessengerBrowser
 {
@@ -156,8 +153,6 @@ namespace MessengerBrowser
 
         private void pnMess_Click(object sender, EventArgs e)
         {
-            Library.int_windows = 0;
-            painPanels(0, Color.DarkGray);
             changeBrowserControl(0, string.Empty);
         }
 
@@ -263,9 +258,8 @@ namespace MessengerBrowser
 
         private void pnFA_MouseClick(object sender, MouseEventArgs e)
         {
-            Library.int_windows = 1;
-            painPanels(1, Color.DarkGray);
-            changeBrowserControl(1, string.Empty);
+            if (Library.int_windows != 1)
+                changeBrowserControl(1, string.Empty);
         }
 
         private void pnPIP_Click(object sender, EventArgs e)
@@ -364,7 +358,6 @@ namespace MessengerBrowser
                 else
                 {
                     this.WindowState = (this.WindowState == FormWindowState.Normal) ? FormWindowState.Maximized : FormWindowState.Normal;
-
                 }
             }
         }
@@ -380,20 +373,19 @@ namespace MessengerBrowser
 
         private void defaultColorTabmenu()
         {
-            foreach (Form frm in Application.OpenForms)
-                if (frm is frmMain)
-                    foreach (Control crt in frm.Controls)
-                        if (crt is Panel)
-                            if (crt.Name == "pngrMSFA" || crt.Name == "pngrMSFA_1")
-                                foreach (Control crtc in crt.Controls)
-                                    if (crtc is Panel)
-                                        crtc.BackColor = Color.Transparent;
+            foreach (Control crt in this.Controls)
+                if (crt is Panel)
+                    if (crt.Name == "pngrMSFA" || crt.Name == "pngrMSFA_1")
+                        foreach (Control crtc in crt.Controls)
+                            if (crtc is Panel)
+                                crtc.BackColor = Color.Transparent;
         }
 
         public void PanelCanVisible() => PanelMain.Visible = true;
 
         public void ShowOfHideMain()
         {
+
             if (checkTrue_False())
             {
                 frmShow();
@@ -420,6 +412,10 @@ namespace MessengerBrowser
 
         public void balloonClicked()
         {
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             frmShow();
             Library.str_TextShow = string.Empty;
             Library.str_input_save = string.Empty;
@@ -463,6 +459,7 @@ namespace MessengerBrowser
             switch (int_inputNumIcon)
             {
                 case 0:
+                    Library.int_windows = 0;
                     Library.EndFace = false;
                     hidebrowser(frmface);
                     Library.str_url = string.Empty;
@@ -474,15 +471,15 @@ namespace MessengerBrowser
                         PanelMain.Controls.Add(frmmes);
                     });
                     frmmes.Show();
+                    painPanels(0, Color.DarkGray);
                     break;
                 case 1:
+                    Library.int_windows = 1;
                     hidebrowser(frmmes);
-
                     Library.str_url = str_url;
                     frmface.TopLevel = false;
                     frmface.Dock = DockStyle.Fill;
-                    //if (Library.is_FaceOpened)
-                    //{
+
                     if (this.InvokeRequired)
                     {
                         this.Invoke((MethodInvoker)delegate
@@ -528,6 +525,7 @@ namespace MessengerBrowser
                             frmface.Show();
                         }
                     }
+                    painPanels(1, Color.DarkGray);
                     break;
 
                 default:
@@ -542,8 +540,6 @@ namespace MessengerBrowser
                 Properties.Settings.Default.FAutoPIP = !Properties.Settings.Default.FAutoPIP;
                 Properties.Settings.Default.Save();
 
-                //pnAutoPIP.BackgroundImage = (Properties.Settings.Default.FAutoPIP) ? Properties.Resources.done_red : Properties.Resources.done;
-
                 if (Properties.Settings.Default.FAutoPIP)
                 {
                     pnAutoPIP.BackgroundImage = Properties.Resources.done_red;
@@ -556,105 +552,114 @@ namespace MessengerBrowser
                 }
             }
         }
-
+        System.Windows.Forms.Timer tmrunPIP = new System.Windows.Forms.Timer();
         public void startPIP()
         {
+            //BlueformFrameworkUse.Hide(this, 10);
             if (WindowState == FormWindowState.Maximized)
             {
                 winstate = true;
                 this.WindowState = FormWindowState.Normal;
             }
+            PanelMain.Visible = false;
             Library.is_PIP = true;
             is_resize = false;
-            //BlueformFrameworkUse.Hide(this, 10);
-            BlueformFrameworkUse.Hide(this, 10);
-            //PanelMain.Visible = false;
-
             Library.setZoomLeverMS(-1.3);
+            showPanels(false);
             this.Width = Library.PIPWidth;
             this.Height = Library.PIPHeight;
-            showPanels(false);
-            //PanelMain.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             PanelMain.Width = Library.PIPPanelWidth; PanelMain.Height = Library.PIPPanelHeight;
-            PanelMain.Location = Properties.Settings.Default.FPIPPanelLocation;
-
-            Rectangle r = Screen.PrimaryScreen.WorkingArea;
             this.StartPosition = FormStartPosition.Manual;
+            this.TopMost = Properties.Settings.Default.FIsPIPTopMost;
+
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-            this.TopMost = true;
-            //Thread.Sleep(1000);
-            //BlueformFrameworkUse.Hide(this, 10);
-            //Thread.Sleep(100);
-            BlueformFrameworkUse.Show(this, 10);
-            //PanelMain.Visible = true;
+            PanelMain.Location = Properties.Settings.Default.FPIPPanelLocation;
+            this.Hide();
+            int i_run = 0;
+            tmrunPIP.Stop();
+            tmrunPIP = new System.Windows.Forms.Timer();
+            tmrunPIP.Interval = 200;
+            tmrunPIP.Tick += new EventHandler((object obj, EventArgs e) =>
+            {
+                i_run++;
+                if (i_run <= 1)
+                {
+                    tmrunPIP.Stop();
+                    PanelMain.Visible = true;
+                    BlueformFrameworkUse.Show(this, 10);
+                }
+            });
+            tmrunPIP.Start();
         }
 
         public void stopPIP()
         {
+            tmrunPIP.Stop();
             Library.is_PIP = false;
-            BlueformFrameworkUse.Hide(this, 10);
-            //Thread.Sleep(300);
+
+            PanelMain.Visible = false;
             Library.setZoomLeverMS(Library.dou_zoomvalueMS);
             this.Width = Library.int_formWidth;
             this.Height = Library.int_formHeight;
             showPanels(true);
-            //PanelMain.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
             PanelMain.Width = Library.int_controlWidth; PanelMain.Height = Library.int_controlHeight;
             PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
 
             this.Location = new Point(Library.int_formLocationX, Library.int_formLocationY);
             this.TopMost = Properties.Settings.Default.FIsShowTop;
             is_resize = true;
-            //Thread.Sleep(100);
-            BlueformFrameworkUse.Show(this, 10);
+
             Properties.Settings.Default.FPIP = false;
             Properties.Settings.Default.Save();
-
+            this.Hide();
             if (winstate)
             {
                 WindowState = FormWindowState.Maximized;
                 winstate = false;
             }
-            //this.Show();
 
+            int i_run = 0;
+            tmrunPIP.Stop();
+            tmrunPIP = new System.Windows.Forms.Timer();
+            tmrunPIP.Interval = 200;
+            tmrunPIP.Tick += new EventHandler((object obj, EventArgs e) =>
+            {
+                i_run++;
+                if (i_run <= 1)
+                {
+                    tmrunPIP.Stop();
+                    PanelMain.Visible = true;
+                    BlueformFrameworkUse.Show(this, 10);
+                }
+            });
+            tmrunPIP.Start();
         }
-        int PENWIDTH = 0, PENHEIGHT = 0;
-        int PENX = 0, PENY = 0;
+
         public void previewPIPSize(int width, int height)
         {
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             if (!Library.is_PIP)
                 startPIP();
             this.Height = height;
             this.Width = width;
-            //PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
-            //int x = Properties.Settings.Default.FPIPPanelLocation.X;
-            //int y = Properties.Settings.Default.FPIPPanelLocation.Y;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-            Library.PIPPanelWidth = PENWIDTH = PanelMain.Width;
-            Library.PIPPanelHeight = PENHEIGHT = PanelMain.Height;
+            Library.PIPPanelWidth = PanelMain.Width;
+            Library.PIPPanelHeight = PanelMain.Height;
             Library.PIPPanelLocation = PanelMain.Location;
-            PENX = PanelMain.Location.X;
-            PENY = PanelMain.Location.Y;
-            //PanelMain.Location = new System.Drawing.Point(x, y);
         }
 
 
         public void previewPIPPanelSize(int width, int height)
         {
-            //MessageBox.Show(PENX.ToString());
+            if (Library.int_windows != 0)
+            {
+                changeBrowserControl(0, string.Empty);
+            }
             if (!Library.is_PIP)
                 startPIP();
-            //Library.PIPPanelWidth = PanelMain.Width = width;
-            //Library.PIPPanelHeight = PanelMain.Height = height;
-            //PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
-            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-            //int int_WIDTH = (PENWIDTH == 0) ? Properties.Settings.Default.FPIPPanelWidth : PENWIDTH;
-            //int int_HEIGHT = (PENHEIGHT == 0) ? Properties.Settings.Default.FPIPPanelHeight : PENHEIGHT;
-            //int int_X = (PENX == 0) ? Library.PIPPanelLocation.X : PENX;
-            //int int_y = (PENY == 0) ? Library.PIPPanelLocation.Y : PENY;
-            //int x = Properties.Settings.Default.FPIPPanelLocation.X;
-            //int y = Properties.Settings.Default.FPIPPanelLocation.Y;
-            //MessageBox.Show((Library.PIPPanelHeight - (Library.PIPPanelHeight - height)).ToString());
             PanelMain.Height = (PanelMain.Height - height);
             PanelMain.Location = new Point(PanelMain.Location.X, PanelMain.Location.Y + ((Library.PIPPanelHeight - (Library.PIPPanelHeight - height))));
             Library.PIPPanelLocation = PanelMain.Location;
@@ -668,8 +673,6 @@ namespace MessengerBrowser
 
         public void SendHostKey(int icontrolkey)
         {
-            //if (icontrolkey != 0)
-            //{
             tm.Stop();
             KeysConverter converter = new KeysConverter();
             string str_key = converter.ConvertToString(icontrolkey);
@@ -677,7 +680,7 @@ namespace MessengerBrowser
             switch (icontrolkey)
             {
                 case -3:
-                    str_show = "Kích thước: " + (1 + ((Library.int_windows == 0) ? Library.dou_zoomvalueMS :Library.dou_zoomvalueFA)).ToString("#0.##%");
+                    str_show = "Kích thước: " + (1 + ((Library.int_windows == 0) ? Library.dou_zoomvalueMS : Library.dou_zoomvalueFA)).ToString("#0.##%");
                     break;
                 case -2:
                     str_show = "Jum Tab Facebook";
@@ -706,7 +709,6 @@ namespace MessengerBrowser
                 it++;
             });
             tm.Start();
-            //}
         }
 
         public void painPanels(int int_panelwindows, Color colorOfPanelTab)
@@ -782,6 +784,11 @@ namespace MessengerBrowser
                     }
                     break;
             }
+        }
+
+        public void focursMainForm()
+        {
+            this.Focus();
         }
     }
 }

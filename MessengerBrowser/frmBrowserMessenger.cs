@@ -1,15 +1,8 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
-using CefSharp.WinForms.Internals;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using MetroFramework;
 using System.Threading;
-using CefSharp.Internals;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using System.Reflection;
 using System.Net;
 using System.IO;
 
@@ -35,8 +28,6 @@ namespace MessengerBrowser
 
         public void load()
         {
-            Library.int_windows = 0;
-            Library.painPanels(0, System.Drawing.Color.DarkGray);
             new Thread(() =>
             {
                 if (this.InvokeRequired)
@@ -134,6 +125,7 @@ namespace MessengerBrowser
                         {
                             UpdateCheck();
                             is_firstStart = true;
+                            Library.focursMainForm();
                         }
                     }
                 }))
