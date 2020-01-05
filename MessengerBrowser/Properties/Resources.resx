@@ -121,6 +121,9 @@
   <data name="mac_ico_close2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mac_ico_close2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="kisspng-clip-art-computer-icons-portable-network-graphics-logout-log-out-exit-sign-out-svg-png-icon-free-dow-5b86e27565bb87.7232799915355664534167" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kisspng-clip-art-computer-icons-portable-network-graphics-logout-log-out-exit-sign-out-svg-png-icon-free-dow-5b86e27565bb87.7232799915355664534167.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="facebook-new1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\facebook-new1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,11 +136,14 @@
   <data name="done" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="done_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\done_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="messenger-app-icon-28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\messenger-app-icon-28.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mac_ico_close2_cv" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mac_ico_close2_cv.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="close_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="picture64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\picture64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mac_ico_close1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mac_ico_close1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,14 +154,11 @@
   <data name="bug-vector-png-1-300x200" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bug-vector-png-1-300x200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="messenger-app-icon-28" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\messenger-app-icon-28.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mac_ico_close2_cv" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mac_ico_close2_cv.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="kisspng-clip-art-computer-icons-portable-network-graphics-logout-log-out-exit-sign-out-svg-png-icon-free-dow-5b86e27565bb87.7232799915355664534167" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\kisspng-clip-art-computer-icons-portable-network-graphics-logout-log-out-exit-sign-out-svg-png-icon-free-dow-5b86e27565bb87.7232799915355664534167.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="close_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\close_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="done_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\done_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="error-close-ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\error-close-ico.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,7 +175,7 @@
   <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="picture64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\picture64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="messengerIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\messengerIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

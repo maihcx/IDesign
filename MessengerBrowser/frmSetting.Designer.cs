@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.theme = new MetroFramework.Controls.MetroTabPage();
+            this.cbMessenging = new MetroFramework.Controls.MetroCheckBox();
             this.cbbStyleWin = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroRadioButton3 = new MetroFramework.Controls.MetroRadioButton();
@@ -379,6 +380,7 @@
             // 
             // theme
             // 
+            this.theme.Controls.Add(this.cbMessenging);
             this.theme.Controls.Add(this.cbbStyleWin);
             this.theme.Controls.Add(this.metroLabel1);
             this.theme.Controls.Add(this.metroRadioButton3);
@@ -397,6 +399,17 @@
             this.theme.VerticalScrollbarBarColor = true;
             this.theme.VerticalScrollbarHighlightOnWheel = false;
             this.theme.VerticalScrollbarSize = 10;
+            // 
+            // cbMessenging
+            // 
+            this.cbMessenging.AutoSize = true;
+            this.cbMessenging.Location = new System.Drawing.Point(144, 122);
+            this.cbMessenging.Name = "cbMessenging";
+            this.cbMessenging.Size = new System.Drawing.Size(188, 15);
+            this.cbMessenging.TabIndex = 17;
+            this.cbMessenging.Text = "Cho phép sử dụng Messenging";
+            this.cbMessenging.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cbMessenging.UseSelectable = true;
             // 
             // cbbStyleWin
             // 
@@ -564,6 +577,12 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [5/1/2020] | [15:00]> //Thêm tính năng//",
+            "</1.0.5.6/>",
+            "   1) Thêm cửa sổ messenging: \"Khi đóng ứng dụng sẽ để lại biểu tượng messenger t" +
+                "rên màn hình\".",
+            "   2) Thêm tắt messenging khi kéo thả vào ô X.",
+            "   3) Thêm cho phép tắt mở messenging trong cài đặt - giao diện.",
             "<Date: [30/12/2019] | [19:00]> //Vá lỗi - Thêm tính năng//",
             "</1.0.5.5/>",
             "   1) Sửa lỗi cài đặt khi còn ở Tab facebook.",
@@ -743,5 +762,6 @@
         private MetroFramework.Controls.MetroComboBox cbbStyleWin;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroCheckBox cbbPIPTopMost;
+        private MetroFramework.Controls.MetroCheckBox cbMessenging;
     }
 }

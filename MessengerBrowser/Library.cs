@@ -6,9 +6,10 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.5";
+        internal static string systemversion = "1.0.5.6";
         internal static string str_inputTitle;
         internal static string str_TextShow;
+        internal static bool is_Messenging_Start = false;
         internal static int int_ChangeIconUrl = 0;
         internal static string str_url = "http://www.messenger.com";
         internal static bool EndFace = false;
@@ -448,6 +449,30 @@ namespace MessengerBrowser
                 {
                     ((frmMain)frm).focursMainForm();
                     break;
+                }
+            }
+        }
+
+        public static void Show_Hide_PoupupMessenging(bool isShow)
+        {
+            if (Properties.Settings.Default.FIsMessenging)
+            {
+                if (!is_Messenging_Start && isShow)
+                {
+                    frmpoupupMessenging frmpoupup = new frmpoupupMessenging();
+                    frmpoupup.Show();
+                }
+
+                foreach (Form frm in Application.OpenForms)
+                {
+                    if (frm is frmpoupupMessenging)
+                    {
+                        if (is_Messenging_Start)
+                        {
+                            ((frmpoupupMessenging)frm).Show_Hide(isShow);
+                        }
+                        break;
+                    }
                 }
             }
         }

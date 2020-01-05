@@ -81,6 +81,7 @@ namespace MessengerBrowser
             cbOutApplication.Checked = Properties.Settings.Default.FIsOutApplication;
             cbbStyleWin.SelectedIndex = Properties.Settings.Default.FIntWinStyle;
             cbbPIPTopMost.Checked = Properties.Settings.Default.FIsPIPTopMost;
+            cbMessenging.Checked = Properties.Settings.Default.FIsMessenging;
         }
 
         private void btnOKSystem_Click(object sender, EventArgs e)
@@ -163,7 +164,8 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FPIPPanelWidth = Library.PIPPanelWidth;
                     Properties.Settings.Default.FPIPPanelHeight = Library.PIPPanelHeight;
                     Properties.Settings.Default.FPIPPanelLocation = Library.PIPPanelLocation;
-                    
+                    Properties.Settings.Default.FIsMessenging = cbMessenging.Checked;
+
                     Library.PIPWidth = trackWidth.Value;
                     Library.PIPHeight = trackHeight.Value;
                     this.Close();
