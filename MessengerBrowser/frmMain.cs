@@ -214,6 +214,7 @@ namespace MessengerBrowser
             StateWindow = false;
             Library.is_openedwindows = false;
             Library.str_input_save = string.Empty;
+            Library.Show_Hide_PoupupMessenging(true);
         }
 
         private void frmShow()
@@ -225,6 +226,7 @@ namespace MessengerBrowser
             Library.str_TextShow = string.Empty;
             Library.str_input_save = string.Empty;
             Library.is_openedwindows = true;
+            Library.Show_Hide_PoupupMessenging(false);
         }
 
         private void frmClose()

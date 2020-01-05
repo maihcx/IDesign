@@ -274,5 +274,17 @@ namespace MessengerBrowser.Properties {
                 this["FIsPIPTopMost"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FIsMessenging {
+            get {
+                return ((bool)(this["FIsMessenging"]));
+            }
+            set {
+                this["FIsMessenging"] = value;
+            }
+        }
     }
 }
