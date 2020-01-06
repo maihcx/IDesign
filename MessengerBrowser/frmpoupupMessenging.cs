@@ -29,6 +29,16 @@ namespace MessengerBrowser
             if (ismove)
             {
                 pnPoupup.Location = new Point(pnPoupup.Location.X - (x - e.X), pnPoupup.Location.Y - (y - e.Y));
+                int pnx = pnPoupup.Location.X;
+                int pny = pnPoupup.Location.Y;
+                if (checkInZoneClosed(pnx, pny))
+                {
+                    pnClose.BackColor = Color.IndianRed;
+                }
+                else
+                {
+                    pnClose.BackColor = Color.White;
+                }
                 ismoveControls();
                 isfirsMove = true;
                 isMoveTrue = true;
@@ -43,20 +53,18 @@ namespace MessengerBrowser
             isfirsMove = false;
             if (isMoveTrue)
             {
-                if ((pnx >= ((this.Width / 2) - (pnClose.Width / 2)) - 40) &&
-                    (pnx <= ((this.Width / 2) + (pnClose.Width / 2)) - 40) &&
-                    (pny >= this.Height - pnClose.Height - 40))
+                if (checkInZoneClosed(pnx, pny))
                 {
                     this.Hide();
                     pnPoupup.Location = new Point(12, 12);
                 }
                 else
                 {
-                    pnPoupup.Location = new Point((pnx < 12) ? 12 : 
-                        (pnx < this.Width / 2) ? 12 : 
+                    pnPoupup.Location = new Point((pnx < 12) ? 12 :
+                        (pnx < this.Width / 2) ? 12 :
                         (pnx > this.Width / 2) ? (this.Width - pnPoupup.Width - 12) : pnx,
-                        (pny < 12) ? 12 : (pny > (this.Height - pnPoupup.Height - 12)) ? 
-                        (this.Height - pnPoupup.Height - 12) : pny);
+                        (pny < 12) ? 12 : 
+                        (pny > (this.Height - pnPoupup.Height - 12)) ? (this.Height - pnPoupup.Height - 12) : pny);
                 }
                 ismoveControls();
             }
@@ -94,7 +102,7 @@ namespace MessengerBrowser
                     //tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                     //{
                     //    tmwait.Stop();
-                        this.Opacity = 0.7;
+                    this.Opacity = 0.7;
                     //});
                     //tmwait.Start();
                 }
@@ -109,8 +117,8 @@ namespace MessengerBrowser
                 //tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                 //{
                 //    tmwait.Stop();
-                    this.BackColor = SystemColors.ActiveCaption;
-                    this.Opacity = 1;
+                //this.BackColor = SystemColors.ActiveCaption;
+                this.Opacity = 1;
                 //    this.Show();
                 //});
                 //tmwait.Start();
@@ -119,6 +127,13 @@ namespace MessengerBrowser
 
         private void frmpoupupMessenging_Load(object sender, EventArgs e)
         {
+            int widthForm = Screen.PrimaryScreen.Bounds.Width;
+            int heightForm = Screen.PrimaryScreen.Bounds.Height - 40;
+
+            this.Width = widthForm;
+            this.Height = heightForm;
+
+            this.Location = new Point(0, 0);
             Library.is_Messenging_Start = true;
             pnClose.Location = new Point((this.Width / 2) - (pnClose.Width / 2), this.Height - pnClose.Height - 12);
         }
@@ -133,6 +148,17 @@ namespace MessengerBrowser
             {
                 this.Hide();
             }
+        }
+
+        private bool checkInZoneClosed(int x, int y)
+        {
+            if ((x >= ((this.Width / 2) - (pnClose.Width / 2)) - 25) &&
+                        (x <= ((this.Width / 2) + (pnClose.Width / 2)) - 30) &&
+                        (y >= this.Height - pnClose.Height - 12))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
