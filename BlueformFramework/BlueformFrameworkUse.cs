@@ -67,6 +67,35 @@ namespace BlueformFramework
             timego.Start();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="frm">Your Form</param>
+        /// <param name="valueInterval">Interval Of time</param>
+        public static void FormBlure(Form frm, int valueInterval)
+        {
+            frm.Show();
+            Stop();
+            double value = 1;
+            double valuePlus = value / valueInterval;
+            double valueUse = 1;
+            timego = new Timer();
+            timego.Enabled = true;
+            timego.Interval = 1;
+            timego.Tick += new EventHandler((object sender, EventArgs e) =>
+            {
+                valueUse -= valuePlus;
+                frm.Opacity = valueUse;
+
+                if (valueUse <= 0)
+                {
+                    timego.Stop();
+                    frm.Opacity = 1;
+                }
+            });
+            timego.Start();
+        }
+
         //public static void End(Form frm, int valueInterval)
         //{
         //    System.Threading.Thread th = new System.Threading.Thread(() =>
