@@ -469,10 +469,22 @@ namespace MessengerBrowser
                     {
                         if (is_Messenging_Start)
                         {
-                            ((frmpoupupMessenging)frm).Show_Hide(isShow);
+                            ((frmpoupupMessenging)frm).Show_Close(isShow);
                         }
                         break;
                     }
+                }
+            }
+        }
+
+        public static void endAero()
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).endAero();
+                    break;
                 }
             }
         }

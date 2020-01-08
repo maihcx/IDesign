@@ -116,6 +116,7 @@ namespace MessengerBrowser
                 }
                 Library.endLoading();
                 Library.BrowserVisible();
+                Library.endAero();
 
                 new Thread(new ThreadStart(() =>
                 {

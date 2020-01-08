@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BlueformFramework;
 using System.Drawing;
+using AeroLibrary;
 
 namespace MessengerBrowser
 {
@@ -35,6 +36,7 @@ namespace MessengerBrowser
         bool is_resize = true;
         frmBrowserMessenger frmmes = new frmBrowserMessenger();
         frmBrowserFacebook frmface = new frmBrowserFacebook();
+        Form frmBlueGone = new Form();
         System.Windows.Forms.Timer tm = new System.Windows.Forms.Timer();
         bool winstate = false;
         bool isEndProcess = false;
@@ -44,6 +46,16 @@ namespace MessengerBrowser
             checkIntStyleWinform();
             //Properties.Settings.Default.Reset();
             SaveSettingForm.IntializeForm(this);
+
+            frmBlueGone.BackColor = frmBlueGone.TransparencyKey = Color.Gainsboro;
+            frmBlueGone.TopMost = true;
+            frmBlueGone.StartPosition = FormStartPosition.Manual;
+            frmBlueGone.FormBorderStyle = FormBorderStyle.None;
+            //frmBlueGone.Size = this.Size;
+            //frmBlueGone.Location = new Point(120, 12);
+            Aero.EnableAcrylic(frmBlueGone, Color.Transparent);
+            SaveSettingForm.IntializeForm(frmBlueGone);
+            frmBlueGone.Show();
 
             //pnAutoPIP.BackgroundImage = (Properties.Settings.Default.FAutoPIP) ? Properties.Resources.done_red : Properties.Resources.done;
             if (Properties.Settings.Default.FAutoPIP)
@@ -321,6 +333,7 @@ namespace MessengerBrowser
                 Library.int_formLocationX = this.Location.X;
                 Library.int_formLocationY = this.Location.Y;
             }
+            frmBlueGone.Location = this.Location;
         }
 
         private void pnClose_MouseHover(object sender, EventArgs e)
@@ -791,6 +804,11 @@ namespace MessengerBrowser
         public void focursMainForm()
         {
             this.Focus();
+        }
+
+        public void endAero()
+        {
+            Aero.DisabledAcrylic(frmBlueGone);
         }
     }
 }
