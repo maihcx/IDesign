@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using AeroLibrary;
 
 namespace MessengerBrowser
 {
@@ -17,7 +18,8 @@ namespace MessengerBrowser
         bool ismove = false;
         bool isfirsMove = false;
         bool isMoveTrue = false;
-        Point locationFormPoupup;
+        bool isClosetForm = false;
+        //Point locationFormPoupup;
         System.Windows.Forms.Timer tmwait = new System.Windows.Forms.Timer();
 
         //protected override void OnPaintBackground(PaintEventArgs e)
@@ -55,7 +57,7 @@ namespace MessengerBrowser
                 isfirsMove = true;
                 isMoveTrue = true;
 
-                WindowUtils.EnableAcrylic(this, Color.Transparent);
+                Aero.EnableAcrylic(this, Color.Transparent);
             }
         }
 
@@ -69,21 +71,23 @@ namespace MessengerBrowser
             {
                 if (checkInZoneClosed(pnx, pny))
                 {
-                    Show_Hide(false);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        new Thread(() => { pnPoupup.Location = locationFormPoupup; }) { IsBackground = true }.Start();
-                    });
+                    isClosetForm = true;
+                    //this.Invoke((MethodInvoker)delegate
+                    //{
+                    //    new Thread(() => { pnPoupup.Location = locationFormPoupup; }) { IsBackground = true }.Start();
+                    //});
                 }
                 else
                 {
                     pnPoupup.Location = new Point((pnx < 12) ? 12 :
                         (pnx < this.Width / 2) ? 12 :
                         (pnx > this.Width / 2) ? (this.Width - pnPoupup.Width - 12) : pnx,
-                        (pny < 12) ? 12 : 
+                        (pny < 12) ? 12 :
                         (pny > (this.Height - pnPoupup.Height - 12)) ? (this.Height - pnPoupup.Height - 12) : pny);
 
-                    locationFormPoupup = pnPoupup.Location;
+                    //locationFormPoupup = pnPoupup.Location;
+                    Properties.Settings.Default.FLocationMessenging = pnPoupup.Location;
+                    Properties.Settings.Default.Save();
                 }
                 ismoveControls();
             }
@@ -91,12 +95,13 @@ namespace MessengerBrowser
             {
                 if (!Library.is_openedwindows)
                 {
-                    Show_Hide(false);
+                    Library.ShowOrHideForm();
+                    Show_Close(false);
                 }
             }
             isMoveTrue = false;
 
-            
+
 
             //this.BackColor = Color.Gainsboro;
             //this.TransparencyKey = Color.Gainsboro;
@@ -117,19 +122,7 @@ namespace MessengerBrowser
                 if (!isfirsMove)
                 {
                     pnClose.Visible = true;
-                    BlueformFrameworkUse.Show(this, 15);
-                    //this.BackColor = Color.White;
-                    //this.Opacity = 0;
-                    //BlueformFrameworkUse.Show(this, 10);
-                    //tmwait.Stop();
-                    //tmwait = new Timer();
-                    //tmwait.Interval = 200;
-                    //tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
-                    //{
-                    //    tmwait.Stop();
-                    //this.Opacity = 0.7;
-                    //});
-                    //tmwait.Start();
+                    BlueformFrameworkUse.FormNormal(this, 15);
                 }
             }
             else
@@ -141,8 +134,14 @@ namespace MessengerBrowser
                 tmwait.Interval = 170;
                 tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                 {
-                    WindowUtils.DisabledAcrylic(this);
-                    tmwait.Stop();
+                    tmwait.Stop(); 
+                    Aero.DisabledAcrylic(this);
+                    if (isClosetForm)
+                    {
+                        tmwait.Stop();
+                        Show_Close(false);
+
+                    }
                 });
                 tmwait.Start();
             }
@@ -151,7 +150,7 @@ namespace MessengerBrowser
         private void frmpoupupMessenging_Load(object sender, EventArgs e)
         {
             int widthForm = Screen.PrimaryScreen.Bounds.Width;
-            int heightForm = Screen.PrimaryScreen.Bounds.Height - 40;
+            int heightForm = Screen.PrimaryScreen.Bounds.Height - 1;
 
             this.Width = widthForm;
             this.Height = heightForm;
@@ -162,14 +161,14 @@ namespace MessengerBrowser
             pnPoupup.Location = Properties.Settings.Default.FLocationMessenging;
             pnClose.Location = new Point((this.Width / 2) - (pnClose.Width / 2), this.Height - pnClose.Height - 12);
 
-            locationFormPoupup = pnPoupup.Location;
+            //locationFormPoupup = pnPoupup.Location;
         }
 
         /// <summary>
         /// Set Form Messenging is Show or Hide
         /// </summary>
         /// <param name="isShow">True = Show</param>
-        public void Show_Hide(bool isShow)
+        public void Show_Close(bool isShow)
         {
             if (isShow)
             {
@@ -177,9 +176,9 @@ namespace MessengerBrowser
             }
             else
             {
-                Properties.Settings.Default.FLocationMessenging = this.Location;
-                Properties.Settings.Default.Save();
-                this.Hide();
+                this.Dispose();
+                GC.Collect();
+                Library.is_Messenging_Start = false;
             }
         }
 

@@ -217,7 +217,6 @@
     </Compile>
     <Compile Include="runApplication.cs" />
     <Compile Include="SaveSettingForm.cs" />
-    <Compile Include="WindowUtils.cs" />
     <EmbeddedResource Include="frmBrowserMessenger.resx">
       <DependentUpon>frmBrowserMessenger.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +295,10 @@
     <None Include="Resources\rest.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AeroLibrary\AeroLibrary.csproj">
+      <Project>{761c16ae-85a9-468f-abad-9fbe8d018195}</Project>
+      <Name>AeroLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueformFramework\BlueformFramework.csproj">
       <Project>{6b0403f9-9ed1-4006-88de-b300ce38d741}</Project>
       <Name>BlueformFramework</Name>
