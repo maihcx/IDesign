@@ -33,7 +33,8 @@ namespace BlueformFramework
             timego_show.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse += valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse >= value)
                     timego_show.Stop();
@@ -62,7 +63,8 @@ namespace BlueformFramework
             timego_hide.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse -= valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse <= 0)
                 {
@@ -92,7 +94,8 @@ namespace BlueformFramework
             timego_normal.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse += valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse >= value)
                     timego_normal.Stop();
@@ -117,7 +120,8 @@ namespace BlueformFramework
             timego_blure.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse -= valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse <= 0)
                 {
@@ -146,7 +150,8 @@ namespace BlueformFramework
             timego_close.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse -= valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse <= 0)
                 {
@@ -175,7 +180,8 @@ namespace BlueformFramework
             timego_dispose.Tick += new EventHandler((object sender, EventArgs e) =>
             {
                 valueUse -= valuePlus;
-                ChangeOpacity(frm, valueUse);
+                //ChangeOpacity(frm, valueUse);
+                frm.Opacity = valueUse;
 
                 if (valueUse <= 0)
                 {
@@ -187,28 +193,28 @@ namespace BlueformFramework
         }
 
         private delegate void ChangeOpacityDelegate(Form frm,double value);
-        private static void ChangeOpacity(Form frm, double value)
-        {
-            try
-            {
-                if (frm.InvokeRequired)
-                {
-                    ChangeOpacityDelegate del = new ChangeOpacityDelegate(ChangeOpacity);
-                    object[] parameters = { value };
+        //private static void ChangeOpacity(Form frm, double value)
+        //{
+        //    try
+        //    {
+        //        if (frm.InvokeRequired)
+        //        {
+        //            ChangeOpacityDelegate del = new ChangeOpacityDelegate(ChangeOpacity);
+        //            object[] parameters = { value };
 
-                    frm.Invoke(del, value);
-                }
-                else
-                {
-                    //Your code goes here, in this case:
-                    frm.Opacity = value;
-                }
-            }
-            catch
-            {
-                frm.Opacity = value;
-            }
-        }
+        //            frm.Invoke(del, value);
+        //        }
+        //        else
+        //        {
+        //            //Your code goes here, in this case:
+        //            frm.Opacity = value;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        frm.Opacity = value;
+        //    }
+        //}
 
         //public static void End(Form frm, int valueInterval)
         //{
