@@ -290,6 +290,8 @@
     <None Include="Resources\messengerIcon1.png" />
     <None Include="Resources\messengerImg40x40.png" />
     <None Include="Resources\messengerIcon40x40.png" />
+    <None Include="Resources\messengerIconfix.png" />
+    <None Include="Resources\messengerIconfixResize.png" />
     <Content Include="TextTemplate.ico" />
     <None Include="Resources\messenger-app-icon-28.jpg" />
     <None Include="Resources\rest.png" />

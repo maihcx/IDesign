@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using AeroLibrary;
+using System.Drawing.Drawing2D;
 
 namespace MessengerBrowser
 {
@@ -19,6 +20,8 @@ namespace MessengerBrowser
         bool isfirsMove = false;
         bool isMoveTrue = false;
         bool isClosetForm = false;
+        centreeControls pnPoupup = new centreeControls();
+        centreeControls pnClose = new centreeControls();
         //Point locationFormPoupup;
         System.Windows.Forms.Timer tmwait = new System.Windows.Forms.Timer();
 
@@ -134,7 +137,7 @@ namespace MessengerBrowser
                 tmwait.Interval = 170;
                 tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                 {
-                    tmwait.Stop(); 
+                    tmwait.Stop();
                     Aero.DisabledAcrylic(this);
                     if (isClosetForm)
                     {
@@ -158,9 +161,22 @@ namespace MessengerBrowser
             this.Location = new Point(0, 0);
             Library.is_Messenging_Start = true;
 
-            pnPoupup.Location = Properties.Settings.Default.FLocationMessenging;
-            pnClose.Location = new Point((this.Width / 2) - (pnClose.Width / 2), this.Height - pnClose.Height - 12);
 
+            pnClose.Location = new Point((this.Width / 2) - 35, this.Height - pnClose.Height + 12);
+
+            pnPoupup.PropertiesPanel();
+            pnPoupup.Location = Properties.Settings.Default.FLocationMessenging;
+            pnPoupup.MouseDown += new MouseEventHandler(pnPoupup_MouseDown);
+            pnPoupup.MouseMove += new MouseEventHandler(pnPoupup_MouseMove);
+            pnPoupup.MouseUp += new MouseEventHandler(pnPoupup_MouseUp);
+
+            pnClose.PropertiesPanelClose();
+            pnClose.BackColor = Color.White;
+            pnClose.Visible = false;
+
+            this.Controls.Add(pnPoupup);
+            this.Controls.Add(pnClose);
+            pnPoupup.BringToFront();
             //locationFormPoupup = pnPoupup.Location;
         }
 
@@ -170,27 +186,92 @@ namespace MessengerBrowser
         /// <param name="isShow">True = Show</param>
         public void Show_Close(bool isShow)
         {
-            if (isShow)
+            if (this.InvokeRequired)
             {
-                this.Show();
+                this.Invoke((MethodInvoker)delegate
+                {
+                    if (isShow)
+                    {
+                        this.Show();
+                    }
+                    else
+                    {
+                        this.Dispose();
+                        GC.Collect();
+                        Library.is_Messenging_Start = false;
+                    }
+                });
             }
             else
             {
-                this.Dispose();
-                GC.Collect();
-                Library.is_Messenging_Start = false;
+                if (isShow)
+                {
+                    this.Show();
+                }
+                else
+                {
+                    this.Dispose();
+                    GC.Collect();
+                    Library.is_Messenging_Start = false;
+                }
             }
+        }
+
+        private void frmpoupupMessenging_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("XX");
         }
 
         private bool checkInZoneClosed(int x, int y)
         {
             if ((x >= ((this.Width / 2) - (pnClose.Width / 2)) - 25) &&
                         (x <= ((this.Width / 2) + (pnClose.Width / 2)) - 30) &&
-                        (y >= this.Height - pnClose.Height - 12))
+                        (y >= this.Height - pnClose.Height - 35))
             {
                 return true;
             }
             return false;
         }
     }
+    class centreeControls : Panel
+    {
+        public void PropertiesPanel()
+        {
+            //base.Text = value.ToString();
+            this.ForeColor = Color.White; //màu chữ
+            //this.TextAlign = ContentAlignment.MiddleCenter; //canh vị trí label
+            this.BackColor = Color.White; //màu nền
+            this.Size = new Size(59, 58);//Kích thước của khung chứa text
+            //this.FlatStyle = FlatStyle.Flat;
+            this.AutoSize = false;
+            this.BackgroundImage = Properties.Resources.messengerIconfixResize;
+            this.BackgroundImageLayout = ImageLayout.Center;
+            //this.Height += 10;
+            //this.Width += 10;
+
+            GraphicsPath p = new GraphicsPath(); //Khởi tạo GraphicsPath
+            p.AddEllipse(0, 0, 59, 58); //Add hình elip vào GraphicsPath
+            this.Region = new Region(p); //Tạo region cho label theo elip vừa add
+            p.Dispose();
+        }
+
+        public void PropertiesPanelClose()
+        {
+            //base.Text = value.ToString();
+            this.ForeColor = Color.White; //màu chữ
+            //this.TextAlign = ContentAlignment.MiddleCenter; //canh vị trí label
+            this.BackColor = Color.White; //màu nền
+            this.Size = new Size(70, 68);//Kích thước của khung chứa text
+            //this.FlatStyle = FlatStyle.Flat;
+            this.AutoSize = false;
+            //this.Height += 10;
+            //this.Width += 10;
+
+            GraphicsPath p = new GraphicsPath(); //Khởi tạo GraphicsPath
+            p.AddEllipse(0, 0, 70, 68); //Add hình elip vào GraphicsPath
+            this.Region = new Region(p); //Tạo region cho label theo elip vừa add
+            p.Dispose();
+        }
+    }
 }
+

@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmpoupupMessenging));
-            this.pnClose = new System.Windows.Forms.Panel();
+            this.pnPoupup1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnPoupup = new System.Windows.Forms.Panel();
-            this.pnClose.SuspendLayout();
+            this.pnClose1 = new System.Windows.Forms.Panel();
+            this.pnClose1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnClose
+            // pnPoupup1
             // 
-            this.pnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnClose.BackColor = System.Drawing.Color.White;
-            this.pnClose.Controls.Add(this.label1);
-            this.pnClose.Location = new System.Drawing.Point(254, 242);
-            this.pnClose.Name = "pnClose";
-            this.pnClose.Size = new System.Drawing.Size(72, 63);
-            this.pnClose.TabIndex = 1;
-            this.pnClose.Visible = false;
+            this.pnPoupup1.BackColor = System.Drawing.Color.White;
+            this.pnPoupup1.BackgroundImage = global::MessengerBrowser.Properties.Resources.messengerIcon40x40;
+            this.pnPoupup1.Location = new System.Drawing.Point(12, 12);
+            this.pnPoupup1.Name = "pnPoupup1";
+            this.pnPoupup1.Size = new System.Drawing.Size(50, 48);
+            this.pnPoupup1.TabIndex = 0;
+            this.pnPoupup1.Visible = false;
+            this.pnPoupup1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseDown);
+            this.pnPoupup1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseMove);
+            this.pnPoupup1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseUp);
             // 
             // label1
             // 
@@ -57,18 +59,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "X";
             // 
-            // pnPoupup
+            // pnClose1
             // 
-            this.pnPoupup.BackColor = System.Drawing.Color.White;
-            this.pnPoupup.BackgroundImage = global::MessengerBrowser.Properties.Resources.messengerIcon40x40;
-            this.pnPoupup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pnPoupup.Location = new System.Drawing.Point(12, 12);
-            this.pnPoupup.Name = "pnPoupup";
-            this.pnPoupup.Size = new System.Drawing.Size(50, 48);
-            this.pnPoupup.TabIndex = 0;
-            this.pnPoupup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseDown);
-            this.pnPoupup.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseMove);
-            this.pnPoupup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnPoupup_MouseUp);
+            this.pnClose1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnClose1.BackColor = System.Drawing.Color.White;
+            this.pnClose1.Controls.Add(this.label1);
+            this.pnClose1.Location = new System.Drawing.Point(254, 242);
+            this.pnClose1.Name = "pnClose1";
+            this.pnClose1.Size = new System.Drawing.Size(72, 63);
+            this.pnClose1.TabIndex = 1;
+            this.pnClose1.Visible = false;
             // 
             // frmpoupupMessenging
             // 
@@ -76,8 +76,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(565, 317);
-            this.Controls.Add(this.pnPoupup);
-            this.Controls.Add(this.pnClose);
+            this.Controls.Add(this.pnPoupup1);
+            this.Controls.Add(this.pnClose1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -88,16 +88,17 @@
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Gainsboro;
             this.Load += new System.EventHandler(this.frmpoupupMessenging_Load);
-            this.pnClose.ResumeLayout(false);
-            this.pnClose.PerformLayout();
+            this.Click += new System.EventHandler(this.frmpoupupMessenging_Click);
+            this.pnClose1.ResumeLayout(false);
+            this.pnClose1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnPoupup;
-        private System.Windows.Forms.Panel pnClose;
+        private System.Windows.Forms.Panel pnPoupup1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnClose1;
     }
 }

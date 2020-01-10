@@ -254,6 +254,26 @@ namespace MessengerBrowser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap messengerIconfix {
+            get {
+                object obj = ResourceManager.GetObject("messengerIconfix", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap messengerIconfixResize {
+            get {
+                object obj = ResourceManager.GetObject("messengerIconfixResize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap messengerImg40x40 {
             get {
                 object obj = ResourceManager.GetObject("messengerImg40x40", resourceCulture);
