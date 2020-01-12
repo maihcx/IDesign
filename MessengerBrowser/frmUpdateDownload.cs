@@ -46,8 +46,6 @@ namespace MessengerBrowser
                     StreamReader srdUpdate = new StreamReader(wrpUpdate.GetResponseStream());
                     Thread.Sleep(300);
 
-                    Thread.Sleep(350);
-
                     string response = srdUpdate.ReadToEnd();
                     var reponseStr = response.Split('\n');
                     string newver = reponseStr[0].Trim();
@@ -88,7 +86,7 @@ namespace MessengerBrowser
                     else
                     {
                         progressWork.Value += 20;
-                        lblstatus.Text = "Your Application is release\nYour version: " + thisver;
+                        lblstatus.Text = "Your Application is Update \nYour version: " + thisver;
                     }
                     Application.ExitThread();
                 }

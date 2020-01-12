@@ -6,7 +6,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.6";
+        internal static string systemversion = "1.0.5.7";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static bool is_Messenging_Start = false;

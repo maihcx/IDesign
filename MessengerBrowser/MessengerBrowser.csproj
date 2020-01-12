@@ -301,9 +301,9 @@
       <Project>{761c16ae-85a9-468f-abad-9fbe8d018195}</Project>
       <Name>AeroLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueformFramework\BlueformFramework.csproj">
-      <Project>{6b0403f9-9ed1-4006-88de-b300ce38d741}</Project>
-      <Name>BlueformFramework</Name>
+    <ProjectReference Include="..\BlueformFrameworV1\BlueformFrameworkV1.csproj">
+      <Project>{ebf66802-00e5-406c-ab8d-adcab3112fc3}</Project>
+      <Name>BlueformFrameworkV1</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
