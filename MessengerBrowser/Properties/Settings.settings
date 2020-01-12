@@ -71,5 +71,8 @@
     <Setting Name="FLocationMessenging" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">12, 12</Value>
     </Setting>
+    <Setting Name="FColorControls" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Gainsboro</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

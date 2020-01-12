@@ -60,7 +60,7 @@ namespace MessengerBrowser
                 isfirsMove = true;
                 isMoveTrue = true;
 
-                Aero.EnableAcrylic(this, Color.Transparent);
+                Aero.EnableAcrylic(blureForm.frmBlueGone, Color.Transparent);
             }
         }
 
@@ -82,12 +82,34 @@ namespace MessengerBrowser
                 }
                 else
                 {
-                    pnPoupup.Location = new Point((pnx < 12) ? 12 :
-                        (pnx < this.Width / 2) ? 12 :
-                        (pnx > this.Width / 2) ? (this.Width - pnPoupup.Width - 12) : pnx,
-                        (pny < 12) ? 12 :
-                        (pny > (this.Height - pnPoupup.Height - 12)) ? (this.Height - pnPoupup.Height - 12) : pny);
+                    //pnPoupup.Location = new Point((pnx < 12) ? 12 :
+                    //    (pnx < this.Width / 2) ? 12 :
+                    //    (pnx > this.Width / 2) ? (this.Width - pnPoupup.Width - 12) : pnx,
+                    //    (pny < 12) ? 12 :
+                    //    (pny > (this.Height - pnPoupup.Height - 12)) ? (this.Height - pnPoupup.Height - 12) : pny);
 
+                    int int_x = pnx, int_y = pny;
+
+                    if (pnx < 12 || pnx < this.Width / 2)
+                    {
+                        int_x = 12;
+                    }
+                    else if (pnx > this.Width / 2)
+                    {
+                        int_x = this.Width - pnPoupup.Width - 12;
+                    }
+
+                    if (pny < 12)
+                    {
+                        int_y = 12;
+                    }
+                    else if (pny > this.Height - pnPoupup.Height - 12)
+                    {
+                        int_y = this.Height - pnPoupup.Height - 12;
+                    }
+
+                    MovePanelPoupup(new Point(int_x, int_y));
+                    //pnPoupup.Location = new Point(int_x, int_y);
                     //locationFormPoupup = pnPoupup.Location;
                     Properties.Settings.Default.FLocationMessenging = pnPoupup.Location;
                     Properties.Settings.Default.Save();
@@ -125,25 +147,25 @@ namespace MessengerBrowser
                 if (!isfirsMove)
                 {
                     pnClose.Visible = true;
-                    BlueformFrameworkUse.FormNormal(this, 15);
+                    BlueformFrameworkUse.FormNormal(blureForm.frmBlueGone, 15);
                 }
             }
             else
             {
                 pnClose.Visible = false;
-                BlueformFrameworkUse.FormBlure(this, 10);
+                BlueformFrameworkUse.FormBlure(blureForm.frmBlueGone, 10);
                 tmwait.Stop();
                 tmwait = new System.Windows.Forms.Timer();
                 tmwait.Interval = 170;
                 tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                 {
                     tmwait.Stop();
-                    Aero.DisabledAcrylic(this);
+                    Aero.DisabledAcrylic(blureForm.frmBlueGone);
                     if (isClosetForm)
                     {
                         tmwait.Stop();
                         Show_Close(false);
-
+                        blureForm.DisponseForm();
                     }
                 });
                 tmwait.Start();
@@ -161,8 +183,10 @@ namespace MessengerBrowser
             this.Location = new Point(0, 0);
             Library.is_Messenging_Start = true;
 
-
-            pnClose.Location = new Point((this.Width / 2) - 35, this.Height - pnClose.Height + 12);
+            blureForm.SetSize = this.Size;
+            blureForm.SetLocations = this.Location;
+            blureForm.Intialization();
+            this.Focus();
 
             pnPoupup.PropertiesPanel();
             pnPoupup.Location = Properties.Settings.Default.FLocationMessenging;
@@ -176,6 +200,8 @@ namespace MessengerBrowser
 
             this.Controls.Add(pnPoupup);
             this.Controls.Add(pnClose);
+
+            pnClose.Location = new Point((this.Width / 2) - (pnClose.Width / 2), this.Height - pnClose.Height - 12);
             pnPoupup.BringToFront();
             //locationFormPoupup = pnPoupup.Location;
         }
@@ -219,7 +245,21 @@ namespace MessengerBrowser
 
         private void frmpoupupMessenging_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("XX");
+            if (Properties.Settings.Default.FColorControls == Color.Gainsboro)
+            {
+                Properties.Settings.Default.FColorControls = Color.White;
+                this.BackColor = Color.White;
+                this.TransparencyKey = Color.White;
+                MessageBox.Show("Hệ thống gặp vấn đề về tương thích với Messenging, phần mềm đang cấu hình cài đặt khác !", "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Hệ thống không tương thích với Messenging, sẽ tắt Messenging !", "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Properties.Settings.Default.FIsMessenging = false;
+            }
+            Properties.Settings.Default.Save();
+            this.Dispose();
+            Library.is_Messenging_Start = true;
         }
 
         private bool checkInZoneClosed(int x, int y)
@@ -231,6 +271,50 @@ namespace MessengerBrowser
                 return true;
             }
             return false;
+        }
+
+        private void MovePanelPoupup(Point Locations)
+        {
+            int pnx = Locations.X, pny = Locations.Y;
+            int pn_x = pnPoupup.Location.X, pn_y = pnPoupup.Location.Y;
+            Point locations = new Point(pnx, pny);
+
+            new Thread(() =>
+            {
+                if (Math.Abs(pnx - pn_x) <= 40)
+                {
+                    pnPoupup.Location = new Point(pnx, pny);
+                }
+                else
+                {
+                    if (pnx - pn_x > 0)
+                        for (int i = pn_x; i <= pnx; i += 40)
+                        {
+                            pnPoupup.Location = new Point(i, pny);
+                            Thread.Sleep(5);
+                        }
+                    else
+                        for (int i = pn_x; i >= pnx; i -= 40)
+                        {
+                            pnPoupup.Location = new Point(i, pny);
+                            Thread.Sleep(5);
+                        }
+
+                    locations = CheckReLocations(pnx, pny);
+                }
+                Properties.Settings.Default.FLocationMessenging = locations;
+            })
+            { IsBackground = true }.Start();
+        }
+
+        private Point CheckReLocations(int pnx, int pny)
+        {
+            pnPoupup.Location = new Point((pnx < 12) ? 12 :
+                (pnx < this.Width / 2) ? 12 :
+                (pnx > this.Width / 2) ? (this.Width - pnPoupup.Width - 12) : pnx,
+                (pny < 12) ? 12 :
+                (pny > (this.Height - pnPoupup.Height - 12)) ? (this.Height - pnPoupup.Height - 12) : pny);
+            return pnPoupup.Location;
         }
     }
     class centreeControls : Panel
@@ -257,15 +341,20 @@ namespace MessengerBrowser
 
         public void PropertiesPanelClose()
         {
-            //base.Text = value.ToString();
             this.ForeColor = Color.White; //màu chữ
-            //this.TextAlign = ContentAlignment.MiddleCenter; //canh vị trí label
             this.BackColor = Color.White; //màu nền
             this.Size = new Size(70, 68);//Kích thước của khung chứa text
-            //this.FlatStyle = FlatStyle.Flat;
             this.AutoSize = false;
-            //this.Height += 10;
-            //this.Width += 10;
+
+            Label lblCloset = new Label();
+            lblCloset.Font = new Font(FontFamily.GenericSansSerif, 20);
+            lblCloset.AutoSize = true;
+            lblCloset.Text = "X";
+            lblCloset.TextAlign = ContentAlignment.MiddleCenter;
+            lblCloset.ForeColor = Color.DarkRed;
+            this.Controls.Add(lblCloset);
+            lblCloset.Show();
+            lblCloset.Location = new Point((this.Width / 2) - (lblCloset.Width / 2) + 2, (this.Height / 2) - (lblCloset.Height / 2));
 
             GraphicsPath p = new GraphicsPath(); //Khởi tạo GraphicsPath
             p.AddEllipse(0, 0, 70, 68); //Add hình elip vào GraphicsPath

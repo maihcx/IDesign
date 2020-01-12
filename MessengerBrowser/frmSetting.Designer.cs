@@ -577,6 +577,12 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [12/1/2020] | [12:00]> //Thêm tính năng//",
+            "</1.0.5.7/>",
+            "   1) Sửa đổi UI thuộc tính cửa sổ Messenging.",
+            "   2) Thêm Thay đổi hiệu ứng mờ (Aero).",
+            "   3) Fix các vấn đề liên quan đến hiệu ứng.",
+            "   4) Tối ưu hoạt động mã hệ thống.",
             "<Date: [5/1/2020] | [15:00]> //Thêm tính năng//",
             "</1.0.5.6/>",
             "   1) Thêm cửa sổ messenging: \"Khi đóng ứng dụng sẽ để lại biểu tượng messenger t" +
