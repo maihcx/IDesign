@@ -583,7 +583,7 @@
             "   2) Fix bug khi đóng ứng dụng đã tồn tại từ phiên bản 1.0.0.0.",
             "   3) Khoanh vùng khoảng trống ram và dọn sau khi tác vụ đã dừng.",
             "   4) Nâng cấp tính năng tự động update để kiểm tra nhanh hơn.",
-            "   5) Sửa đổi lại UI các icon từ vuông sang tròn.",
+            "   // Lỗi - Loại bỏ // 5) Sửa đổi lại UI các icon từ vuông sang tròn.",
             "   6) Thay đổi tên và ẩn Messenging khỏi thanh taskbar.",
             "   7) Khắc phục vấn đề đóng Messenging khi người dùng click chạy biểu tượng ngoài" +
                 " màn hình.",
