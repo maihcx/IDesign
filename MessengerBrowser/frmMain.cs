@@ -43,7 +43,7 @@ namespace MessengerBrowser
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            cropElipPanel();
+            //cropElipPanel();
             checkIntStyleWinform();
             //Properties.Settings.Default.Reset();
             SaveSettingForm.IntializeForm(this);
