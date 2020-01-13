@@ -1,12 +1,10 @@
-﻿using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.7";
+        internal static string systemversion = "1.0.5.9";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static bool is_Messenging_Start = false;
@@ -113,7 +111,6 @@ namespace MessengerBrowser
                 if (frm is frmMain)
                 {
                     return ((frmMain)frm).MessengerMain(strtext, strtitle, btn, ico);
-                    break;
                 }
             }
             return DialogResult.No;
@@ -209,12 +206,12 @@ namespace MessengerBrowser
                 }
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text">The messenger you want for user know</param>
-        /// <param name="title">Title for your messenger</param>
-        /// <param name="time">Time to closed</param>
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="text">The messenger you want for user know</param>
+        ///// <param name="title">Title for your messenger</param>
+        ///// <param name="time">Time to closed</param>
         //public static void showNotification(string text, string title, int time)
         //{
         //    foreach (Form frm in Application.OpenForms)
@@ -453,7 +450,7 @@ namespace MessengerBrowser
             }
         }
 
-        public static void Show_Hide_PoupupMessenging(bool isShow)
+        public static void Show_Close_PoupupMessenging(bool isShow)
         {
             if (Properties.Settings.Default.FIsMessenging)
             {

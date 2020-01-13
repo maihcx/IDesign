@@ -124,9 +124,21 @@ namespace MessengerBrowser
                     {
                         if (!is_firstStart)
                         {
-                            UpdateCheck();
-                            is_firstStart = true;
-                            Library.focursMainForm();
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke((MethodInvoker)delegate
+                                {
+                                    UpdateCheck();
+                                    is_firstStart = true;
+                                    Library.focursMainForm();
+                                });
+                            }
+                            else
+                            {
+                                UpdateCheck();
+                                is_firstStart = true;
+                                Library.focursMainForm();
+                            }
                         }
                     }
                 }))

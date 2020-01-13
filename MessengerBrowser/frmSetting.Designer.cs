@@ -577,7 +577,21 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
-            "<Date: [12/1/2020] | [12:00]> //Thêm tính năng//",
+            "<Date: [13/1/2020] | [17:20]> //Fix Bug - Optimization//",
+            "</1.0.5.9/>",
+            "   1) Tối ưu hóa hiệu năng toàn ứng dụng.",
+            "   2) Fix bug khi đóng ứng dụng đã tồn tại từ phiên bản 1.0.0.0.",
+            "   3) Khoanh vùng khoảng trống ram và dọn sau khi tác vụ đã dừng.",
+            "   4) Nâng cấp tính năng tự động update để kiểm tra nhanh hơn.",
+            "   5) Sửa đổi lại UI các icon từ vuông sang tròn.",
+            "   6) Thay đổi tên và ẩn Messenging khỏi thanh taskbar.",
+            "   7) Khắc phục vấn đề đóng Messenging khi người dùng click chạy biểu tượng ngoài" +
+                " màn hình.",
+            "   8) Và các thay đổi khác về UI.",
+            "<Date: [13/1/2020] | [09:00]> //Fix Bug - Khẩn cấp//",
+            "</1.0.5.8/>",
+            "   1) Sửa vấn đề hiệu năng của Messenging.",
+            "<Date: [12/1/2020] | [12:00]> //Thêm tính năng - Fix UI//",
             "</1.0.5.7/>",
             "   1) Sửa đổi UI thuộc tính cửa sổ Messenging.",
             "   2) Thêm Thay đổi hiệu ứng mờ (Aero).",

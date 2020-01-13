@@ -91,7 +91,6 @@ namespace MessengerBrowser
 
         private void runformSetting()
         {
-            GC.Collect();
             frmst.Dispose();
             if (string.IsNullOrEmpty(frmst.Text) || frmst.IsDisposed)
             {
@@ -101,7 +100,8 @@ namespace MessengerBrowser
             {
                 frmst.ShowDialog();
             });
-
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void popupNoty_Click(object sender, EventArgs e)

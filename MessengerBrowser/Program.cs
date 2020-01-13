@@ -1,16 +1,10 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Threading;
 using BlueformFramework;
 using Microsoft.VisualBasic.ApplicationServices;
-using System.Drawing;
 
 namespace MessengerBrowser
 {
@@ -71,6 +65,10 @@ namespace MessengerBrowser
                 Library.is_openedwindows = true;
                 frm.Show();
                 BlueformFrameworkUse.Show(frm, 10);
+                if (Library.is_Messenging_Start)
+                {
+                    Library.Show_Close_PoupupMessenging(false);
+                }
             }
         }
 
