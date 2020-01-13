@@ -97,7 +97,7 @@ namespace MessengerBrowser
 
         private void checkIntStyleWinform()
         {
-            disebleAllPanel();
+            disableAllPanel();
             switch (Properties.Settings.Default.FIntWinStyle)
             {
                 case 0:
@@ -115,7 +115,7 @@ namespace MessengerBrowser
             }
         }
 
-        private void disebleAllPanel()
+        private void disableAllPanel()
         {
             foreach (Form frm in Application.OpenForms)
             {
@@ -280,7 +280,7 @@ namespace MessengerBrowser
 
         private void showPanels(bool k)
         {
-            disebleAllPanel();
+            disableAllPanel();
 
             pnPIP.Visible = k;
             pnDF.Visible = k;
@@ -759,7 +759,7 @@ namespace MessengerBrowser
 
         public void previewWindowsStyle(int int_style)
         {
-            disebleAllPanel();
+            disableAllPanel();
             switch (int_style)
             {
                 case 0:
@@ -828,6 +828,7 @@ namespace MessengerBrowser
 
         public static void DisponseForm()
         {
+            frmBlueGone.Close();
             frmBlueGone.Dispose();
         }
     }

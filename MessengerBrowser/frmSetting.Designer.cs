@@ -577,7 +577,10 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
-            "<Date: [12/1/2020] | [12:00]> //Thêm tính năng//",
+            "<Date: [13/1/2020] | [09:00]> //Fix Bug//",
+            "</1.0.5.8/>",
+            "   1) Sửa vấn đề liên quan đến hiệu năng của Messenging.",
+            "<Date: [12/1/2020] | [12:00]> //Thêm tính năng - Fix UI//",
             "</1.0.5.7/>",
             "   1) Sửa đổi UI thuộc tính cửa sổ Messenging.",
             "   2) Thêm Thay đổi hiệu ứng mờ (Aero).",

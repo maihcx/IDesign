@@ -114,6 +114,7 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FLocationMessenging = pnPoupup.Location;
                     Properties.Settings.Default.Save();
                 }
+                blureForm.frmBlueGone.Hide();
                 ismoveControls();
             }
             else
@@ -121,6 +122,7 @@ namespace MessengerBrowser
                 if (!Library.is_openedwindows)
                 {
                     Library.ShowOrHideForm();
+                    blureForm.DisponseForm();
                     Show_Close(false);
                 }
             }
@@ -146,7 +148,9 @@ namespace MessengerBrowser
             {
                 if (!isfirsMove)
                 {
-                    pnClose.Visible = true;
+                    blureForm.frmBlueGone.Visible = true;
+                    pnClose.Show();
+                    this.Focus();
                     BlueformFrameworkUse.FormNormal(blureForm.frmBlueGone, 15);
                 }
             }
@@ -164,8 +168,8 @@ namespace MessengerBrowser
                     if (isClosetForm)
                     {
                         tmwait.Stop();
-                        Show_Close(false);
                         blureForm.DisponseForm();
+                        Show_Close(false);
                     }
                 });
                 tmwait.Start();
@@ -186,6 +190,7 @@ namespace MessengerBrowser
             blureForm.SetSize = this.Size;
             blureForm.SetLocations = this.Location;
             blureForm.Intialization();
+            blureForm.frmBlueGone.Hide();
             this.Focus();
 
             pnPoupup.PropertiesPanel();
