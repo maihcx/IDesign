@@ -125,7 +125,6 @@ namespace MessengerBrowser
             pnClose1.Region = new Region(p);
             pnMaximize.Region = new Region(p);
             pnMaximize1.Region = new Region(p);
-            pnAutoPIP.Region = new Region(p);
             p.Dispose();
         }
 
