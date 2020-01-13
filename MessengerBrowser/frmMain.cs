@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using BlueformFramework;
 using System.Drawing;
 using AeroLibrary;
+using System.Drawing.Drawing2D;
 
 namespace MessengerBrowser
 {
@@ -42,6 +43,7 @@ namespace MessengerBrowser
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            cropElipPanel();
             checkIntStyleWinform();
             //Properties.Settings.Default.Reset();
             SaveSettingForm.IntializeForm(this);
@@ -115,6 +117,18 @@ namespace MessengerBrowser
             }
         }
 
+        private void cropElipPanel()
+        {
+            GraphicsPath p = new GraphicsPath(); //Khởi tạo GraphicsPath
+            p.AddEllipse(0, 0, 19, 19); //Add hình elip vào GraphicsPath
+            pnClose.Region = new Region(p);
+            pnClose1.Region = new Region(p);
+            pnMaximize.Region = new Region(p);
+            pnMaximize1.Region = new Region(p);
+            pnAutoPIP.Region = new Region(p);
+            p.Dispose();
+        }
+
         private void disableAllPanel()
         {
             foreach (Form frm in Application.OpenForms)
@@ -175,8 +189,31 @@ namespace MessengerBrowser
                 {
                     if (MetroMessageBox.Show(this, "Bạn có muốn thoát ?", "Alert !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        SaveSettingForm.SaveForm(this);
-                        frmClose();
+                        if (Library.is_Messenging_Start)
+                        {
+                            Library.Show_Close_PoupupMessenging(false);
+                        }
+                        try
+                        {
+                            if (this.InvokeRequired)
+                            {
+                                this.BeginInvoke((MethodInvoker)delegate ()
+                                {
+                                    frmClose();
+                                    SaveSettingForm.SaveForm(this);
+                                });
+                            }
+                            else
+                            {
+                                frmClose();
+                                SaveSettingForm.SaveForm(this);
+                            }
+                        }
+                        catch
+                        {
+                            Cef.Shutdown();
+                            e.Cancel = false;
+                        }
                     }
                     else
                     {
@@ -220,7 +257,7 @@ namespace MessengerBrowser
             StateWindow = false;
             Library.is_openedwindows = false;
             Library.str_input_save = string.Empty;
-            Library.Show_Hide_PoupupMessenging(true);
+            Library.Show_Close_PoupupMessenging(true);
         }
 
         private void frmShow()
@@ -232,7 +269,7 @@ namespace MessengerBrowser
             Library.str_TextShow = string.Empty;
             Library.str_input_save = string.Empty;
             Library.is_openedwindows = true;
-            Library.Show_Hide_PoupupMessenging(false);
+            Library.Show_Close_PoupupMessenging(false);
         }
 
         private void frmClose()
@@ -240,16 +277,19 @@ namespace MessengerBrowser
             try
             {
                 this.Show();
-                for (double i = 1; i > .0; i -= 0.03)
+                for (double i = 1; i > .0; i -= 0.10)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(20);
                     this.Opacity = i;
                 }
+                Application.ExitThread();
+                Application.Exit();
                 Cef.Shutdown();
             }
             catch
             {
                 Application.ExitThread();
+                Application.Exit();
             }
 
         }
@@ -830,6 +870,8 @@ namespace MessengerBrowser
         {
             frmBlueGone.Close();
             frmBlueGone.Dispose();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

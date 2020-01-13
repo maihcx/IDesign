@@ -114,7 +114,6 @@ namespace MessengerBrowser
                     Properties.Settings.Default.FLocationMessenging = pnPoupup.Location;
                     Properties.Settings.Default.Save();
                 }
-                blureForm.frmBlueGone.Hide();
                 ismoveControls();
             }
             else
@@ -148,7 +147,12 @@ namespace MessengerBrowser
             {
                 if (!isfirsMove)
                 {
-                    blureForm.frmBlueGone.Visible = true;
+                    blureForm.SetSize = this.Size;
+                    blureForm.SetLocations = this.Location;
+                    blureForm.Intialization();
+                    //blureForm.frmBlueGone.Hide();
+                    this.Focus();
+
                     pnClose.Show();
                     this.Focus();
                     BlueformFrameworkUse.FormNormal(blureForm.frmBlueGone, 15);
@@ -164,11 +168,14 @@ namespace MessengerBrowser
                 tmwait.Tick += new EventHandler((object obj, EventArgs e) =>
                 {
                     tmwait.Stop();
+
                     Aero.DisabledAcrylic(blureForm.frmBlueGone);
+                    blureForm.DisponseForm();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+
                     if (isClosetForm)
                     {
-                        tmwait.Stop();
-                        blureForm.DisponseForm();
                         Show_Close(false);
                     }
                 });
@@ -187,11 +194,7 @@ namespace MessengerBrowser
             this.Location = new Point(0, 0);
             Library.is_Messenging_Start = true;
 
-            blureForm.SetSize = this.Size;
-            blureForm.SetLocations = this.Location;
-            blureForm.Intialization();
-            blureForm.frmBlueGone.Hide();
-            this.Focus();
+            
 
             pnPoupup.PropertiesPanel();
             pnPoupup.Location = Properties.Settings.Default.FLocationMessenging;
@@ -229,6 +232,7 @@ namespace MessengerBrowser
                     {
                         this.Dispose();
                         GC.Collect();
+                        GC.WaitForPendingFinalizers();
                         Library.is_Messenging_Start = false;
                     }
                 });
@@ -243,6 +247,7 @@ namespace MessengerBrowser
                 {
                     this.Dispose();
                     GC.Collect();
+                    GC.WaitForPendingFinalizers();
                     Library.is_Messenging_Start = false;
                 }
             }
@@ -261,10 +266,10 @@ namespace MessengerBrowser
             {
                 MessageBox.Show("Hệ thống không tương thích với Messenging, sẽ tắt Messenging !", "Lỗi !", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Properties.Settings.Default.FIsMessenging = false;
+                this.Dispose();
+                Library.is_Messenging_Start = false;
             }
             Properties.Settings.Default.Save();
-            this.Dispose();
-            Library.is_Messenging_Start = true;
         }
 
         private bool checkInZoneClosed(int x, int y)

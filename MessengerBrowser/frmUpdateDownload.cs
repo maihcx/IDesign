@@ -86,7 +86,7 @@ namespace MessengerBrowser
                     else
                     {
                         progressWork.Value += 20;
-                        lblstatus.Text = "Your Application is Update \nYour version: " + thisver;
+                        lblstatus.Text = "Your Application is Updated \nYour version: " + thisver;
                     }
                     Application.ExitThread();
                 }

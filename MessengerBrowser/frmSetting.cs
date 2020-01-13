@@ -89,11 +89,6 @@ namespace MessengerBrowser
             OKBTN();
         }
 
-        private void pipSetting_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void trackWidth_Scroll(object sender, EventArgs e)
         {
             Library.previewPIPSize(trackWidth.Value, trackHeight.Value);
@@ -231,6 +226,7 @@ namespace MessengerBrowser
                     }
                     this.Dispose();
                     GC.Collect();
+                    GC.WaitForPendingFinalizers();
                 }
                 catch
                 {
@@ -305,6 +301,7 @@ namespace MessengerBrowser
 
             //Thread.Sleep(500);
             GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void cbbStyleWin_SelectedIndexChanged(object sender, EventArgs e)

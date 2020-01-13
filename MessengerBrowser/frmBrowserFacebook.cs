@@ -97,6 +97,7 @@ namespace MessengerBrowser
         {
             this.Close();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public void RestartFacebook()
