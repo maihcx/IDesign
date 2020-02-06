@@ -115,6 +115,7 @@ namespace MessengerBrowser
                     pngrMSFA_1.Visible = true;
                     break;
             }
+            pnDF.Visible = true;
         }
 
         private void cropElipPanel()
@@ -130,18 +131,24 @@ namespace MessengerBrowser
 
         private void disableAllPanel()
         {
-            foreach (Form frm in Application.OpenForms)
+            foreach (Control crt in this.Controls)
             {
-                if (frm is frmMain)
+                if (crt is Panel)
                 {
-                    foreach (Control crt in frm.Controls)
-                    {
-                        if (crt is Panel)
-                        {
-                            if (crt.Name != "pnDF" && crt.Name != "PanelMain" && crt.Name != "pnAutoPIP" && crt.Name != "pnReset" && crt.Name != "pnPIP")
-                                crt.Visible = false;
-                        }
-                    }
+                    if (crt.Name != "pnDF" && crt.Name != "PanelMain" && crt.Name != "pnAutoPIP" && crt.Name != "pnReset" && crt.Name != "pnPIP")
+                        crt.Visible = false;
+                }
+            }
+        }
+
+        private void disableAllPanelForFullScreen()
+        {
+            foreach (Control crt in this.Controls)
+            {
+                if (crt is Panel)
+                {
+                    if (crt.Name != "PanelMain")
+                        crt.Visible = false;
                 }
             }
         }
@@ -843,9 +850,41 @@ namespace MessengerBrowser
             Aero.DisabledAcrylic(blureForm.frmBlueGone);
             blureForm.DisponseForm();
         }
+
+        public void setFullScreen(bool fullscreen)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                Library.is_FullScreen = fullscreen;
+                if (fullscreen)
+                {
+                    Library.is_PIP = false;
+                    is_resize = false;
+                    disableAllPanelForFullScreen();
+                    Library.setZoomLeverMS(Library.dou_zoomvalueMS);
+                    this.WindowState = FormWindowState.Maximized;
+                    PanelMain.Size = this.Size;
+                    PanelMain.Location = new Point(0, 0);
+                }
+                else
+                {
+                    showPanels(true);
+                    this.WindowState = FormWindowState.Normal;
+                    Library.setZoomLeverMS(Library.dou_zoomvalueMS);
+                    this.Width = Library.int_formWidth;
+                    this.Height = Library.int_formHeight;
+                    PanelMain.Width = Library.int_controlWidth; PanelMain.Height = Library.int_controlHeight;
+                    PanelMain.Location = new System.Drawing.Point(Library.int_controlLocationX, Library.int_controlLocationY);
+
+                    this.Location = new Point(Library.int_formLocationX, Library.int_formLocationY);
+                    this.TopMost = Properties.Settings.Default.FIsShowTop;
+                    is_resize = true;
+                }
+            });
+        }
     }
 
-    public class blureForm : Form
+    public class blureForm
     {
         public static Form frmBlueGone;
         public static System.Drawing.Size SetSize;

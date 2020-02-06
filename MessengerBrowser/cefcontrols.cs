@@ -24,28 +24,7 @@ namespace MessengerBrowser
         }
         void IDisplayHandler.OnFullscreenModeChange(IWebBrowser browserControl, IBrowser browser, bool fullscreen)
         {
-            var chromiumWebBrowser = (ChromiumWebBrowser)browserControl;
-            chromiumWebBrowser.InvokeOnUiThreadIfRequired(() =>
-            {
-                if (fullscreen)
-                {
-                    parent = chromiumWebBrowser.Parent;
-                    parent.Controls.Remove(chromiumWebBrowser);
-                    fullScreenForm = new Form();
-                    fullScreenForm.FormBorderStyle = FormBorderStyle.None;
-                    fullScreenForm.WindowState = FormWindowState.Maximized;
-                    fullScreenForm.Controls.Add(chromiumWebBrowser);
-                    fullScreenForm.ShowDialog(parent.FindForm());
-                }
-                else
-                {
-                    fullScreenForm.Controls.Remove(chromiumWebBrowser);
-                    parent.Controls.Add(chromiumWebBrowser);
-                    fullScreenForm.Close();
-                    fullScreenForm.Dispose();
-                    fullScreenForm = null;
-                }
-            });
+            Library.setFullScreen(fullscreen);
         }
         bool IDisplayHandler.OnTooltipChanged(IWebBrowser chromiumWebBrowser, ref string text)
         {
@@ -184,6 +163,7 @@ namespace MessengerBrowser
         {
             if (type == KeyType.RawKeyDown)
             {
+                //MessageBox.Show(windowsKeyCode.ToString());
                 if (windowsKeyCode == 116)
                 {
                     if (Library.int_windows == 0)
@@ -207,11 +187,32 @@ namespace MessengerBrowser
                         Library.sendHostKey(-1);
                         Library.changeBrowser(0, string.Empty);
                     }
-                }
 
+                    if (Library.is_PIP)
+                        Library.stopPIP();
+                }
+                else if (windowsKeyCode == 122)
+                {
+                    Library.is_FullScreen = !Library.is_FullScreen;
+                    if (Library.is_FullScreen)
+                    {
+                        Library.setFullScreen(true);
+                    }
+                    else
+                    {
+                        Library.setFullScreen(false);
+                    }
+                }
                 else if (windowsKeyCode == 27)
                 {
-                    Library.ShowOrHideForm();
+                    if (Library.is_FullScreen)
+                    {
+                        Library.setFullScreen(false);
+                    }
+                    else
+                    {
+                        Library.ShowOrHideForm();
+                    }
                 }
                 else if (windowsKeyCode == 109)
                 {
