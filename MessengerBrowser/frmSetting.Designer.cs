@@ -577,6 +577,14 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
             "Change Log:",
+            "<Date: [6/2/2020] | [14:00]> //Fix Bug - Warning - Update//",
+            "</1.0.6.0/>",
+            "   1) Tối ưu hóa hoạt động cho messenging.",
+            "   2) Fix lỗi đè nền trong messenging.",
+            "   3) Fix lỗi Ctrl + Tab khi đang ở chế độ PIP.",
+            "   4) Tối ưu hóa trình chạy toàn màn hình.",
+            "   5) Thêm F11 để chạy toàn màn hình.",
+            "   6) Cập nhật nhân hệ thống đến: v79.1.350.",
             "<Date: [13/1/2020] | [17:20]> //Fix Bug - Optimization//",
             "</1.0.5.9/>",
             "   1) Tối ưu hóa hiệu năng toàn ứng dụng.",

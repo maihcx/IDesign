@@ -4,7 +4,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
-        internal static string systemversion = "1.0.5.9";
+        internal static string systemversion = "1.0.6.0";
         internal static string str_inputTitle;
         internal static string str_TextShow;
         internal static bool is_Messenging_Start = false;
@@ -32,6 +32,7 @@ namespace MessengerBrowser
         internal static System.Drawing.Point PIPPanelLocation = Properties.Settings.Default.FPIPPanelLocation;
         internal static double dou_zoomvalueMS = 0;
         internal static double dou_zoomvalueFA = 0;
+        internal static bool is_FullScreen = false;
         //varible in the application privited
         static string str_messenging = "";
         static string str_messenging_e = "";
@@ -485,5 +486,17 @@ namespace MessengerBrowser
                 }
             }
         }
+        public static void setFullScreen(bool fullscreen)
+        {
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmMain)
+                {
+                    ((frmMain)frm).setFullScreen(fullscreen);
+                    break;
+                }
+            }
+        }
+
     }
 }

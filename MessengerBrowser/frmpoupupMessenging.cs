@@ -38,6 +38,17 @@ namespace MessengerBrowser
         //    base.OnHandleCreated(e);
         //}
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                // turn on WS_EX_TOOLWINDOW style bit
+                cp.ExStyle |= 0x80;
+                return cp;
+            }
+        }
+
         private void pnPoupup_MouseMove(object sender, MouseEventArgs e)
         {
             if (ismove)
