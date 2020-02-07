@@ -123,7 +123,7 @@
             // 
             this.btnSave.Location = new System.Drawing.Point(183, 287);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(126, 40);
+            this.btnSave.Size = new System.Drawing.Size(126, 54);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Lưu";
             this.btnSave.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -153,9 +153,15 @@
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.txtAcc);
+            this.Movable = false;
             this.Name = "frmLogin";
+            this.Opacity = 0.7D;
+            this.Resizable = false;
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Đăng nhập";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
