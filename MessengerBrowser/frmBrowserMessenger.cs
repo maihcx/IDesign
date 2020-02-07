@@ -118,6 +118,13 @@ namespace MessengerBrowser
                 Library.BrowserVisible();
                 Library.endAero();
 
+                if (Text.Contains("messenger.com"))
+                {
+                    var getAcc = Library.getAccount_Password(Library.keyDecrypt);
+                    browser.EvaluateScriptAsync("document.querySelector('input[name=email]').value='" + getAcc[0].Trim() + "';");
+                    browser.EvaluateScriptAsync("document.querySelector('input[name=pass]').value='" + getAcc[1].Trim() + "';");
+                }
+
                 new Thread(new ThreadStart(() =>
                 {
                     if (Properties.Settings.Default.FIsAutoUpdate)

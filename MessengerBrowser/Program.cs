@@ -10,13 +10,17 @@ namespace MessengerBrowser
 {
     static class Program
     {
-        static frmMain frm;
+        static Form frm;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
+            //Properties.Settings.Default.FUser = "";
+            //Properties.Settings.Default.FUser = "";
+            //Properties.Settings.Default.FIsFirsStart = false;
+            //Properties.Settings.Default.Save();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -49,8 +53,17 @@ namespace MessengerBrowser
 
             //Application.Run(new frmMain());
 
-            frm = new frmMain();
-            SingleInstanceApplication.Run(frm, NewInstanceHandler);
+            if (Properties.Settings.Default.FIsFirsStart)
+            {
+                frm = new frmMain();
+                SingleInstanceApplication.Run(frm, NewInstanceHandler);
+            }
+            else
+            {
+                frm = new frmLogin();
+                SingleInstanceApplication.Run(frm, NewInstanceHandler);
+            }
+            
             //frm1 = new frmIconTray();
             //SingleInstanceApplication.Run(frm1, NewInstanceHandlerNone);
             //Application.Run(new frmIconTray());
