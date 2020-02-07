@@ -4,6 +4,7 @@ namespace MessengerBrowser
 {
     public class Library
     {
+        internal static string keyDecrypt = "IdesignEncrypt";
         internal static string systemversion = "1.0.6.0";
         internal static string str_inputTitle;
         internal static string str_TextShow;
@@ -498,5 +499,25 @@ namespace MessengerBrowser
             }
         }
 
+        /// <summary>
+        /// Get Account and Password Of facebook. It's get array, [0] => Account | [1] => Password
+        /// </summary>
+        /// <param name="key">Key to look user</param>
+        /// <returns></returns>
+        public static string[] getAccount_Password(string key)
+        {
+            string[] result = new string[2];
+            if (CryptPassword.key != key.Trim())
+            {
+                MessengerMain("Vi phạm bảo mật hệ thống!", "Hack warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                result[0] = result[1] = "";
+            }
+            else
+            {
+                result[0] = Properties.Settings.Default.FUser;
+                result[1] = CryptPassword.Decrypt(Properties.Settings.Default.FPass.Trim());
+            }
+            return result;
+        }
     }
 }

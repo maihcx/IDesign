@@ -46,7 +46,12 @@ namespace MessengerBrowser
         private void loadchild()
         {
             DisplayHandler displayer = new DisplayHandler();
+            //IRequestContext cont = new RequestContext();
+            //cont.LoadExtension(@"C:\Users\NTJ_LAP TRINH\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm\1.24.4_1\", null, new ExtensionHandler());
+
+            //browser = new ChromiumWebBrowser((string.IsNullOrEmpty(Library.str_url)) ? "http://www.facebook.com" : Library.str_url, cont);
             browser = new ChromiumWebBrowser((string.IsNullOrEmpty(Library.str_url)) ? "http://www.facebook.com" : Library.str_url);
+            //browser.BrowserSettings.ImageLoading = CefState.Disabled;
             browser.DownloadHandler = new DownloadHandler();
             Controls.Add(browser);
             browser.Dock = DockStyle.Fill;
@@ -56,6 +61,7 @@ namespace MessengerBrowser
             browser.RequestHandler = new RequestHandlerfb();
             browser.MenuHandler = new MenuHandler();
             browser.AddressChanged += Browser_AddressChanged;
+            browser.LoadingStateChanged += browser_LoadingStateChanged;
         }
 
         private void browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -68,8 +74,15 @@ namespace MessengerBrowser
             else
             {
                 //
-                Library.BrowserVisible();
+                //Library.BrowserVisible();
+                //MessageBox.Show("X");
                 //
+                if (Text.Contains("facebook.com"))
+                {
+                    var getAcc = Library.getAccount_Password(Library.keyDecrypt);
+                    browser.EvaluateScriptAsync("document.querySelector('input[name=email]').value='" + getAcc[0].Trim() + "';");
+                    browser.EvaluateScriptAsync("document.querySelector('input[name=pass]').value='" + getAcc[1].Trim() + "';");
+                }
             }
         }
 

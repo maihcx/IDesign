@@ -74,5 +74,14 @@
     <Setting Name="FColorControls" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Gainsboro</Value>
     </Setting>
+    <Setting Name="FIsFirsStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
