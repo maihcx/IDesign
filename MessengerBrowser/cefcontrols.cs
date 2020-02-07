@@ -11,8 +11,7 @@ namespace MessengerBrowser
 
     public class DisplayHandler : IDisplayHandler
     {
-        private Control parent;
-        private Form fullScreenForm;
+        
         void IDisplayHandler.OnAddressChanged(IWebBrowser browserControl, AddressChangedEventArgs addressChangedArgs)
         {
         }
